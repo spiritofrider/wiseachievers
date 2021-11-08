@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
 import { ValuesComponent } from './values/values.component';
 
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'values',
     component: ValuesComponent
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent
   }
 ];
 
