@@ -1,1 +1,182 @@
-/* You can add global styles to this file, and also import other style files */
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    text-align: center;
+  }
+
+.flex-container-home {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container-section2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container-section5 {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container-section2-item {
+    flex: 50%;
+    padding: 10px;
+}
+
+.flex-container-section5-item {
+    flex: 50%;
+    padding: 10px;
+}
+
+.flex-item {
+    padding: 10px;
+    flex: 20%;
+  }
+
+.flex-item-home {
+    flex: 50%;
+    margin-top: 40px;
+    margin-left: 22px;
+}
+
+.flex-item-down {
+    margin-top: 44px;
+}
+
+.logoImage {
+    width: 60px;
+    height: 76px;
+}
+
+.logoSpan {
+    float: left;
+}
+
+.titleLogo{
+    margin-top: 44px;
+    margin-right: 80px;
+}
+
+.trophySVG {
+    width: 503px;
+    height: 383px;
+    margin-left: 110px;
+}
+
+.section2SVG {
+    width: 503px;
+    height: 383px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.aboutSVG {
+    width: 503px;
+    height: 383px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.section2Title {
+    margin-top: 50px;
+    margin-left: 150px;
+}
+
+.section2Paragraphs {
+    margin-top: 30px;
+}
+
+.section2ParaStyle {
+    font-size: 20px;
+}
+
+.section3Title {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.section5Title {
+    text-align: center;
+}
+
+.section5Paragraphs {
+    margin-top: 130px;
+}
+
+.section5ParaStyle{
+    font-size: 20px;
+}
+
+.squareButtons {
+    background-color:#0081d6;
+    color: white;
+    cursor: pointer;;
+}
+
+.callButtons {
+    background-color:#0081d6;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 22px;
+}
+
+.loginButton {
+    float: left;
+    margin-left: 135px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.iconsTheme {
+    color:#0081d6;
+}
+
+.navbarTheme {
+    background-color: #0081d6;
+}
+
+.navbarLinks {
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.navbarLinks:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.pointsHome {
+    font-size: 24px;
+}
+
+  @media (max-width: 800px) {
+    .flex-container {
+      flex-direction: column;
+    }
+
+    .flex-container-home {
+        flex-direction: column;
+    }
+
+    .flex-item-down {
+        margin-top: 0px;
+    }
+
+    .logoImage {
+        width: 60px;
+        height: 76px;
+        margin-left: 111px;
+    }
+
+    .titleLogo{
+        margin-top: 44px;
+        margin-right: 135px;
+    }
+  }
