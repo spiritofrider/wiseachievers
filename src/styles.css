@@ -20,6 +20,16 @@
     flex-direction: row;
 }
 
+.flex-container-values {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container-values-item {
+    flex: 50%;
+    padding: 10px;
+}
+
 .flex-container-section2-item {
     flex: 50%;
     padding: 10px;
@@ -73,6 +83,13 @@
 }
 
 .aboutSVG {
+    width: 503px;
+    height: 383px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.valuesSVG {
     width: 503px;
     height: 383px;
     margin-top: 50px;
