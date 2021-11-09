@@ -12,6 +12,7 @@ import { Section4Component } from './section4/section4.component';
 import { Section5Component } from './section5/section5.component';
 import { ValuesComponent } from './values/values.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GalleryComponent } from './gallery/gallery.component';
     Section4Component,
     Section5Component,
     ValuesComponent,
-    GalleryComponent
+    GalleryComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
