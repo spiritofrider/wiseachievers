@@ -13,6 +13,7 @@ import { Section5Component } from './section5/section5.component';
 import { ValuesComponent } from './values/values.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { MentorsComponent } from './mentors/mentors.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
     Section5Component,
     ValuesComponent,
     GalleryComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    MentorsComponent
   ],
   imports: [
     BrowserModule,
