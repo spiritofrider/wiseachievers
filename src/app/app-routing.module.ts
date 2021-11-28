@@ -4,6 +4,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
 import { MentorsComponent } from './mentors/mentors.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { TestExampleComponent } from './test-example/test-example.component';
 import { ValuesComponent } from './values/values.component';
 
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'mentors',
     component: MentorsComponent
+  },
+  {
+    path: 'test',
+    component: TestExampleComponent
   }
 ];
 

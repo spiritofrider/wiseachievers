@@ -14,6 +14,7 @@ import { ValuesComponent } from './values/values.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MentorsComponent } from './mentors/mentors.component';
+import { TestExampleComponent } from './test-example/test-example.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MentorsComponent } from './mentors/mentors.component';
     ValuesComponent,
     GalleryComponent,
     ReviewsComponent,
-    MentorsComponent
+    MentorsComponent,
+    TestExampleComponent
   ],
   imports: [
     BrowserModule,

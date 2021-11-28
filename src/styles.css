@@ -183,6 +183,11 @@ a {
     font-size: 24px;
 }
 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
   @media (max-width: 800px) {
     .flex-container {
       flex-direction: column;
