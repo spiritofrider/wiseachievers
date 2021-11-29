@@ -1,6 +1,7 @@
 <app-top-band></app-top-band>
 <app-navbar></app-navbar>
 <br><br>
+<div *ngIf="result == false">
 <div style="text-align: center;">
     <p>{{ currentQuestion + 1 }} out of 9 Questions</p>
 </div>
@@ -29,4 +30,8 @@
 </div>
 <div *ngIf="currentQuestion == 8" style="display: flex; justify-content: center;">
     <button class="btn btn-primary squareButtons" (click)="nextQuestion()">Submit Test</button>
+</div>
+</div>
+<div *ngIf="result == true">
+    <h2>This is your result</h2>
 </div>

@@ -17,6 +17,13 @@ export class TestExampleComponent implements OnInit {
   naPoints:0;
   organiserPoints:0;
   pragmaticPoints:0;
+  firstPref:any;
+  firstPrefScore:3;
+  secondPref:any;
+  secondPrefScore:2;
+  thirdPref:any;
+  thirdPrefScore:1;
+  result:boolean=false;
   constructor(private testExample: ExampleTestService) { }
 
   ngOnInit() {
@@ -27,40 +34,47 @@ export class TestExampleComponent implements OnInit {
 
   nextQuestion(){
     this.currentQuestion += 1;
+    this.scoreCalculator(this.firstPref,this.firstPrefScore);
+    this.scoreCalculator(this.secondPref,this.secondPrefScore);
+    this.scoreCalculator(this.thirdPref,this.thirdPrefScore);
+    if(this.currentQuestion == 9){
+      this.result = true;
+    }
   }
 
   firstPreferenceChange(e:any){
-    console.log(e);
-    this.scoreCalculator(e['target']['defaultValue']);
+    this.firstPref = e['target']['defaultValue'];
   }
 
   secondPreferenceChange(e:any){
-    console.log(e);
-    this.scoreCalculator(e['target']['defaultValue']);
+    this.secondPref = e['target']['defaultValue'];
   }
 
   thirdPreferenceChange(e:any){
-    console.log(e);
-    this.scoreCalculator(e['target']['defaultValue']);
+    this.thirdPref = e['target']['defaultValue'];
   }
 
-  scoreCalculator(e){
+  scoreCalculator(e,score){
     switch(e){
       case 'Business':
-        this.businessPoints += 1;
+        this.businessPoints += score;
       case 'Artist':
-        this.artistPoints += 1;
+        this.artistPoints += score;
       case 'Intellectual':
-        this.intellectualPoints += 1;
+        this.intellectualPoints += score;
       case 'Sports':
-        this.sportsPoints += 1;
+        this.sportsPoints += score;
       case 'Organiser':
-        this.organiserPoints += 1;
+        this.organiserPoints += score;
       case 'Pragmatic':
-        this.pragmaticPoints += 1;
+        this.pragmaticPoints += score;
       case 'NA':
-        this.pragmaticPoints += 1;
+        this.pragmaticPoints += score;
     }
+  }
+
+  submitExampleTest(){
+    this.result = true;
   }
 
 }
