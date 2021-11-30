@@ -32,6 +32,17 @@
     <button class="btn btn-primary squareButtons" (click)="nextQuestion()">Submit Test</button>
 </div>
 </div>
-<div *ngIf="result == true">
-    <h2>This is your result</h2>
+<div *ngIf="result == true" >
+<div style="display: flex; justify-content: center;">
+    <div style="display: block; height: 300px; width: 600px;">
+        <canvas baseChart height="50%" width="50%"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+    </div>
+</div>
 </div>

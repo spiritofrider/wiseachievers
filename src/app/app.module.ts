@@ -16,6 +16,10 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { MentorsComponent } from './mentors/mentors.component';
 import { TestExampleComponent } from './test-example/test-example.component';
 
+import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,9 @@ import { TestExampleComponent } from './test-example/test-example.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
