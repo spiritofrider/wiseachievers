@@ -6,6 +6,9 @@ import { TopLayoutComponent } from './layout/top-layout/top-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { BaseModule } from './base/base.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './app.material.module';
+import {ModalModule} from 'ngx-bootstrap/modal'
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     SharedModule,
     BaseModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule,
+    ModalModule.forRoot(),
+    BrowserAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

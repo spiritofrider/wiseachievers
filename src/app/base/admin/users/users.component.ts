@@ -7,7 +7,8 @@ import { CommonService } from 'src/app/services/commonservice';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-
+  userList:any = [];
+  userListCopy:any = [];
   constructor(private common : CommonService) { }
 
   ngOnInit(): void {
@@ -16,8 +17,23 @@ export class UsersComponent implements OnInit {
 
   getAllUsersList(){
     this.common.getAllUsers().subscribe(user =>{
-      console.log(user)
+      this.userList = user;
+      this.userListCopy = user;
     })
+  }
+
+  filteredData(changedUserData){
+    this.userList = changedUserData;
+  }
+
+  ActivateDeactivate(record,flag){
+console.log(record,flag)
+let body = {
+  "activateAccount": flag
+}
+this.common.editUsers(record._id,body).subscribe(e =>{
+  console.log(e)
+})
   }
 
 }

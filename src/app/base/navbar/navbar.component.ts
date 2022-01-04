@@ -13,7 +13,6 @@ export class NavbarComponent implements OnInit {
   constructor(private router:Router,private location:Location) {
     router.events.subscribe(e=>{
       if(location.path() != ""){
-        console.log(location.path())
         this.route = location.path();
       }
       else{
@@ -29,7 +28,6 @@ export class NavbarComponent implements OnInit {
     let isRoute: boolean = false;
     if(route){
       if(this.route.indexOf(route) > -1){
-        console.log(this.route.indexOf(route))
         isRoute = true;
       }
       else{

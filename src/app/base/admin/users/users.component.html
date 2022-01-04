@@ -1,32 +1,55 @@
 <div class="user-container">
-<table class="table table-striped">
+  <div class="table-responsive">
+<table class="table table-striped" *ngIf="userList">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col" id="ser">Sr. No</th>
+        <th scope="col" id="name">
+          <filter [displayData]="'Name'" [property]="'fullName'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="email">
+          <filter [displayData]="'Email Id'" [property]="'email'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="phone">
+          <filter [displayData]="'Phone'" [property]="'phone'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="dob">
+          <filter [displayData]="'DOB'" [property]="'dob'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="gender">
+          <filter [displayData]="'Gender'" [property]="'gender'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="last_exam">
+          <filter [displayData]="'Last Examination'" [property]="'lastExam'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="Locality">
+          <filter [displayData]="'Locality'" [property]="'locality'" [mainData]="userList" [mainDataCopy]="userListCopy" (ChangedData)="filteredData($event)"></filter>
+        </th>
+        <th scope="col" id="pwd">Password</th>
+        <th scope="col" id="active">Acivate/Deactivate</th>
+
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
+      <tr *ngFor="let user of userList;let i=index"> 
+        <td scope="row">{{i+1}}</td>
+        <td scope="row">{{user.fullName}}</td>
+        <td scope="row">{{user.email}}</td>
+        <td scope="row">{{user.phone}}</td>
+        <td scope="row">{{user.dob | date:'dd MMM yyyy'}}</td>
+        <td scope="row">{{user.gender}}</td>
+        <td scope="row">{{user.lastExam}}</td>
+        <td scope="row">{{user.locality}}</td>
+        <td scope="row">{{user.password}}</td>
+        <td scope="row">
+          <label class="switch">
+            <input type="checkbox" [checked]="user.activateAccount" (change)="ActivateDeactivate(user,$event.target.checked)">
+            <span class="slider round"></span>
+          </label>
+          </td>
+
       </tr>
     </tbody>
   </table>
+</div>
 </div>

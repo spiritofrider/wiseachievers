@@ -1,0 +1,22 @@
+<div class="modal-conent">
+ 
+    <div class="modal-body">
+                <div class="login-form-1">
+                    
+                    <form [formGroup]="loginForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control"  formControlName= "email" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" formControlName="password" placeholder="Your Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btnSubmit" value="Login" (click)="submitForm(loginForm.value)" >Login</button>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                        </div>
+                    </form>
+        </div>
+    </div>
+</div>

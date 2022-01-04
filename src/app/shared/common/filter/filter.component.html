@@ -1,0 +1,14 @@
+<span style="display: inline-flex;width: 100%;line-height: 18px;">
+    <span class="">{{displayData}}</span>
+<span style="width: 100%;text-align: right;">  
+    <i class="fa fa-filter fa-icon" #showFilter tooltip="Enable Search Filter" aria-hidden="true" style="cursor: pointer; display: block;font-size: 14px;"  (click)="fnShowFilter(showFilter, clearFilter)"></i>
+</span>
+</span>
+<span>
+<mat-form-field appearance="outline" #clearFilter style="display: none;font-size: 10px;" class="dataFilter">
+    <input matInput (keyup)="applyFilterNew($event.target.value, property)" #inputFilter autocomplete="off">
+    <button matSuffix mat-icon-button aria-label="Clear" class="close-btn" matTooltip="Clear And Remove Search Filter" (click)="fnHideFilter(property, showFilter, clearFilter, inputFilter)">
+        <i class="fa fa-times mat-icon-replacement mat-cross-rep" aria-hidden="true" style="font-size: 15px;margin-bottom: 6px;"></i>
+    </button>
+</mat-form-field>
+</span>
