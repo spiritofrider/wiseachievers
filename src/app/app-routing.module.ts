@@ -1,43 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GalleryComponent } from './gallery/gallery.component';
-import { HomeComponent } from './home/home.component';
-import { MentorsComponent } from './mentors/mentors.component';
-import { ReviewsComponent } from './reviews/reviews.component';
-import { TestExampleComponent } from './test-example/test-example.component';
-import { ValuesComponent } from './values/values.component';
-
+import { TopLayoutComponent } from './layout/top-layout/top-layout.component';
 
 const routes: Routes = [
+
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: TopLayoutComponent,
+    children : [
+      {
+        path: '',
+        redirectTo: 'base',
+        pathMatch: 'full'
+      },
+      {
+        path: 'base',
+        loadChildren: ()=> import('./base/base.module').then(mod => mod.BaseModule)
+      },
+      {
+        path: '**',
+        redirectTo: 'base',
+        pathMatch: 'full'
+      },
+
+    ]
   },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'values',
-    component: ValuesComponent
-  },
-  {
-    path: 'gallery',
-    component: GalleryComponent
-  },
-  {
-    path: 'reviews',
-    component: ReviewsComponent
-  },
-  {
-    path: 'mentors',
-    component: MentorsComponent
-  },
-  {
-    path: 'test',
-    component: TestExampleComponent
-  }
 ];
 
 @NgModule({

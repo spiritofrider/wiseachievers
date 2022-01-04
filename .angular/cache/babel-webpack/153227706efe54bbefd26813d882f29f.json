@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let CONSTOBJ = {\n  admin: {\n    getAllUsers: 'users/all'\n  }\n};","map":null,"metadata":{},"sourceType":"module"}

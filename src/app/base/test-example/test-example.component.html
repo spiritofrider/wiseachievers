@@ -1,0 +1,45 @@
+<div *ngIf="result == false">
+<div style="text-align: center;">
+    <p>{{ currentQuestion + 1 }} out of 9 Questions</p>
+</div>
+<div style="text-align: center;">
+    <h3>{{ exampleTestQuiz[currentQuestion].question }}</h3>
+</div>
+<div style="display: flex; justify-content: center;">
+    <table style="border: 1px bold black;">
+        <tr>
+            <th>Options</th>
+            <th>1st Preference</th>
+            <th>2nd Preference</th>
+            <th>3rd Preference</th>
+        </tr>
+        <tr *ngFor="let quiz of exampleTestQuiz[currentQuestion]['options']">
+            <td>{{ quiz.value }}</td>
+            <td><input type="radio" name="1" value="{{ quiz.real }}" (change)="firstPreferenceChange($event)"></td>
+            <td><input type="radio" name="2" value="{{ quiz.real }}" (change)="secondPreferenceChange($event)"></td>
+            <td><input type="radio" name="3" value="{{ quiz.real }}" (change)="thirdPreferenceChange($event)"></td>
+        </tr>
+    </table>
+</div>
+<br>
+<div *ngIf="currentQuestion != 8" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary squareButtons" (click)="nextQuestion()">Next Question</button>
+</div>
+<div *ngIf="currentQuestion == 8" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary squareButtons" (click)="nextQuestion()">Submit Test</button>
+</div>
+</div>
+<div *ngIf="result == true" >
+<div style="display: flex; justify-content: center;">
+    <div style="display: block; height: 300px; width: 600px;">
+        <canvas baseChart height="50%" width="50%"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+    </div>
+</div>
+</div>

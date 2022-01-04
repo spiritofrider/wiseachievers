@@ -1,47 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopBandComponent } from './top-band/top-band.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { Section2Component } from './section2/section2.component';
-import { Section3Component } from './section3/section3.component';
-import { Section4Component } from './section4/section4.component';
-import { Section5Component } from './section5/section5.component';
-import { ValuesComponent } from './values/values.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { ReviewsComponent } from './reviews/reviews.component';
-import { MentorsComponent } from './mentors/mentors.component';
-import { TestExampleComponent } from './test-example/test-example.component';
-
-import { ChartsModule } from 'ng2-charts';
-import { FormsModule } from '@angular/forms';
-
+import { TopLayoutComponent } from './layout/top-layout/top-layout.component';
+import { SharedModule } from './shared/shared.module';
+import { BaseModule } from './base/base.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopBandComponent,
-    NavbarComponent,
-    HomeComponent,
-    Section2Component,
-    Section3Component,
-    Section4Component,
-    Section5Component,
-    ValuesComponent,
-    GalleryComponent,
-    ReviewsComponent,
-    MentorsComponent,
-    TestExampleComponent
+    TopLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ChartsModule
-  ],
+    SharedModule,
+    BaseModule,
+    HttpClientModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
