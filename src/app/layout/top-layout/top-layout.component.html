@@ -10,10 +10,14 @@
         <p><i class="fa fa-envelope iconsTheme" aria-hidden="true"></i> info@wiseAchievers.com</p>
     </div>
 
-    <div class="flex-item flex-item-down">
-        <button class="btn btn-primary squareButtons loginButton" (click)="openLoginModal()">Login</button> <!--data-toggle="modal" data-target="#loginModal"-->
-        <button class="btn btn-primary squareButtons">Sign-Up</button>
+    <div class="flex-item flex-item-down" *ngIf="!token">
+        <button class="btn btn-primary squareButtons loginButton" (click)="openLoginModal()">Login</button> 
+        <button class="btn btn-primary squareButtons" (click)="openSignupModal()">Sign-Up</button>
     </div>
+    <div class="flex-item flex-item-down" *ngIf="token">
+      <span>Hi! {{username}}</span>
+      <button class="btn btn-primary squareButtons ml-3" (click)="logout()">Logout</button>
+  </div>
 </div>
 
 

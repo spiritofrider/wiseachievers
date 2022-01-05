@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bsModalService:BsModalService) { }
 
   ngOnInit(): void {
+  }
+
+  CancelModal(){
+    this.bsModalService.hide()
   }
 
 }

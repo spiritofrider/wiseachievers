@@ -54,7 +54,6 @@ export class TestExampleComponent implements OnInit {
 
   nextQuestion(){
     this.currentQuestion += 1;
-    console.log(this.firstPref)
     this.scoreCalculator(this.firstPref,this.firstPrefScore);
     this.scoreCalculator(this.secondPref,this.secondPrefScore);
     this.scoreCalculator(this.thirdPref,this.thirdPrefScore);

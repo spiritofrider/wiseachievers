@@ -5,6 +5,7 @@ import { MaterialModule } from '../app.material.module';
 import { LoginComponent } from './common/login/login.component';
 import { SignupComponent } from './common/signup/signup.component';
 import { ContactUsComponent } from './common/contact-us/contact-us.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
@@ -13,7 +14,8 @@ import { ContactUsComponent } from './common/contact-us/contact-us.component';
     FilterComponent,
     LoginComponent,
     SignupComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,10 @@ import { ContactUsComponent } from './common/contact-us/contact-us.component';
   exports: [
     MaterialModule,
     FilterComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    ContactUsComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

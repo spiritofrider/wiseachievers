@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment'
 import { CONSTOBJ } from '../shared/shared-constant';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,private _snackBar:MatSnackBar) { }
 
 
   getAllUsers(){
@@ -24,4 +25,11 @@ export class CommonService {
   }
 
 
+  snackBar(message: string, snackStyle: string) {    
+    this._snackBar.open(message, '', {      
+      duration: 3000,
+      panelClass: [snackStyle]    
+    });
+
+    }
 }
