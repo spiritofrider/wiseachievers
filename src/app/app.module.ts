@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app.material.module';
 import {ModalModule} from 'ngx-bootstrap/modal'
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     useClass:JwtInterceptor,
   multi:true}
   ],
+  exports : [LoaderComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,13 +27,18 @@ loginForm: FormGroup;
 
   submitForm(formVal){
     this.common.loginUser(formVal).subscribe(e=>{
+      console.log(e)
       this.username = e['fullName']
       this.storageService.setCookie('token',e['token'])
       this.storageService.setCookie('username',e['fullName'])
       if(e.hasOwnProperty('isAdmin')){
         this.storageService.setCookie('isAdmin',e['isAdmin'])
+        this.storageService.setCookie('isActive',e['activateAccount'])
         this.route.navigate(['base/admin'])
       }
+      else{ this.storageService.setCookie('isActive',e['activateAccount'])}
+      if(e['activateAccount']){ this.route.navigate(['base/test']) }
+      else if(!e['activateAccount']){ this.route.navigate(['base/home'])}
       this.Cancel()
       this.common.snackBar('Login successful','s')
     },(error)=>{

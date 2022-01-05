@@ -5,15 +5,16 @@
     </button>
     <div class="collapse navbar-collapse navbarTheme" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-      <li class="nav-item"><a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/home')}" routerLinkActive="active" [routerLink]="['home']" *ngIf="!admin">Home</a></li>
-      <li class="nav-item"> <a class="nav-link navbarLinks" href="javascript:;"[ngClass]="{'activeRoute': getActiveRoutes('/values')}" [routerLink]="['values']" routerLinkActive="active" *ngIf="!admin">Our Values</a></li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/gallery')}" [routerLink]="['gallery']"   routerLinkActive="active" *ngIf="!admin">Gallery</a></li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/test')}" [routerLink]="['test']"   routerLinkActive="active" >Test</a>  </li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/mentor')}" [routerLink]="['mentor']"   routerLinkActive="active" *ngIf="!admin">Mentor</a></li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/reviews')}" [routerLink]="['reviews']"   routerLinkActive="active" *ngIf="!admin">Reviews</a></li>
+      <li class="nav-item"><a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/home')}" routerLinkActive="active" [routerLink]="['home']" *ngIf="isActive != 'true'">Home</a></li>
+      <li class="nav-item"> <a class="nav-link navbarLinks" href="javascript:;"[ngClass]="{'activeRoute': getActiveRoutes('/values')}" [routerLink]="['values']" routerLinkActive="active" *ngIf="isActive != 'true'">Our Values</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/gallery')}" [routerLink]="['gallery']"   routerLinkActive="active" *ngIf="isActive != 'true'">Gallery</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/test')}" [routerLink]="['test']"   routerLinkActive="active" *ngIf="admin == 'true' || isActive == 'true'">Test</a>  </li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/mentor')}" [routerLink]="['mentor']"   routerLinkActive="active" *ngIf="isActive != 'true'">Mentor</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/reviews')}" [routerLink]="['reviews']"   routerLinkActive="active" *ngIf="isActive != 'true'">Reviews</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;"  *ngIf="isActive == 'true' && !admin">Add Reviews</a></li>
       <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" >Blog</a></li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;"  style="cursor: pointer;" data-toggle="modal" data-target="#contactModal"*ngIf="!admin">Contact Us</a></li>
-      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/admin')}" [routerLink]="['admin']"   routerLinkActive="active" *ngIf="admin">View Users</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;"  style="cursor: pointer;" data-toggle="modal" data-target="#contactModal" *ngIf="isActive != 'true'">Contact Us</a></li>
+      <li class="nav-item">  <a class="nav-link navbarLinks" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/admin')}" [routerLink]="['admin']"   routerLinkActive="active" *ngIf="admin == 'true'">View Users</a></li>
 
 
       

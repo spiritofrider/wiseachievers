@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment'
 import { CONSTOBJ } from '../shared/shared-constant';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,23 @@ export class CommonService {
     });
 
     }
+private isAdmin = new BehaviorSubject<any>([])
+private isActive = new BehaviorSubject<any>([])
+
+
+updatedIsAdmin = this.isAdmin.asObservable();
+updatedIsActive = this.isActive.asObservable();
+
+
+  updateData(data:any,keyToShare){
+    switch(keyToShare){
+      case 'isAdmin':
+        this.isAdmin.next(data)
+      break;
+      case 'isActive':
+        this.isActive.next(data)
+      break;
+    }
+  }
+
 }
