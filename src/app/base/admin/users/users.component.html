@@ -43,8 +43,8 @@
         <td scope="row">{{user.password}}</td>
         <td scope="row">
           <label class="switch">
-            <input type="checkbox" [checked]="user.activateAccount" (change)="ActivateDeactivate(user,$event.target.checked)">
-            <span class="slider round"></span>
+            <input type="checkbox" [checked]="user.activateAccount" [disabled]="user.email == 'admin@gmail.com'" (change)="ActivateDeactivate(user,$event.target.checked)">
+            <span class="slider round" [class]="{'disabledClass':user.email == 'admin@gmail.com'}"></span>
           </label>
           </td>
 
