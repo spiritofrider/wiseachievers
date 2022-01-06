@@ -42,7 +42,7 @@ export class TopLayoutComponent implements OnInit {
   logout(){
     this.storageService.clearAllCookie()
     this.token = undefined;
-    this.route.navigate(['home'])
+    this.route.navigate(['base/home'])
   }
 
   openSignupModal(){

@@ -36,8 +36,7 @@ export class NavbarComponent implements OnInit {
 
   getActiveRoutes(route:any){
     let isRoute: boolean = false;
-    this.admin = this.common.tokenDecryption(this.storageService.getCookie('token'))['isAdmin']
-    this.isActive = this.common.tokenDecryption(this.storageService.getCookie('token'))['activateAccount']
+    
     if(route){
       if(this.route.indexOf(route) > -1){
         isRoute = true;
@@ -46,8 +45,15 @@ export class NavbarComponent implements OnInit {
         isRoute = false;
       }
     }
+
     return isRoute;
 
   }
 
+  
+  ngDoCheck(){
+    this.admin = this.common.tokenDecryption(this.storageService.getCookie('token'))['isAdmin']
+    this.isActive = this.common.tokenDecryption(this.storageService.getCookie('token'))['activateAccount'] }
+  
+  
 }
