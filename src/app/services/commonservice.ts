@@ -4,6 +4,8 @@ import {environment} from 'src/environments/environment'
 import { CONSTOBJ } from '../shared/shared-constant';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,16 @@ updatedIsActive = this.isActive.asObservable();
         this.isActive.next(data)
       break;
     }
+  }
+
+  tokenDecryption(token){
+    const helper = new JwtHelperService();
+    let decodedToken;
+    if(token){   decodedToken = helper.decodeToken(token);
+    }
+    else{ decodedToken = {}}
+
+      return decodedToken;
   }
 
 }

@@ -30,14 +30,14 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.admin = this.storageService.getCookie('isAdmin')
-    this.isActive = this.storageService.getCookie('isActive')
+    this.admin = this.common.tokenDecryption(this.storageService.getCookie('token'))['isAdmin']
+    this.isActive = this.common.tokenDecryption(this.storageService.getCookie('token'))['activateAccount']
   }
 
   getActiveRoutes(route:any){
     let isRoute: boolean = false;
-    this.admin = this.storageService.getCookie('isAdmin')
-    this.isActive = this.storageService.getCookie('isActive')
+    this.admin = this.common.tokenDecryption(this.storageService.getCookie('token'))['isAdmin']
+    this.isActive = this.common.tokenDecryption(this.storageService.getCookie('token'))['activateAccount']
     if(route){
       if(this.route.indexOf(route) > -1){
         isRoute = true;

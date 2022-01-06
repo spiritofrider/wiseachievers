@@ -4,7 +4,7 @@ import { CommonService } from 'src/app/services/commonservice';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -27,18 +27,14 @@ loginForm: FormGroup;
 
   submitForm(formVal){
     this.common.loginUser(formVal).subscribe(e=>{
-      console.log(e)
-      this.username = e['fullName']
       this.storageService.setCookie('token',e['token'])
-      this.storageService.setCookie('username',e['fullName'])
-      if(e.hasOwnProperty('isAdmin')){
-        this.storageService.setCookie('isAdmin',e['isAdmin'])
-        this.storageService.setCookie('isActive',e['activateAccount'])
+      let decodedToken = this.common.tokenDecryption(e['token'])
+      this.username = decodedToken['fullName']
+      if(decodedToken.hasOwnProperty('isAdmin')){
         this.route.navigate(['base/admin'])
       }
-      else{ this.storageService.setCookie('isActive',e['activateAccount'])}
-      if(e['activateAccount']){ this.route.navigate(['base/test']) }
-      else if(!e['activateAccount']){ this.route.navigate(['base/home'])}
+      if(decodedToken['activateAccount']){ this.route.navigate(['base/test']) }
+      else if(!decodedToken['activateAccount']){ this.route.navigate(['base/home'])}
       this.Cancel()
       this.common.snackBar('Login successful','s')
     },(error)=>{

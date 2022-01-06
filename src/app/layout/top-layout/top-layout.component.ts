@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
+import { CommonService } from 'src/app/services/commonservice';
 import { StorageService } from 'src/app/services/storage.service';
 import { LoginComponent } from 'src/app/shared/common/login/login.component';
 import { SignupComponent } from 'src/app/shared/common/signup/signup.component';
@@ -15,10 +16,11 @@ export class TopLayoutComponent implements OnInit {
   username : any ;
   token : any;
 
-  constructor(private BsModalService:BsModalService,private storageService:StorageService,private route:Router) { }
+  constructor(private BsModalService:BsModalService,private storageService:StorageService,private route:Router,
+    private common : CommonService) { }
 
   ngOnInit(): void {
-    this.username = this.storageService.getCookie('username')
+    this.username = this.common.tokenDecryption(this.storageService.getCookie('token'))['fullName']
     this.token = this.storageService.getCookie('token')
   }
   openLoginModal(){
