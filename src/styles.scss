@@ -2,6 +2,23 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-image: //linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #f6f9fa6b)
+  linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
+}
+
+h2{
+  font-family: 'Dancing Script', cursive;
+//text-shadow: 1px 1px 3px #333;
+//text-shadow: 1px 9px 4px rgb(144, 140, 140);
+font-weight: bold;
+}
+
+h4{
+  font-family: 'Lucida Console', cursive;
+}
+
 
 .flex-container-common {
     display: flex;
@@ -19,9 +36,16 @@
 }
 
 .squareButtons {
-    background-color:#0081d6;
-    color: white;
-    cursor: pointer;;
+    //background-color:#0081d6;
+    //color: white;
+    cursor: pointer;border: none;
+    outline: none;
+    padding: 6px 18px;
+    border-radius: 50px;
+    color: #333;
+    background: #fff;
+    //margin-bottom: 50px;
+    box-shadow: 0 3px 20px 0 #0000003b;
 }
 
 
@@ -31,88 +55,72 @@ a {
 }
 
 table{
-  //border: 1px solid black;
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 
-
-//=========== Top layer (logo) designs =============
-.flex-container {
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    text-align: center;
-    .flex-item-down {
-        margin-top: 44px;
-    }
-    .flex-item {
-        padding: 10px;
-        flex: 20%;
-      }
-    
-    .loginButton {
-        float: left;
-        margin-left: 135px;
-    }
-
-.logoImage {
-    width: 60px;
-    height: 76px;
-    //height: 50px;
+//*======== nav-bar styling ===========
+.navbarTheme {
+  background-color: #0081d6;
 }
 
-.logoSpan {
-    float: left;
-}
-
-.titleLogo{
-    margin-top: 44px;
-    margin-right: 80px;
-}
+.nav-container{
+width: 100%;
+  .navbarLinks {
+      color: white !important; 
+      margin-left: 10px;
+  
   }
-//=========== Top layer (logo) designs ends=============
+  
+  .activeRoute{
+      border-bottom: 2px solid gold;
+  }
+  
+  .navbarLinks:hover {
+      //text-decoration: underline;
+      transform:scale(1.2)
+  }
+}
+
+//*========= nav-bar styling ends ========
+
+
+
 
 //============= Home (Main Page) styling ===========
-.flex-container-home {
-    display: flex;
-    flex-direction: row;
-    
-    
-.flex-item-home {
-    flex: 50%;
-    margin-top: 40px;
-    margin-left: 22px;
-}
-    .pointsHome {
-        font-size: 24px;
+.homeContainer{
+  //padding-top: 120px;
+
+  h4, ul,.section2Container,.section3Container,.section4Container,.section5Container{
+    padding-top: 30px;
+  }
+  .section3Container,.section4Container,.section5Container{
+    padding-top: 30px;
+    h2{
+    text-align: center;
+  }
+  }
+  .section5Paragraphs{
+    margin-top: 100px;
+  }
+  
+  
+  p{
+      font-size: 18px;
     }
-    
-   
-    
-}
-
-
-.trophySVG {
+  img{
+    width: 100%;
+  }
+  
+  .aboutSVG {
     width: 503px;
     height: 383px;
-    margin-left: 110px;
 }
 
-.section2SVG {
-    width: 503px;
-    height: 383px;
-    margin-top: 50px;
-    margin-left: 50px;
 }
 
-.aboutSVG {
-    width: 503px;
-    height: 383px;
-    margin-top: 50px;
-    margin-left: 50px;
-}
+
 
 .valuesSVG {
     width: 503px;
@@ -120,45 +128,10 @@ table{
     margin-top: 50px;
     margin-left: 50px;
 }
-.section2Title {
-    margin-top: 50px;
-    margin-left: 150px;
-}
-
-.section2Paragraphs {
-    margin-top: 30px;
-}
-
-.section2ParaStyle {
-    font-size: 20px;
-}
-
-.section3Title {
-    text-align: center;
-    margin-top: 60px;
-}
-
-.section5Title {
-    text-align: center;
-}
-
-.section5Paragraphs {
-    margin-top: 130px;
-}
-
-.section5ParaStyle{
-    font-size: 20px;
-}
 
 
-.callButtons {
-    background-color:#0081d6;
-    color: white;
-    cursor: pointer;
-    border-radius: 20px;
-    font-size: 22px;
-}
 
+//***************Step Strategy Chart****************
 
 .title {
     position: relative;
@@ -422,53 +395,28 @@ table{
     }
   }
 
-
+//***************Step Strategy Chart****************
 
 //============= Home (Main Page) styling ends===========
 
 
-//*======== nav-bar styling ===========
-.navbarTheme {
-    background-color: #0081d6;
-}
-.nav-container{
-    .navbarLinks {
-        color: white !important; 
-        //padding: 10px;
-        margin-left: 10px;
-    
-    }
-    
-    .activeRoute{
-        border-bottom: 2px solid gold;
-    }
-    
-    .navbarLinks:hover {
-        //text-decoration: underline;
-        transform:scale(1.2)
-    }
-}
 
-//*========= nav-bar styling ends ========
 
 //*===== gallery =======
 .galleryContainer{
-    margin-top: 10px;
+    margin-top: 30px;
     height: 500px; 
     width: 666px; 
-    margin-left: 300px;
+    
 }
 //*===== gallery ends =======
 
 //*======== mentor styling ========
 .mentor-container{
-    margin-top: 10px;
+    margin-top: 30px;
  
     .card{
-    width: 80%; 
-    margin-left: 115px;
-    height: 50%;
-
+      padding: 10px;
     p{
         margin-top: 40px;
      }
@@ -487,7 +435,7 @@ table{
 //** ============= Values styling ===========
 
 .value-container{
-    margin-top: 130px;
+    margin-top: 30px;
 }
 
 //** ============= Values styling ends===========
@@ -500,7 +448,7 @@ table{
     padding: 0 50px;
     .table-responsive{
       max-height: 335px;
-      border:1px solid #bbe1f8;
+      //border:1px solid #bbe1f8;
       padding-right: 1px;
       line-height: 18px;
        table{
@@ -689,5 +637,3 @@ input:checked + .slider:before {
   }
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
