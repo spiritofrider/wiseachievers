@@ -3,14 +3,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+body { margin: 0; //font-family: Roboto, "Helvetica Neue", sans-serif; 
   background-image: //linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #f6f9fa6b)
   linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
 }
 
 h2{
   font-family: 'Dancing Script', cursive;
-//text-shadow: 1px 1px 3px #333;
 //text-shadow: 1px 9px 4px rgb(144, 140, 140);
 font-weight: bold;
 }
