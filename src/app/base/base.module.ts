@@ -11,6 +11,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MentorsComponent } from './mentors/mentors.component';
 import { TestExampleComponent } from './test-example/test-example.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
 {
@@ -44,6 +45,10 @@ const routes: Routes = [
       component : ReviewsComponent
     },
     {
+      path: 'contact',
+      component : ContactUsComponent
+    },
+    {
       path: 'test',
       component : TestExampleComponent
     },
@@ -72,7 +77,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, BaseComponent,NavbarComponent,ValuesComponent,GalleryComponent,MentorsComponent,ReviewsComponent,TestExampleComponent],
+  declarations: [HomeComponent, BaseComponent,NavbarComponent,ValuesComponent,GalleryComponent,MentorsComponent,ReviewsComponent,TestExampleComponent,ContactUsComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

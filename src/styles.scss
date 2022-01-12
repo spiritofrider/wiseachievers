@@ -4,8 +4,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; //font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background-image: //linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #f6f9fa6b)
-  linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
+  background-image: linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
 }
 
 h2{
@@ -59,76 +58,42 @@ table{
   border-spacing: 0;
 }
 
+.base-container{
+  margin-top:150px
+}
+
 
 //*======== nav-bar styling ===========
-.navbarTheme {
-  background-color: #0081d6;
-}
-
-.nav-container{
-width: 100%;
-  .navbarLinks {
-      color: white !important; 
-      margin-left: 10px;
-  
-  }
-  
-  .activeRoute{
-      border-bottom: 2px solid gold;
-  }
-  
-  .navbarLinks:hover {
-      //text-decoration: underline;
-      transform:scale(1.2)
-  }
-}
 
 //*========= nav-bar styling ends ========
 
 
 
 
-//============= Home (Main Page) styling ===========
+//============= Home/Values (Main Page) styling ===========
 .homeContainer{
-  //padding-top: 120px;
-
   h4, ul,.section2Container,.section3Container,.section4Container,.section5Container{
     padding-top: 30px;
   }
   .section3Container,.section4Container,.section5Container{
     padding-top: 30px;
     h2{
-    text-align: center;
+    text-align: center;}
   }
+  .section5Paragraphs,.valueMessage{
+    display: flex;
+    align-items: center;
   }
-  .section5Paragraphs{
-    margin-top: 100px;
-  }
-  
-  
   p{
       font-size: 18px;
     }
   img{
     width: 100%;
   }
-  
-  .aboutSVG {
-    width: 503px;
-    height: 383px;
+  .valuesSVG{
+    height: 400px;
+  }
 }
-
-}
-
-
-
-.valuesSVG {
-    width: 503px;
-    height: 383px;
-    margin-top: 50px;
-    margin-left: 50px;
-}
-
 
 
 //***************Step Strategy Chart****************
@@ -404,7 +369,6 @@ width: 100%;
 
 //*===== gallery =======
 .galleryContainer{
-    margin-top: 30px;
     height: 500px; 
     width: 666px; 
     
@@ -412,9 +376,7 @@ width: 100%;
 //*===== gallery ends =======
 
 //*======== mentor styling ========
-.mentor-container{
-    margin-top: 30px;
- 
+.mentor-container{ 
     .card{
       padding: 10px;
     p{
@@ -431,15 +393,26 @@ width: 100%;
 
 //*======== mentor styling ends========
 
+//*****************contact us page *****************
 
-//** ============= Values styling ===========
-
-.value-container{
-    margin-top: 30px;
+.contactContainer{
+  padding-top: 40px;
+i {
+  color: #0081d6;
+  font-size: 40px;
+  
 }
 
-//** ============= Values styling ends===========
-
+.contactContent{
+  text-align: center;
+  h2{
+      margin-top:  10px;
+      font-weight: 500;
+      font-size: 25px;
+  }
+}
+}
+//****************contact page ends ****************
 
 //=============== Admin ===================
 
@@ -564,7 +537,12 @@ input:checked + .slider:before {
 
 //================== Login Container ==================
 
-
+.modal-content{
+  //background-image: linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
+i{
+  color:#0081d6;
+}
+}
 .login-container{
   margin-top: 5%;
   margin-bottom: 5%;
@@ -582,8 +560,8 @@ input:checked + .slider:before {
 }
 .btnSubmit
 {
-  width: 50%;
-  border-radius: 1rem;
+  width: 100%;
+  border-radius: 5px;
   padding: 1.5%;
   border: none;
   cursor: pointer;
@@ -607,33 +585,14 @@ input:checked + .slider:before {
 
 
 
-  @media (max-width: 800px) {
-    .flex-container {
-      flex-direction: column;
+
+
+
+  @media (max-width: 991.98px) {  
+    .base-container{
+      margin-top: 35px;
     }
 
-    .flex-container-home {
-        flex-direction: column;
-        .pointsHome {
-            font-size: 24px;
-        }
-    }
-
-    .flex-item-down {
-        margin-top: 0px;
-    }
-
-    .logoImage {
-        width: 60px;
-        height: 76px;
-        //height: 50px;
-        margin-left: 111px;
-    }
-
-    .titleLogo{
-        margin-top: 44px;
-        margin-right: 135px;
-    }
   }
 
 

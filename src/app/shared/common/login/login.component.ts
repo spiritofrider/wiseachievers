@@ -38,7 +38,7 @@ loginForm: FormGroup;
       this.Cancel()
       this.common.snackBar('Login successful','s')
     },(error)=>{
-      this.common.snackBar(error.error,'s')
+      this.common.snackBar(error.error.message,'s')
     })
 
   }

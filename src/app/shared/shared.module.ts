@@ -4,7 +4,6 @@ import { FilterComponent } from './common/filter/filter.component';
 import { MaterialModule } from '../app.material.module';
 import { LoginComponent } from './common/login/login.component';
 import { SignupComponent } from './common/signup/signup.component';
-import { ContactUsComponent } from './common/contact-us/contact-us.component';
 import { LoaderComponent } from './loader/loader.component';
 
 
@@ -14,7 +13,6 @@ import { LoaderComponent } from './loader/loader.component';
     FilterComponent,
     LoginComponent,
     SignupComponent,
-    ContactUsComponent,
     LoaderComponent
   ],
   imports: [
@@ -26,7 +24,6 @@ import { LoaderComponent } from './loader/loader.component';
     FilterComponent,
     LoginComponent,
     SignupComponent,
-    ContactUsComponent,
     LoaderComponent
   ]
 })
