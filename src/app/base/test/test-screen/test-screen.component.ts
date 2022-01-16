@@ -128,9 +128,15 @@ export class TestScreenComponent implements OnInit {
       this.scoreCalculator(this.secondPref,this.secondPrefScore);
       this.scoreCalculator(this.thirdPref,this.thirdPrefScore);
       if(chart == 'bar'){
+        if(this.mainTestObject.length == this.totalQuestion.length){
         this.result = true;
         this.barChartData = [{data:[this.intellectualPoints,this.businessPoints,this.artistPoints,this.pragmaticPoints,this.organiserPoints,this.socialPoints,this.sportsPoints], label: 'Skills'}]
       }
+        else{
+          this.sharedService.snackBar("Please submit all the questions",'a')
+        }
+      }
+      
     console.log(this.mainTestObject)
    
   
