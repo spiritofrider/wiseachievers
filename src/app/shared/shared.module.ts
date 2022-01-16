@@ -5,6 +5,7 @@ import { MaterialModule } from '../app.material.module';
 import { LoginComponent } from './common/login/login.component';
 import { SignupComponent } from './common/signup/signup.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ConfirmationComponent } from './common/confirmation/confirmation.component';
 
 
 
@@ -13,7 +14,8 @@ import { LoaderComponent } from './loader/loader.component';
     FilterComponent,
     LoginComponent,
     SignupComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmationComponent
   ],
   imports: [
     CommonModule,

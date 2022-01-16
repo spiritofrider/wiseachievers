@@ -42,7 +42,7 @@ export class ExampleTestService {
       ]
     },
     {
-      question:'From the below click on the positive attributes which you will be using very much in your work',
+      question:'From the below click on the positive attributes which you will be using very much in your work' ,
       options:[
         {value:'People based solutions',real:'Social',preference:''},
         {value:'Influencing People',real:'Business',preference:''},
@@ -81,7 +81,7 @@ export class ExampleTestService {
       ]
     },
     {
-      question:'From the below choices click on the preferances for task which you would best like to do at work',
+      question:'From the below choices click on the preferances for task which you would best like to do at work(2)',
       options:[
         {value:'Physical games, athletic activities, sports, sports equipment',real:'Sports',preference:''},
         {value:'Scientific, techinical, investigative, exploration, discovery, inventive',real:'Intellectual',preference:''},

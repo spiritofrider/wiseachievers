@@ -50,7 +50,7 @@ const routes: Routes = [
     },
     {
       path: 'test',
-      component : TestExampleComponent
+      loadChildren : () => import('./test/test.module').then(mod=> mod.TestModule)
     },
     {
       path: 'admin',

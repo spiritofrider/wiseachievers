@@ -12,6 +12,7 @@ import {ModalModule} from 'ngx-bootstrap/modal'
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { LoaderComponent } from './shared/loader/loader.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

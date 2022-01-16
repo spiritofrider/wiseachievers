@@ -1,0 +1,90 @@
+.data-card {
+    display: flex;
+    flex-direction: column;
+      min-height: 20px;
+      overflow: hidden;
+      border-radius: .5em;
+      text-decoration: none;
+      margin: 1em;
+      //padding: 20px 2.5em;
+      box-shadow: 1em 1em 1.5em -0.5em #0000001a;
+      transition: transform .45s ease,background .45s ease;
+      background-color: rgb(236, 243, 244);
+      justify-content: center;
+
+
+}
+
+
+
+h5{
+padding: 20px 20px ;
+background-color: #ffff;
+font-size: 15px;
+}
+
+
+.inner-data-card{
+    padding: 2.5em 2.5em ;
+    background-color: #ffff;
+    font-size: 15px;
+    i{
+        margin-right: 10px;
+        font-size: 18px;
+        color: lightgray;
+    }
+    .choiceContainer{
+        padding: 1em ;
+    }
+    .question{
+        font-weight: 600;
+    }
+}
+
+.stepBtn{
+    border-radius: 5px;
+    padding: 4px 10px;
+    background-color: rgb(236, 243, 244);
+    i{
+        color: black;
+        margin: 3px;
+    }
+}
+
+.btn-primary.disabled, .btn-primary:disabled{
+    background-color: lightgray !important;
+}
+
+.questionNumberContainer{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 1em 0px;
+    .questionNumberBox{
+    min-width: 25px;
+    max-height: 25px;
+    margin-right : 10px;
+    background-color: #ffff;
+    border-radius: 3px;
+    p{
+        font-size: 14px;
+        text-align: center;
+    }
+}
+}
+
+.activeClass{
+transform: scale(1.5);
+}
+
+
+table{
+    th,td{
+        padding: 3px 10px;
+    }
+    th{
+        font-size:13px
+    }
+    .input{
+        text-align: center;
+    }
+}
