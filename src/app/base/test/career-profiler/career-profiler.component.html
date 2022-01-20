@@ -1,0 +1,31 @@
+<div  class="data-card inner-data-card" >
+    <div>
+       <span><i class="fa fa-question-circle" aria-hidden="true"></i>
+       </span><span class="question">{{ TestQuiz[currentQuestion].question }}</span>
+    </div>
+    <div class="choiceContainer">
+        <div class="table-responsive">
+     <table >
+            <tr>
+                <th>Options</th>
+                <th>1st Preference</th>
+                <th>2nd Preference</th>
+                <th>3rd Preference</th>
+            </tr>
+            <tbody>
+            <tr *ngFor="let quiz of TestQuiz[currentQuestion]['options'];let i =index">
+                <td class="maxWIdth">{{ quiz.option }}</td>
+                <td class="input " ><input type="radio" name="{{i}}" id="f{{i+1}}" value="{{ quiz.value }}" (change)="preferenceSelection('First',$event,i+1)"></td>
+                <td class="input"><input type="radio" name="{{i}}" id="s{{i+1}}" value="{{ quiz.value }}" (change)="preferenceSelection('Second',$event,i+1)"></td>
+                <td class="input"><input type="radio" name="{{i}}" id="t{{i+1}}" value="{{ quiz.value }}" (change)="preferenceSelection('Third',$event,i+1)"></td>
+            </tr>
+        </tbody>
+        </table> 
+          
+    </div>
+</div>
+    <div >
+        <button class="btn btn-primary squareButtons stepBtn" [disabled]="currentQuestion == 0" (click)="prevQues()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+        <button class="btn btn-primary squareButtons stepBtn ml-2" [disabled]="currentQuestion >= TestQuiz.length-1" (click)="nextQuestion()"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+    </div>
+    </div>

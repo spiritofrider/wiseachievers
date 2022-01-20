@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TestScreenComponent } from './test-screen/test-screen.component';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+import { CareerProfilerComponent } from './career-profiler/career-profiler.component';
 
 
 const routes: Routes = [
@@ -46,7 +47,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     TestComponent,
-    TestScreenComponent
+    TestScreenComponent,
+    CareerProfilerComponent
   ],
   imports: [
     RouterModule.forChild(routes),
