@@ -3,5 +3,9 @@ export let CONSTOBJ : Object = {
         getAllUsers : 'users/all',
         editUser : 'users/update/'
     },
+    test : {
+        getTest1List : 'tests/test1'
+
+    },
     login : 'auth/sign_in'
 }
