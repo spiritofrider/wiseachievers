@@ -55,7 +55,7 @@ export class CareerProfilerComponent implements OnInit {
 
 
    prevQues(){
-    if(this.currentQuestion > 0){this.currentQuestion -= 1;this.questionIncrement.emit(this.currentQuestion)}
+    if(this.currentQuestion > 0){this.currentQuestion -= 1;   }
     this.CheckBoxLogicCommon();
   }
 

@@ -3,10 +3,14 @@
         <div class="col-md-12">
             <div  class="data-card" *ngIf="TestQuiz" >
                 <h5>Career Interest Profiler : Part {{uniqueRelation[0]}} </h5>
-        
-                <div class="questionNumberContainer">
-                    <div class="questionNumberBox" id="b{{i}}" [ngClass]="{'activeClass': i == currentQuestion}"  *ngFor="let ques of TestQuiz;let i=index">
-                    <p>{{i+1}}</p>
+                    <div class="questionNumberContainer">
+                    <div class="questionNumberBox" id="b{{ques}}" [ngClass]="{'activeClass': ques == currentQuestion}"  *ngFor="let ques of incrementBoxes;let i=index">
+                    <p>{{ques+1}}</p>
+                    </div>
+                    <div *ngIf="TestQuiz.length > 3">
+                    <sub><i class="fa fa-circle" aria-hidden="true" fa-lg ></i></sub>
+                    <sub><i class="fa fa-circle" aria-hidden="true" fa-lg ></i></sub>
+                    <sub><i class="fa fa-circle" aria-hidden="true" fa-lg ></i></sub>
                     </div>
                     <div *ngIf="currentQuestion == TestQuiz.length-1" class="ml-auto">
                     <button class="btn btn-primary squareButtons" (click)="submitExampleTest()">Submit Test</button>
