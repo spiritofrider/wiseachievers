@@ -1,20 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { BsModalService } from "ngx-bootstrap/modal";
+import { CommonService } from "src/app/services/commonservice";
+import { StorageService } from "src/app/services/storage.service";
+import { InstructionModalComponent } from "src/app/shared/common/instruction-modal/instruction-modal.component";
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  selector: "app-test",
+  templateUrl: "./test.component.html",
+  styleUrls: ["./test.component.scss"],
 })
 export class TestComponent implements OnInit {
+  bsModalRef: any;
+  statusObject: Object;
 
-  constructor(private router:Router) { }
+  constructor(
+    private router: Router,
+    private BsModalService: BsModalService,
+    private common: CommonService,
+    private storageService: StorageService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    const decryptCookie = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    );
+    decryptCookie["isAdmin"]
+      ? (this.testUserStatus = Object)
+      : this.testUserStatus(decryptCookie["_id"]);
   }
 
-  TestSelection(type){
-    this.router.navigate(['base/test/test1'])
+  TestSelection(attri, type, subattri1?, subattri2?) {
+    const condition =
+      this.statusObject?.[attri].completed !== true ||
+      this.statusObject?.[subattri1].completed !== true ||
+      this.statusObject?.[subattri2].completed !== true;
+    if (condition) {
+      this.bsModalRef = this.BsModalService.show(InstructionModalComponent, {
+        backdrop: "static",
+        keyboard: false,
+      });
+      let subsciber = this.BsModalService.onHide.subscribe((res) => {
+        let action = this.bsModalRef.content.action;
+        if (action == "ok") {
+          subsciber.unsubscribe();
+          this.router.navigate(["base/test/test1"]);
+        }
+      });
+    }
   }
 
+  testUserStatus(userId) {
+    this.common.testUserStatus(userId).subscribe(
+      (e) => {
+        console.log(e);
+        this.statusObject = e;
+        this.common.updateData(this.statusObject, "testStatus");
+      },
+      (error) => {
+        this.common.snackBar("There is some issue in fetching the tests", "");
+      }
+    );
+  }
+
+  disablingClass() {
+    return this.common.tokenDecryption(this.storageService.getCookie("token"))[
+      "isAdmin"
+    ]
+      ? false
+      : this.statusObject?.["test_1"]?.completed == true &&
+          this.statusObject?.["test_2"]?.completed == true &&
+          this.statusObject?.["test_3"]?.completed == true;
+  }
 }

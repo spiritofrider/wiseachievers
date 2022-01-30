@@ -1,144 +1,236 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import { Router } from "@angular/router";
+import { CommonService } from "src/app/services/commonservice";
+import { StorageService } from "src/app/services/storage.service";
 
 @Component({
-  selector: 'app-career-profiler',
-  templateUrl: './career-profiler.component.html',
-  styleUrls: ['./career-profiler.component.scss']
+  selector: "app-career-profiler",
+  templateUrl: "./career-profiler.component.html",
+  styleUrls: ["./career-profiler.component.scss"],
 })
 export class CareerProfilerComponent implements OnInit {
-
   @Input() TestQuiz;
   @Input() submissionPart;
+  @Input() TestType;
+  @Input() firstRelation;
   @Output() questionIncrement = new EventEmitter();
   @Output() finalObj = new EventEmitter();
+  @Output() submitExampleTestEmitter = new EventEmitter();
+  @Output() traverseTestEmitter = new EventEmitter();
 
+  mainTestObject: any = [];
+  currentQuestion: any = 0;
 
-  mainTestObject:any = [];
-  currentQuestion:any = 0;
-
-  preferenceObject : any = {
-    'id' : '',
-    'question' : '',
-    'FirstPreferance' : '',
-    'SecondPreferance' : '',
-    'ThirdPreferance' : '',
-    'FirstPreferanceIndex' : null,
-    'SecondPreferanceIndex':null,
-    'ThirdPreferanceIndex': null
+  preferenceObject: any = {
+    id: "",
+    question: "",
+    FirstPreferance: "",
+    SecondPreferance: "",
+    ThirdPreferance: "",
+    FirstPreferanceIndex: null,
+    SecondPreferanceIndex: null,
+    ThirdPreferanceIndex: null,
+    FirstPreferanceOption: "",
+    SecondPreferanceOption: "",
+    ThirdPreferanceOption: "",
   };
-  constructor() { }
 
-  ngOnInit(): void {
-   
+  choiceObjectTest3: any = {
+    id: "",
+    question: "",
+    selected: "",
+    category: "",
+    value: "",
+  };
+  isAdmin: any;
+  constructor(
+    private storageService: StorageService,
+    private common: CommonService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {}
+
+  ngOnChanges() {
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"];
+    if (!this.submissionPart) {
+      this.resetPreferenceObject();
+      this.currentQuestion = 0;
+      this.mainTestObject = [];
+    }
   }
 
-  ngOnChanges(){
-    console.log(this.submissionPart)
-    if(!this.submissionPart){
-      this.resetPreferenceObject()
-      this. currentQuestion = 0;
-      this.mainTestObject = [] 
-     }
+  travesingPart(testType) {
+    this.traverseTestEmitter.emit([testType, this.TestType]);
+  }
+  goToMainScreen() {
+    this.router.navigate(["base/test"]);
   }
 
-
-
-
-
-  nextQuestion(){
-     if(this.currentQuestion < this.TestQuiz.length-1 ) {
-       this.currentQuestion += 1;
-       this.CheckBoxLogicCommon();
-      
+  nextQuestion() {
+    if (this.currentQuestion < this.TestQuiz.length - 1) {
+      this.currentQuestion += 1;
+      this.CheckBoxLogicCommon();
+    }
   }
-   console.log(this.mainTestObject)}
 
-
-   prevQues(){
-    if(this.currentQuestion > 0){this.currentQuestion -= 1;   }
+  prevQues() {
+    if (this.currentQuestion > 0) {
+      this.currentQuestion -= 1;
+    }
     this.CheckBoxLogicCommon();
   }
 
-
-  CheckBoxLogicCommon(){
-    this.resetPreferenceObject()
-    this.questionIncrement.emit(this.currentQuestion)
-    const filledQues = this.mainTestObject.find(e=> e.id == this.TestQuiz[this.currentQuestion].qno)     
-    if(filledQues){
-      setTimeout( ()=>{
-        if(filledQues['FirstPreferanceIndex']){document.getElementById(`f${filledQues['FirstPreferanceIndex']}`)['checked']=true;}
-        if(filledQues['SecondPreferanceIndex']){document.getElementById(`s${filledQues['SecondPreferanceIndex']}`)['checked'] = true;}
-        if(filledQues['ThirdPreferanceIndex']){document.getElementById(`t${filledQues['ThirdPreferanceIndex']}`)['checked'] = true;}
-    },0) 
-   
-  }
+  submitExampleTest() {
+    this.TestType == "3" ? this.finalObj.emit(this.mainTestObject) : "";
+    this.submitExampleTestEmitter.emit("test");
   }
 
+  CheckBoxLogicCommon() {
+    this.resetPreferenceObject();
+    this.questionIncrement.emit(this.currentQuestion);
+    const filledQues = this.mainTestObject.find(
+      (e) => e.id == this.TestQuiz[this.currentQuestion].qno
+    );
+    if (filledQues) {
+      setTimeout(() => {
+        if (filledQues["FirstPreferanceIndex"]) {
+          document.getElementById(`f${filledQues["FirstPreferanceIndex"]}`)[
+            "checked"
+          ] = true;
+        }
+        if (filledQues["SecondPreferanceIndex"]) {
+          document.getElementById(`s${filledQues["SecondPreferanceIndex"]}`)[
+            "checked"
+          ] = true;
+        }
+        if (filledQues["ThirdPreferanceIndex"]) {
+          document.getElementById(`t${filledQues["ThirdPreferanceIndex"]}`)[
+            "checked"
+          ] = true;
+        }
+      }, 0);
+    }
+  }
 
-  preferenceSelection(type,e:any,index){
-    const filledQues = this.mainTestObject.find(e=> e['id'] == this.TestQuiz[this.currentQuestion].qno)
-    if(filledQues){this.preferenceObject = filledQues }
-    this.preferenceObject['question'] = this.TestQuiz[this.currentQuestion].question
-    this.preferenceObject['id'] = this.TestQuiz[this.currentQuestion].qno
-    if(type == 'First'){
-      if(!!this.preferenceObject.FirstPreferanceIndex){
-      document.getElementById(`f${this.preferenceObject['FirstPreferanceIndex']}`)['checked'] = false;
+  //for test for relation '3'
+  choiceSelected(e, qno, question, category, value) {
+    this.choiceObjectTest3["id"] = qno;
+    this.choiceObjectTest3["question"] = question;
+    this.choiceObjectTest3["category"] = category;
+    this.choiceObjectTest3["value"] = value;
+    this.choiceObjectTest3["selected"] = e["target"]["defaultValue"];
+    let filledQues = this.mainTestObject.filter((e) => e["id"] == qno);
+    if (filledQues.length < 1) {
+      this.mainTestObject.push(this.choiceObjectTest3);
+    } else {
+      const Index = this.mainTestObject.findIndex((e) => e.id == qno);
+      this.mainTestObject[Index]["value"] = this.choiceObjectTest3["value"];
+      this.mainTestObject[Index]["selected"] = e["target"]["defaultValue"];
+      console.log("mainObj", this.mainTestObject);
     }
-      if(this.preferenceObject['SecondPreferanceIndex'] == index){this.preferenceObject['SecondPreferanceIndex'] = null}
-      if(this.preferenceObject['ThirdPreferanceIndex'] == index){this.preferenceObject['ThirdPreferanceIndex'] = null}
-      this.preferenceObject['FirstPreferanceIndex'] = index
-      this.preferenceObject['FirstPreferance'] = e['target']['defaultValue'];
+    this.resetChoiceObject();
+  }
+
+  preferenceSelection(type, e: any, index, option) {
+    const filledQues = this.mainTestObject.find(
+      (e) => e["id"] == this.TestQuiz[this.currentQuestion].qno
+    );
+    if (filledQues) {
+      this.preferenceObject = filledQues;
     }
-    else if(type == 'Second'){
-      if(!!this.preferenceObject.SecondPreferanceIndex){
-        document.getElementById(`s${this.preferenceObject['SecondPreferanceIndex']}`)['checked'] = false;
+    this.preferenceObject["question"] =
+      this.TestQuiz[this.currentQuestion].question;
+    this.preferenceObject["id"] = this.TestQuiz[this.currentQuestion].qno;
+    if (type == "First") {
+      this.radioButtonCheckLogic(
+        type,
+        "Second",
+        "Third",
+        index,
+        e,
+        option,
+        "f"
+      );
+    } else if (type == "Second") {
+      this.radioButtonCheckLogic(type, "First", "Third", index, e, option, "s");
+    } else if (type == "Third") {
+      this.radioButtonCheckLogic(
+        type,
+        "First",
+        "Second",
+        index,
+        e,
+        option,
+        "t"
+      );
+    }
+
+    if (Object.values(this.preferenceObject).every((v) => v)) {
+      let filledQues = this.mainTestObject.filter(
+        (e) => e["id"] == this.TestQuiz[this.currentQuestion].qno
+      );
+      if (filledQues.length < 1) {
+        this.mainTestObject.push(this.preferenceObject);
+      } else {
+        this.mainTestObject.map(
+          (obj) => filledQues.find((o) => o.id === obj.id) || obj
+        );
       }
-      if(this.preferenceObject['FirstPreferanceIndex'] == index){this.preferenceObject['FirstPreferanceIndex'] = null}
-      if(this.preferenceObject['ThirdPreferanceIndex'] == index){this.preferenceObject['ThirdPreferanceIndex'] = null}
-        this.preferenceObject['SecondPreferanceIndex'] = index
-        this.preferenceObject['SecondPreferance'] = e['target']['defaultValue'];
-     
     }
-    else if(type == 'Third'){
-      if(!!this.preferenceObject.ThirdPreferanceIndex){
-        document.getElementById(`t${this.preferenceObject['ThirdPreferanceIndex']}`)['checked'] = false;
-        
-      }
-      if(this.preferenceObject['FirstPreferanceIndex'] == index){this.preferenceObject['FirstPreferanceIndex'] = null}
-      if(this.preferenceObject['SecondPreferanceIndex'] == index){this.preferenceObject['SecondPreferanceIndex'] = null}
-        this.preferenceObject['ThirdPreferanceIndex'] = index
-        this.preferenceObject['ThirdPreferance'] = e['target']['defaultValue'];
-      
-    }
-    console.log("preferance object",this.preferenceObject)
-
-    
-    if(Object.values(this.preferenceObject).every(v => v) ){
-      let filledQues = this.mainTestObject.filter(e=> e['id'] == this.TestQuiz[this.currentQuestion].qno)
-      console.log('filled Ques',filledQues)
-      if(filledQues.length < 1){
-        this.mainTestObject.push(this.preferenceObject)}
-      else{ this.mainTestObject.map(obj => filledQues.find(o => o.id === obj.id) || obj);}
-    }
-
-    console.log('main object:',this.mainTestObject)
-    this.finalObj.emit(this.mainTestObject)
+    this.finalObj.emit(this.mainTestObject);
   }
 
-
-  resetPreferenceObject(){
+  resetPreferenceObject() {
     this.preferenceObject = {
-      'id' : '',
-      'question' : '',
-      'FirstPreferance' : '',
-      'SecondPreferance' : '',
-      'ThirdPreferance' : '',
-      'FirstPreferanceIndex' : null,
-      'SecondPreferanceIndex':null,
-      'ThirdPreferanceIndex': null
+      id: "",
+      question: "",
+      FirstPreferance: "",
+      SecondPreferance: "",
+      ThirdPreferance: "",
+      FirstPreferanceIndex: null,
+      SecondPreferanceIndex: null,
+      ThirdPreferanceIndex: null,
+      FirstPreferanceOption: "",
+      SecondPreferanceOption: "",
+      ThirdPreferanceOption: "",
     };
-    
+  }
+  resetChoiceObject() {
+    this.choiceObjectTest3 = {
+      id: "",
+      question: "",
+      selected: "",
+      category: "",
+      value: "",
+    };
   }
 
-
+  radioButtonCheckLogic(
+    prefType,
+    prefType2nd,
+    prefType3rd,
+    index,
+    e,
+    option,
+    id
+  ) {
+    if (!!this.preferenceObject[`${prefType}PreferanceIndex`]) {
+      document.getElementById(
+        `${id}${this.preferenceObject[`${prefType}PreferanceIndex`]}`
+      )["checked"] = false;
+    }
+    if (this.preferenceObject[`${prefType2nd}PreferanceIndex`] == index) {
+      this.preferenceObject[`${prefType2nd}PreferanceIndex`] = null;
+    }
+    if (this.preferenceObject[`${prefType3rd}PreferanceIndex`] == index) {
+      this.preferenceObject[`${prefType3rd}PreferanceIndex`] = null;
+    }
+    this.preferenceObject[`${prefType}PreferanceIndex`] = index;
+    this.preferenceObject[`${prefType}Preferance`] =
+      e["target"]["defaultValue"];
+    this.preferenceObject[`${prefType}PreferanceOption`] = option;
+  }
 }

@@ -1,0 +1,20 @@
+.reportContainer {
+  //border: 1px solid black;
+  margin-top: 20px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  background: #ffffff;
+  h4 {
+    text-align: center;
+    border-bottom: 1px solid #464545;
+  }
+  h6 {
+    font-weight: 700;
+    color: #2e0d6e;
+  }
+  .reportQuesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}

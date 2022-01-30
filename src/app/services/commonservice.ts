@@ -1,67 +1,83 @@
-import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment'
-import { CONSTOBJ } from '../shared/shared-constant';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { CONSTOBJ } from "../shared/shared-constant";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { BehaviorSubject } from "rxjs";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CommonService {
+  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar) {}
 
-  constructor(private httpClient: HttpClient,private _snackBar:MatSnackBar) { }
-
-
-  getAllUsers(){
-    return this.httpClient.get(environment.baseUrlNode+CONSTOBJ['admin']['getAllUsers'])
+  getAllUsers() {
+    return this.httpClient.get(
+      environment.baseUrlNode + CONSTOBJ["admin"]["getAllUsers"]
+    );
   }
 
-  editUsers(id,body){
-    return this.httpClient.put(environment.baseUrlNode+CONSTOBJ['admin']['editUser']+id,body)
+  editUsers(id, body) {
+    return this.httpClient.put(
+      environment.baseUrlNode + CONSTOBJ["admin"]["editUser"] + id,
+      body
+    );
   }
 
-  loginUser(formbody){
-    return this.httpClient.post(environment.baseUrlNode+CONSTOBJ['login'],formbody)
+  loginUser(formbody) {
+    return this.httpClient.post(
+      environment.baseUrlNode + CONSTOBJ["login"],
+      formbody
+    );
   }
 
+  registerUser(formbody) {
+    return this.httpClient.post(
+      environment.baseUrlNode + CONSTOBJ["register"],
+      formbody
+    );
+  }
 
-  snackBar(message: string, snackStyle: string) {    
-    this._snackBar.open(message, '', {      
+  testUserStatus(userId) {
+    return this.httpClient.get(
+      environment.baseUrlNode + CONSTOBJ["testStatus"] + userId
+    );
+  }
+
+  viewReport(userId) {
+    return this.httpClient.get(
+      environment.baseCalculationUrl + CONSTOBJ["admin"]["viewReports"] + userId
+    );
+  }
+
+  snackBar(message: string, snackStyle: string) {
+    this._snackBar.open(message, "", {
       duration: 3000,
-      panelClass: [snackStyle]    
+      panelClass: [snackStyle],
     });
+  }
+  private isTestStatus = new BehaviorSubject<any>([]);
 
-    }
-private isAdmin = new BehaviorSubject<any>([])
-private isActive = new BehaviorSubject<any>([])
+  updatedTestStatus = this.isTestStatus.asObservable();
 
-
-updatedIsAdmin = this.isAdmin.asObservable();
-updatedIsActive = this.isActive.asObservable();
-
-
-  updateData(data:any,keyToShare){
-    switch(keyToShare){
-      case 'isAdmin':
-        this.isAdmin.next(data)
-      break;
-      case 'isActive':
-        this.isActive.next(data)
-      break;
+  updateData(data: any, keyToShare) {
+    switch (keyToShare) {
+      case "testStatus":
+        this.isTestStatus.next(data);
+        break;
     }
   }
 
-  tokenDecryption(token){
+  tokenDecryption(token) {
     const helper = new JwtHelperService();
     let decodedToken;
-    if(token){   decodedToken = helper.decodeToken(token);
+    if (token) {
+      decodedToken = helper.decodeToken(token);
+    } else {
+      decodedToken = {};
     }
-    else{ decodedToken = {}}
 
-      return decodedToken;
+    return decodedToken;
   }
-
 }

@@ -1,44 +1,110 @@
 <div class="modal-conent">
-    <div class="modal-header">
-        <button type="button" class="float-right" style="margin-left:auto;" data-dismiss="modal" (click)="CancelModal()"><i class="fa fa-times" aria-hidden="true"></i></button> 
-    </div>
- 
-    <div class="modal-body">
-    <form>
+  <div class="modal-body">
     <div class="row">
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
+      <div class="col-md-12">
+        <a
+          class="float-right"
+          style="margin-left: auto"
+          href="javascript:;"
+          (click)="CancelModal()"
+          ><i class="fa fa-times" aria-hidden="true"></i
+        ></a>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
+    <div class="login-form-1">
+      <form [formGroup]="registerForm">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name *"
+              formControlName="name"
+              value=""
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Email *"
+              formControlName="email"
+              value=""
+            />
+          </div>
         </div>
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Phone *"
+              formControlName="phone"
+              value=""
+              max="10"
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Gender(M/F/O) *"
+              formControlName="gender"
+              value=""
+            />
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="DOB(DD/MM/YYYY) * "
+              formControlName="dob"
+              value=""
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="locality *"
+              formControlName="locality"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="last Exam *"
+              formControlName="lastexam"
+              value=""
+            />
+          </div>
+          <div class="col-md-6 form-group">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password *"
+              formControlName="password"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btnSubmit"
+            value="Login"
+            (click)="submitForm(registerForm.value)"
+          >
+            Register
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
-        <div class="col-md-6 form-group">
-            <input type="text" class="form-control"   placeholder="Your Email *" value="" />
-        </div>
-    </div>
-</form>
-   
-    </div>
-
+  </div>
 </div>

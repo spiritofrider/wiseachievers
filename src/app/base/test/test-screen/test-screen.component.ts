@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { PagerService } from "src/app/services/pager.service";
+import { CommonService } from "src/app/services/commonservice";
+import { StorageService } from "src/app/services/storage.service";
 import { TestService } from "../test.service";
 
 @Component({
@@ -9,72 +10,61 @@ import { TestService } from "../test.service";
   styleUrls: ["./test-screen.component.scss"],
 })
 export class TestScreenComponent implements OnInit {
-  preferenceObject: any = {
-    question: "",
-    FirstPreferance: "",
-    SecondPreferance: "",
-    ThirdPreferance: "",
-    FirstPreferanceIndex: null,
-    SecondPreferanceIndex: null,
-    ThirdPreferanceIndex: null,
-  };
   submissionPart: boolean = true;
   mainTestObject: any = [];
   currentQuestion: number;
   TestQuiz: any;
   totalQuizQues: any;
   answerSubmittedObj: any;
-  uniqueRelation: any;
+  uniqueRelation: any = [];
   answerSheet: any = [];
   incrementBoxes: any[];
-  indexAr: any[];
-  currentPage: number = 1;
-  PaginationControl: any = {
-    ques: 0,
-    boolVal: false,
-  };
+  relation: any;
+  firstRelation: any;
+  statusObject: any;
 
   constructor(
     private testService: TestService,
     private router: Router,
-    private pagerService: PagerService
+    private storageService: StorageService,
+    private common: CommonService
   ) {
     this.currentQuestion = 0;
   }
 
   ngOnInit() {
+    this.common.updatedTestStatus.subscribe((status) => {
+      console.log(status);
+      this.statusObject = status;
+    });
     this.getTest1list();
-    //this.TestQuiz = this.testExample.getExampleTest();
+  }
+
+  traverseTest(testNo) {
+    this.currentQuestion = 0;
+    console.log(testNo);
+    const test =
+      testNo[0] == "next"
+        ? (+testNo[1] + 1).toString()
+        : (+testNo[1] - 1).toString();
+    this.TestQuiz = this.totalQuizQues.filter((obj) => obj.relation == test);
+    testNo[0] == "next"
+      ? this.uniqueRelation.shift()
+      : this.uniqueRelation.unshift((+testNo[1] - 1).toString()); // need to check for prev
+    console.log(this.uniqueRelation);
+    this.relation = this.TestQuiz[0].relation;
+    this.submissionPart = false;
   }
 
   questionIncremented(qno) {
-    console.log("emit freq", qno);
     this.currentQuestion = qno;
-    this.PaginationControl.ques = qno;
-
-    this.boxPaginationLogic();
   }
 
   finalObjReturned(obj) {
-    console.log("emitting result", obj);
-    const avail = obj.find(
-      (e) => e["id"] == this.TestQuiz[this.currentQuestion].qno
-    );
-    if (avail && Object.values(avail).every((v) => v)) {
-      document.getElementById(
-        `b${this.currentQuestion}`
-      ).style.backgroundColor = "#0081d6";
-      document.getElementById(`b${this.currentQuestion}`).style.color = "white";
-    } else {
-      document.getElementById(
-        `b${this.currentQuestion}`
-      ).style.backgroundColor = "#ffffff";
-      document.getElementById(`b${this.currentQuestion}`).style.color = "black";
-    }
     this.answerSubmittedObj = obj;
   }
 
-  submitExampleTest() {
+  submitExampleTest(test) {
     if (
       this.answerSubmittedObj?.length > 0 &&
       Object.values(this.answerSubmittedObj).every((v) =>
@@ -82,19 +72,18 @@ export class TestScreenComponent implements OnInit {
       ) &&
       this.answerSubmittedObj.length == this.TestQuiz.length
     ) {
-      console.log("submitted!");
       this.answerSheet.push(...this.answerSubmittedObj);
       this.currentQuestion = 0;
       this.answerSubmittedObj = [];
+      this.storeTest();
+
       if (this.uniqueRelation.length > 1) {
         this.uniqueRelation.shift();
         this.submissionPart = false;
         this.TestQuiz = this.totalQuizQues.filter(
           (obj) => obj.relation == this.uniqueRelation[0]
         );
-        if (this.TestQuiz.length > 4) {
-          this.boxPaginationLogic();
-        }
+        this.relation = this.TestQuiz[0].relation;
       } else {
         this.router.navigate(["base/test"]);
       }
@@ -103,96 +92,65 @@ export class TestScreenComponent implements OnInit {
     }
   }
 
-  getTest1list() {
-    this.testService.getTest1Questionlist().subscribe((res: any) => {
-      this.totalQuizQues = res;
-      let unique = [];
-      res.forEach((element) => {
-        unique.push(element.relation);
-      });
-      this.uniqueRelation = [...new Set(unique)];
-      this.TestQuiz = res.filter(
-        (obj) => obj.relation == this.uniqueRelation[0]
-      );
-      this.currentQuestion = 0;
-      if (this.TestQuiz.length > 4) {
-        this.boxPaginationLogic();
-        console.log(this.incrementBoxes);
-      }
-    });
-  }
-
-  boxPaginationLogic() {
-    let boxAr = Array.from(Array(this.TestQuiz.length).keys());
-    this.indexAr = [...boxAr];
-    let incrementCopy;
-    if (this.incrementBoxes) {
-      incrementCopy = [...this.incrementBoxes];
-    }
-    console.log(
-      "incrementBoxValue at currentQuestion",
-      this.currentQuestion,
-      ":",
-      incrementCopy
+  storeTest() {
+    const decryptCookie = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
     );
-
-    //Totalpage —>  6
-    //Peerage -> 3
-    /*  let pageSize = 3;
-    let totalPages = Math.ceil(boxAr.length / pageSize);
-    let Pages = totalPages / pageSize; //number of pages
-    this.currentPage;
-    Pages = this.currentQuestion == 0 ? 0 : (boxAr.length / this.currentQuestion;
-    console.log("pages", Pages);
-    let startIndex = Pages * pageSize;
-    let endIndex = Math.min(startIndex + pageSize, boxAr.length);
-    console.log(startIndex,endIndex);
-    this.incrementBoxes = this.indexAr.slice(this.currentQuestion, endIndex);
-    console.log(this.incrementBoxes); */
-    if (incrementCopy?.[0] == this.currentQuestion) {
-      console.log("clicked previous", this.currentQuestion);
-      let startIndex =
-        this.currentQuestion - 4 < 0 ? this.currentQuestion - 4 : 0;
-      this.incrementBoxes = this.indexAr.slice(
-        startIndex,
-        this.currentQuestion
-      );
-      console.log(
-        "incrementBoxValue at currentQuestion,firstlogic",
-        this.currentQuestion,
-        ":",
-        this.incrementBoxes
-      );
-    } else {
-      console.log("clicked next", this.currentQuestion);
-
-      let endIndex =
-        this.currentQuestion == boxAr.length
-          ? boxAr.length
-          : this.currentQuestion + 4;
-      this.incrementBoxes = this.indexAr.slice(this.currentQuestion, endIndex);
-      console.log(
-        "incrementBoxValue at currentQuestion,lastlogic",
-        this.currentQuestion,
-        ":",
-        this.incrementBoxes
-      );
-    }
-    console.log(this.answerSubmittedObj);
-    this.answerSubmittedObj?.forEach((element) => {
-      console.log(this.incrementBoxes.includes(element["id"]));
-      if (this.incrementBoxes.includes(parseInt(element["id"]) - 1)) {
-        document.getElementById(
-          `b${parseInt(element["id"]) - 1}`
-        ).style.backgroundColor = "#0081d6";
-        document.getElementById(`b${element.id}`).style.color = "white";
+    let body = this.payloadForTest(decryptCookie);
+    this.testService.storeTestApi(body).subscribe(
+      (e) => {
+        this.answerSheet = [];
+        console.log(e, "score submitted");
+      },
+      (error) => {
+        this.common.snackBar(error.message, "a");
+        this.router.navigate(["base/test"]);
       }
-    });
+    );
   }
 
-  /*   setPage(page: number) {    this.pager = {}    
-  if (this.allItems.length > 0) {      // get pager object from service     
-     this.pager = this.pagerService.getPager(this.allItems.length, page);     
-      // get current page of items     
-       this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);    }  } */
+  payloadForTest(cookieVal) {
+    const testkey = `test${this.relation}`;
+    return {
+      [testkey]: {
+        info: this.answerSheet,
+      },
+      userId: cookieVal["_id"],
+      testType: testkey,
+    };
+  }
+
+  getTest1list() {
+    this.testService.getTest1Questionlist().subscribe(
+      (res: any) => {
+        this.totalQuizQues = res;
+        let unique = [];
+        res.forEach((element) => {
+          unique.push(element.relation);
+        });
+        const decryptCookie = this.common.tokenDecryption(
+          this.storageService.getCookie("token")
+        );
+
+        let uniqueList = [...new Set(unique)];
+        !decryptCookie["isAdmin"]
+          ? uniqueList.forEach((keys) => {
+              if (this.statusObject[`test_${keys}`].completed != true) {
+                this.uniqueRelation.push(keys);
+              }
+            })
+          : (this.uniqueRelation = uniqueList);
+        this.firstRelation = this.uniqueRelation[0];
+        this.TestQuiz = res.filter(
+          (obj) => obj.relation == this.uniqueRelation[0]
+        );
+        this.relation = this.TestQuiz[0].relation;
+        this.currentQuestion = 0;
+      },
+      (error) => {
+        this.common.snackBar(error.message, "a");
+        this.router.navigate(["base/test"]);
+      }
+    );
+  }
 }

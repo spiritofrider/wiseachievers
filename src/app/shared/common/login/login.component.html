@@ -1,30 +1,52 @@
 <div class="modal-conent">
-   
- 
-    <div class="modal-body">
-        <div class="row">
-        <div class="col-md-12">
-        <a class="float-right" style="margin-left:auto;" href="javascript:;" (click)="Cancel()"><i class="fa fa-times" aria-hidden="true"></i></a>
-        </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <a
+          class="float-right"
+          style="margin-left: auto"
+          href="javascript:;"
+          (click)="Cancel()"
+          ><i class="fa fa-times" aria-hidden="true"></i
+        ></a>
+      </div>
     </div>
-                <div class="login-form-1">
-                    
-                    <form [formGroup]="loginForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control"  formControlName= "email" placeholder="Your Email *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" formControlName="password" placeholder="Your Password *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btnSubmit" value="Login" (click)="submitForm(loginForm.value)" >Login</button>
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="ForgetPwd">Create New Account</a>
-                        </div>
-                    </form>
+    <div class="login-form-1">
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            placeholder="Your Email *"
+            value=""
+          />
         </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Your Password *"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btnSubmit"
+            value="Login"
+            (click)="submitForm(loginForm.value)"
+          >
+            Login
+          </button>
+        </div>
+        <div class="form-group">
+          <a href="#" class="ForgetPwd" (click)="createNewAccount()"
+            >Create New Account</a
+          >
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-
-
