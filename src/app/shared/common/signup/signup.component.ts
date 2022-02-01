@@ -37,15 +37,17 @@ export class SignupComponent implements OnInit {
   }
 
   submitForm(form) {
+    const { name, email, phone, gender, dob, locality, lastexam, password } =
+      form;
     let body = {
-      fullName: form.name,
-      email: form.email,
-      phone: form.phone,
-      gender: form.gender,
-      dob: form.dob,
-      locality: form.locality,
-      lastExam: form.lastexam,
-      password: form.password,
+      fullName: name,
+      email: email,
+      phone: phone,
+      gender: gender,
+      dob: dob,
+      locality: locality,
+      lastExam: lastexam,
+      password: password,
       activateAccount: false,
       test_1: { completed: false },
       test_2: {
@@ -81,15 +83,25 @@ export class SignupComponent implements OnInit {
       test_8: { completed: false },
       test_9: { completed: false },
     };
+    /* Object.values(body).every((v) => Object.values(v).every((val) => val)) */
     if (
-      Object.values(body).every((v) => Object.values(v).every((val) => val))
+      name &&
+      email &&
+      phone &&
+      gender &&
+      dob &&
+      locality &&
+      lastexam &&
+      password
     ) {
-      this.commonService.registerUser(body).subscribe(
-        (e) => this.commonService.snackBar("User registered successfully", "s"),
-        (error) => {
-          this.commonService.snackBar(error.message, "e");
-        }
-      );
+      this.commonService.registerUser(body).subscribe((e) => {
+        this.CancelModal();
+        this.commonService.snackBar("User registered successfully", "s"),
+          (error) => {
+            this.CancelModal();
+            this.commonService.snackBar(error.message, "e");
+          };
+      });
     } else {
       alert("Please fill all the details");
     }

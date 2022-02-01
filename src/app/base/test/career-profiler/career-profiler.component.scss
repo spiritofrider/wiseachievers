@@ -39,7 +39,7 @@ h5 {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin: 0px 8px;
+    margin: 2px 8px;
   }
 
   .questionContainer > * {
@@ -110,6 +110,13 @@ h5 {
       max-width: 580px;
     }
   }
+}
+.quesClass {
+  font-weight: 800;
+}
+
+.testContainer {
+  margin-bottom: 10px;
 }
 
 .button-container {

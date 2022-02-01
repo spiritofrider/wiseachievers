@@ -1,48 +1,54 @@
 <div class="reportContainer mat-elevation-z8">
   <h4>Career Interest Profiler</h4>
   <div *ngIf="reportInfo?.['test1']?.['info'].length > 0">
+    <h4>Part 1.</h4>
     <div *ngFor="let ques of reportInfo['test1']['info']">
-      <h6>{{ ques.id }} . {{ ques.question }}</h6>
+      <h6>{{ ques.id }} .&nbsp;&nbsp; {{ ques.question }}</h6>
       <div class="reportQuesContainer">
-        <p>First Preference : &nbsp;</p>
-        <p class="para">{{ ques.FirstPreferanceOption }}</p>
+        <span>First Preference : &nbsp;</span>
+        <span>{{ ques.FirstPreferanceOption }}</span>
       </div>
       <div class="reportQuesContainer">
-        <p>Second Preference : &nbsp;</p>
-        <p class="para">{{ ques.SecondPreferanceOption }}</p>
+        <span>Second Preference : &nbsp;</span>
+        <span>{{ ques.SecondPreferanceOption }}</span>
       </div>
       <div class="reportQuesContainer">
-        <p>Third Preference : &nbsp;</p>
-        <p class="para">{{ ques.ThirdPreferanceOption }}</p>
+        <span>Third Preference : &nbsp;</span>
+        <span>{{ ques.ThirdPreferanceOption }}</span>
       </div>
+      <hr />
     </div>
   </div>
 
   <div *ngIf="reportInfo?.['test2']?.['info'].length > 0">
+    <h4>Part 2.</h4>
     <div *ngFor="let ques of reportInfo['test2']['info']">
-      <h6>{{ ques.id }} . {{ ques.question }}</h6>
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
       <div class="reportQuesContainer">
-        <p>First Preference : &nbsp;</p>
-        <p class="para">{{ ques.FirstPreferanceOption }}</p>
+        <span>First Preference : &nbsp;</span>
+        <span>{{ ques.FirstPreferanceOption }}</span>
       </div>
       <div class="reportQuesContainer">
-        <p>Second Preference : &nbsp;</p>
-        <p class="para">{{ ques.SecondPreferanceOption }}</p>
+        <span>Second Preference : &nbsp;</span>
+        <span>{{ ques.SecondPreferanceOption }}</span>
       </div>
       <div class="reportQuesContainer">
-        <p>Third Preference : &nbsp;</p>
-        <p class="para">{{ ques.ThirdPreferanceOption }}</p>
+        <span>Third Preference : &nbsp;</span>
+        <span>{{ ques.ThirdPreferanceOption }}</span>
       </div>
+      <hr />
     </div>
   </div>
 
   <div *ngIf="reportInfo?.['test3']?.['info'].length > 0">
+    <h4>Part 3.</h4>
     <div *ngFor="let ques of reportInfo['test3']['info']">
-      <h6>{{ ques.id }} . {{ ques.question }}</h6>
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
       <div class="reportQuesContainer">
-        <p>Selected : &nbsp;</p>
-        <p class="para">{{ ques.value }}</p>
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.value }}</span>
       </div>
+      <hr />
     </div>
   </div>
 </div>

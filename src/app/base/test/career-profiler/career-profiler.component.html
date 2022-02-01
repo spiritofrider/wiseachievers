@@ -2,7 +2,9 @@
 
 <div class="data-card inner-data-card" *ngIf="TestType != '3'">
   <div>
-    <span>{{ TestQuiz[currentQuestion].qno }}.</span>
+    <span class="quesClass"
+      >{{ TestQuiz[currentQuestion].qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span
+    >
     <span class="question">{{ TestQuiz[currentQuestion].question }}</span>
   </div>
 
@@ -112,8 +114,8 @@
 <!--Test for single type options-->
 
 <div class="data-card inner-data-card" *ngIf="TestType == '3'">
-  <div *ngFor="let question of TestQuiz; let i = index">
-    <span>{{ question.qno }}.</span>
+  <div class="testContainer" *ngFor="let question of TestQuiz; let i = index">
+    <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
     <span class="question">{{ question.question }}</span>
 
     <div
