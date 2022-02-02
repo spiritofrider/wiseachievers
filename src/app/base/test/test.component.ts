@@ -44,7 +44,7 @@ export class TestComponent implements OnInit {
         let action = this.bsModalRef.content.action;
         if (action == "ok") {
           subsciber.unsubscribe();
-          this.router.navigate(["base/test/test1"]);
+          this.router.navigate(["base/test/" + type]);
         }
       });
     }

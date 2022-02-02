@@ -20,6 +20,7 @@ export class CareerProfilerComponent implements OnInit {
 
   mainTestObject: any = [];
   currentQuestion: any = 0;
+  testHtmlAr = ["3", "4"];
 
   preferenceObject: any = {
     id: "",
@@ -49,7 +50,9 @@ export class CareerProfilerComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.TestType, this.TestType == "4", this.TestType != "4");
+  }
 
   ngOnChanges() {
     this.isAdmin = this.common.tokenDecryption(

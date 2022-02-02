@@ -9,9 +9,9 @@ import { environment } from "src/environments/environment";
 export class TestService {
   constructor(private httpClient: HttpClient) {}
 
-  getTest1Questionlist() {
+  getTest1Questionlist(testNo) {
     return this.httpClient.get(
-      environment.baseTestUrlNode + CONSTOBJ["test"]["getTest1List"]
+      environment.baseTestUrlNode + CONSTOBJ["test"]["getTest1List"] + testNo
     );
   }
 

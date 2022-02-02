@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
 import { TestService } from "../test.service";
@@ -22,12 +22,14 @@ export class TestScreenComponent implements OnInit {
   relation: any;
   firstRelation: any;
   statusObject: any;
+  routeParam: string;
 
   constructor(
     private testService: TestService,
     private router: Router,
     private storageService: StorageService,
-    private common: CommonService
+    private common: CommonService,
+    private route: ActivatedRoute
   ) {
     this.currentQuestion = 0;
   }
@@ -37,7 +39,8 @@ export class TestScreenComponent implements OnInit {
       console.log(status);
       this.statusObject = status;
     });
-    this.getTest1list();
+    this.routeParam = this.route.snapshot.paramMap.get("type");
+    this.getTest1list(`test${this.routeParam}`);
   }
 
   traverseTest(testNo) {
@@ -120,8 +123,8 @@ export class TestScreenComponent implements OnInit {
     };
   }
 
-  getTest1list() {
-    this.testService.getTest1Questionlist().subscribe(
+  getTest1list(testNo) {
+    this.testService.getTest1Questionlist(testNo).subscribe(
       (res: any) => {
         this.totalQuizQues = res;
         let unique = [];
@@ -152,5 +155,13 @@ export class TestScreenComponent implements OnInit {
         this.router.navigate(["base/test"]);
       }
     );
+  }
+
+  TestName(key) {
+    const nameMapping = {
+      "1": "Career Interest Profiler",
+      "2": "Personality Profiler",
+    };
+    return nameMapping[key];
   }
 }

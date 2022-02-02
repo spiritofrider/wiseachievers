@@ -5,7 +5,7 @@ export let CONSTOBJ: Object = {
     viewReports: "get_scores/",
   },
   test: {
-    getTest1List: "tests/test1",
+    getTest1List: "tests/",
     storeTest: "store_test",
   },
   login: "auth/sign_in",
