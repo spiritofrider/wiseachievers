@@ -21,8 +21,9 @@ export class TestScreenComponent implements OnInit {
   incrementBoxes: any[];
   relation: any;
   firstRelation: any;
-  statusObject: any;
+  statusObject: any[];
   routeParam: string;
+  statusObjectCopy: any[];
 
   constructor(
     private testService: TestService,
@@ -36,16 +37,34 @@ export class TestScreenComponent implements OnInit {
 
   ngOnInit() {
     this.common.updatedTestStatus.subscribe((status) => {
-      console.log(status);
       this.statusObject = status;
+      if (this.statusObject.length == 0) {
+        const decryptCookie = this.common.tokenDecryption(
+          this.storageService.getCookie("token")
+        );
+        this.testUserStatus(decryptCookie["_id"]);
+      } else {
+        this.routeParam = this.route.snapshot.paramMap.get("type");
+        this.getTest1list(`test${this.routeParam}`);
+      }
     });
-    this.routeParam = this.route.snapshot.paramMap.get("type");
-    this.getTest1list(`test${this.routeParam}`);
+  }
+
+  testUserStatus(userId) {
+    this.common.testUserStatus(userId).subscribe(
+      (e: any[]) => {
+        this.statusObject = e;
+        this.routeParam = this.route.snapshot.paramMap.get("type");
+        this.getTest1list(`test${this.routeParam}`);
+      },
+      (error) => {
+        this.common.snackBar("There is some issue in fetching the tests", "");
+      }
+    );
   }
 
   traverseTest(testNo) {
     this.currentQuestion = 0;
-    console.log(testNo);
     const test =
       testNo[0] == "next"
         ? (+testNo[1] + 1).toString()
@@ -138,7 +157,7 @@ export class TestScreenComponent implements OnInit {
         let uniqueList = [...new Set(unique)];
         !decryptCookie["isAdmin"]
           ? uniqueList.forEach((keys) => {
-              if (this.statusObject[`test_${keys}`].completed != true) {
+              if (this.statusObject[`test_${keys}`]?.completed != true) {
                 this.uniqueRelation.push(keys);
               }
             })
@@ -163,5 +182,16 @@ export class TestScreenComponent implements OnInit {
       "2": "Personality Profiler",
     };
     return nameMapping[key];
+  }
+
+  RelationMapping(relation) {
+    let partName;
+    if (relation == "4") {
+      partName = "1";
+    }
+    if (relation == "5") {
+      partName = "2";
+    }
+    return partName;
   }
 }

@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-12">
       <div class="data-card" *ngIf="TestQuiz">
-        <h5>{{ TestName(routeParam) }}: Part {{ relation }}</h5>
+        <h5>
+          {{ TestName(routeParam) }}: Part {{ RelationMapping(relation) }}
+        </h5>
 
         <app-career-profiler
           [TestQuiz]="TestQuiz"

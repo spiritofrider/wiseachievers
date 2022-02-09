@@ -53,7 +53,6 @@ export class TestComponent implements OnInit {
   testUserStatus(userId) {
     this.common.testUserStatus(userId).subscribe(
       (e) => {
-        console.log(e);
         this.statusObject = e;
         this.common.updateData(this.statusObject, "testStatus");
       },
@@ -63,13 +62,23 @@ export class TestComponent implements OnInit {
     );
   }
 
-  disablingClass() {
+  disablingClass(testName) {
     return this.common.tokenDecryption(this.storageService.getCookie("token"))[
       "isAdmin"
     ]
       ? false
-      : this.statusObject?.["test_1"]?.completed == true &&
-          this.statusObject?.["test_2"]?.completed == true &&
-          this.statusObject?.["test_3"]?.completed == true;
+      : this.commonDisableLogic(testName);
+  }
+
+  commonDisableLogic(type) {
+    const mapping = {
+      career: ["test_1", "test_2", "test_3"],
+      personality: ["test_4", "test_5"],
+      numeric: ["test_6"],
+    };
+    const isSubmitted = (element) =>
+      this.statusObject?.[element]?.completed == true;
+    const isDisabled = mapping[type].every(isSubmitted);
+    return isDisabled;
   }
 }

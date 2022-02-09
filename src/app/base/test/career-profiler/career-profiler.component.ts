@@ -20,7 +20,7 @@ export class CareerProfilerComponent implements OnInit {
 
   mainTestObject: any = [];
   currentQuestion: any = 0;
-  testHtmlAr = ["3", "4"];
+  testHtmlAr = ["3", "4", "5"];
 
   preferenceObject: any = {
     id: "",
@@ -87,7 +87,9 @@ export class CareerProfilerComponent implements OnInit {
   }
 
   submitExampleTest() {
-    this.TestType == "3" ? this.finalObj.emit(this.mainTestObject) : "";
+    this.testHtmlAr.includes(this.TestType)
+      ? this.finalObj.emit(this.mainTestObject)
+      : "";
     this.submitExampleTestEmitter.emit("test");
   }
 
@@ -118,11 +120,12 @@ export class CareerProfilerComponent implements OnInit {
     }
   }
 
-  //for test for relation '3'
+  //for test for relation '3' & '4'
   choiceSelected(e, qno, question, category, value) {
     this.choiceObjectTest3["id"] = qno;
     this.choiceObjectTest3["question"] = question;
-    this.choiceObjectTest3["category"] = category;
+    this.choiceObjectTest3["category"] =
+      this.TestType == "5" ? "Sample" : category;
     this.choiceObjectTest3["value"] = value;
     this.choiceObjectTest3["selected"] = e["target"]["defaultValue"];
     let filledQues = this.mainTestObject.filter((e) => e["id"] == qno);

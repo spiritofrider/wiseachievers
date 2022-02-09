@@ -115,29 +115,61 @@
 
 <div class="data-card inner-data-card" *ngIf="testHtmlAr.includes(TestType)">
   <div class="testContainer" *ngFor="let question of TestQuiz; let i = index">
-    <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    <span class="question">{{ question.question }}</span>
+    <div *ngIf="TestType !== '5'">
+      <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="question">{{ question.question }}</span>
 
-    <div
-      class="questionContainer"
-      *ngFor="let quiz of question['options']; let i = index"
-    >
-      <input
-        type="radio"
-        name="{{ question.qno }}"
-        id="t{{ i + 1 }}"
-        value="{{ quiz.value }}"
-        (change)="
-          choiceSelected(
-            $event,
-            question.qno,
-            question.question,
-            question.category,
-            quiz.option
-          )
-        "
-      />
-      <span>{{ quiz.option }}</span>
+      <div
+        class="questionContainer"
+        *ngFor="let quiz of question['options']; let i = index"
+      >
+        <input
+          type="radio"
+          name="{{ question.qno }}"
+          id="t{{ i + 1 }}"
+          value="{{ quiz.value }}"
+          (change)="
+            choiceSelected(
+              $event,
+              question.qno,
+              question.question,
+              question.category,
+              quiz.option
+            )
+          "
+        />
+        <span>{{ quiz.option }}</span>
+      </div>
+    </div>
+    <div *ngIf="TestType == '5'">
+      <div class="row">
+        <div class="col-md-1 commonFlex">
+          <span class="quesClass">{{ question.qno }}.</span>
+        </div>
+        <div class="col-md-10">
+          <div
+            class="questionContainer"
+            *ngFor="let quiz of question['options']; let i = index"
+          >
+            <input
+              type="radio"
+              name="{{ question.qno }}"
+              id="t{{ i + 1 }}"
+              value="{{ quiz.value }}"
+              (change)="
+                choiceSelected(
+                  $event,
+                  question.qno,
+                  question.question,
+                  question.category,
+                  quiz.option
+                )
+              "
+            />
+            <span>{{ quiz.option }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="button-container">
@@ -147,6 +179,13 @@
       (click)="submitExampleTest()"
     >
       Submit Test
+    </button>
+    <button
+      class="btn btn-primary squareButtons ml-2"
+      *ngIf="isAdmin && TestType != '5' && TestType != '3'"
+      (click)="travesingPart('next')"
+    >
+      Go to Next Test
     </button>
     <button
       class="btn btn-primary squareButtons ml-2"

@@ -4,7 +4,7 @@
       <div
         class="data-card"
         style="cursor: pointer"
-        [ngClass]="{ disabledClass: disablingClass() }"
+        [ngClass]="{ disabledClass: disablingClass('career') }"
         (click)="TestSelection('test_1', 1, 'test_2', 'test_3')"
       >
         <h4>Career Interest Profiler</h4>
@@ -19,6 +19,7 @@
       <div
         class="data-card"
         style="cursor: pointer"
+        [ngClass]="{ disabledClass: disablingClass('personality') }"
         (click)="TestSelection('test_4', 2, 'test_5')"
       >
         <h4>Personality Profiler.</h4>

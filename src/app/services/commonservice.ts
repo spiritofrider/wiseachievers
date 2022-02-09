@@ -64,6 +64,8 @@ export class CommonService {
   updateData(data: any, keyToShare) {
     switch (keyToShare) {
       case "testStatus":
+        console.log(this.isTestStatus.observers);
+
         this.isTestStatus.next(data);
         break;
     }
