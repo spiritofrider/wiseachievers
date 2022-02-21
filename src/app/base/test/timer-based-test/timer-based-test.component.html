@@ -4,7 +4,7 @@
         <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span class="question">{{ question.question }}</span>
         <div *ngIf="question.img">
-          <img src="{{AssetLocation(question.img)}}" style="width: 200px;height: 100px;
+          <img src="{{AssetLocation(question.img)}}" style="
           object-fit: contain;">
         </div>
             <div class="questionContainer" *ngFor="let quiz of question['options']; let i = index">

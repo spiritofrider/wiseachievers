@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { filter } from "rxjs/internal/operators/filter";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
 import { TestService } from "../test.service";
@@ -28,7 +27,7 @@ export class TestScreenComponent implements OnInit {
 
   templateArray : string[] = ['3','4','5','6']   //route param match for timer tests
 
-  timeLeft: number = 10;
+  timeLeft: number = 900;
   interval;
 
   constructor(
