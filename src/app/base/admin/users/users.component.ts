@@ -18,9 +18,10 @@ export class UsersComponent implements OnInit {
 
   getAllUsersList() {
     this.common.getAllUsers().subscribe(
-      (user) => {
-        this.userList = user;
-        this.userListCopy = user;
+      (user:any) => {
+        //this.userList = user;
+        this.userList = [...user].reverse();
+        this.userListCopy = [...user].reverse();
       },
       (error) => {
         this.common.snackBar(error.error, "s");
@@ -31,7 +32,6 @@ export class UsersComponent implements OnInit {
   filteredData(changedUserData) {
     this.userList = changedUserData;
   }
-
   ActivateDeactivate(record, flag) {
     let body = {
       activateAccount: flag,

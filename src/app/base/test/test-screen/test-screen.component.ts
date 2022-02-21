@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs/internal/operators/filter";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
 import { TestService } from "../test.service";
@@ -25,6 +26,11 @@ export class TestScreenComponent implements OnInit {
   routeParam: string;
   statusObjectCopy: any[];
 
+  templateArray : string[] = ['3','4','5','6']   //route param match for timer tests
+
+  timeLeft: number = 10;
+  interval;
+
   constructor(
     private testService: TestService,
     private router: Router,
@@ -33,6 +39,23 @@ export class TestScreenComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.currentQuestion = 0;
+
+    /* this.router.events
+    .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
+    .subscribe(event => {
+      if (
+        event.id === 1 &&
+        event.url === event.urlAfterRedirects 
+      ) {
+        console.log("page refreshed")
+        this.router.navigate(["base/test"]);  
+        this.pauseTimer() 
+      }
+      else{ if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}}
+    })
+ */
+    
+   
   }
 
   ngOnInit() {
@@ -48,6 +71,10 @@ export class TestScreenComponent implements OnInit {
         this.getTest1list(`test${this.routeParam}`);
       }
     });
+   
+    if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}
+  
+   
   }
 
   testUserStatus(userId) {
@@ -84,12 +111,12 @@ export class TestScreenComponent implements OnInit {
 
   finalObjReturned(obj) {
     this.answerSubmittedObj = obj;
+    console.log("emit every obj",obj)
   }
 
   submitExampleTest(test) {
-    if (
-      this.answerSubmittedObj?.length > 0 &&
-      Object.values(this.answerSubmittedObj).every((v) =>
+    if (this.answerSubmittedObj?.length > 0 &&
+        Object.values(this.answerSubmittedObj).every((v) =>
         Object.values(v).every((val) => val)
       ) &&
       this.answerSubmittedObj.length == this.TestQuiz.length
@@ -112,6 +139,18 @@ export class TestScreenComponent implements OnInit {
     } else {
       alert("Please answer all questions");
     }
+  }
+  submitTimerBasedTest(){
+    console.log("heree trouble",this.answerSubmittedObj)
+    if(this.answerSubmittedObj){
+      if(this.answerSubmittedObj?.length > 0){
+    this.answerSheet.push(...this.answerSubmittedObj);
+    console.log("timerbase test",this.answerSheet)
+    this.currentQuestion = 0;
+    this.answerSubmittedObj = [];
+    this.storeTest();
+    }
+  }
   }
 
   storeTest() {
@@ -180,6 +219,10 @@ export class TestScreenComponent implements OnInit {
     const nameMapping = {
       "1": "Career Interest Profiler",
       "2": "Personality Profiler",
+      "3": "Numerical Reasoning.",
+      "4": "English Aptitude.",
+      "5": "Mechanical Aptitude.",
+      "6": "Visual Spatial Test"
     };
     return nameMapping[key];
   }
@@ -187,11 +230,35 @@ export class TestScreenComponent implements OnInit {
   RelationMapping(relation) {
     let partName;
     if (relation == "4") {
-      partName = "1";
+      partName = ": Part 1";
     }
-    if (relation == "5") {
-      partName = "2";
+   else if (relation == "5") {
+      partName =  ": Part 2";
     }
+    else {partName = ""}
     return partName;
   }
+
+
+  /* Timer  */
+
+
+
+startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.router.navigate(["base/test"]);  
+        this.pauseTimer()  
+        this.submitTimerBasedTest()
+      }
+    },1000)
+
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
+  formatTime(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 }

@@ -84,6 +84,7 @@ export class SignupComponent implements OnInit {
       test_9: { completed: false },
     };
     /* Object.values(body).every((v) => Object.values(v).every((val) => val)) */
+    console.log(body)
     if (
       name &&
       email &&

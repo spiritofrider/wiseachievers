@@ -30,7 +30,7 @@ export class TestComponent implements OnInit {
       : this.testUserStatus(decryptCookie["_id"]);
   }
 
-  TestSelection(attri, type, subattri1?, subattri2?) {
+  TestSelection(attri, routeParam, subattri1?, subattri2?) {
     const condition =
       this.statusObject?.[attri].completed !== true ||
       this.statusObject?.[subattri1].completed !== true ||
@@ -44,7 +44,7 @@ export class TestComponent implements OnInit {
         let action = this.bsModalRef.content.action;
         if (action == "ok") {
           subsciber.unsubscribe();
-          this.router.navigate(["base/test/" + type]);
+          this.router.navigate(["base/test/" + routeParam]);
         }
       });
     }
@@ -75,6 +75,10 @@ export class TestComponent implements OnInit {
       career: ["test_1", "test_2", "test_3"],
       personality: ["test_4", "test_5"],
       numeric: ["test_6"],
+      english: ["test_7"],
+      mechanical : ["test_8"],
+      visual : ["test_9"]
+
     };
     const isSubmitted = (element) =>
       this.statusObject?.[element]?.completed == true;

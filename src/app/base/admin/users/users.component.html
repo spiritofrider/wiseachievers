@@ -40,6 +40,15 @@
               (ChangedData)="filteredData($event)"
             ></filter>
           </th>
+          <th scope="col" id="createdDate">
+            <filter
+              [displayData]="'Created Date'"
+              [property]="'createdDate'"
+              [mainData]="userList"
+              [mainDataCopy]="userListCopy"
+              (ChangedData)="filteredData($event)"
+            ></filter>
+          </th>
           <th scope="col" id="gender">
             <filter
               [displayData]="'Gender'"
@@ -79,6 +88,7 @@
           <td scope="row">{{ user.email }}</td>
           <td scope="row">{{ user.phone }}</td>
           <td scope="row">{{ user.dob | date: "dd MMM yyyy" }}</td>
+          <td scope="row">{{user.createdDate | date: "dd MMM yyyy" }}</td>
           <td scope="row">{{ user.gender }}</td>
           <td scope="row">{{ user.lastExam }}</td>
           <td scope="row">{{ user.locality }}</td>

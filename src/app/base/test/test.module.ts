@@ -7,6 +7,7 @@ import { TestScreenComponent } from "./test-screen/test-screen.component";
 import { FormsModule } from "@angular/forms";
 import { ChartsModule } from "ng2-charts";
 import { CareerProfilerComponent } from "./career-profiler/career-profiler.component";
+import { TimerBasedTestComponent } from './timer-based-test/timer-based-test.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TestComponent, TestScreenComponent, CareerProfilerComponent],
+  declarations: [TestComponent, TestScreenComponent, CareerProfilerComponent, TimerBasedTestComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

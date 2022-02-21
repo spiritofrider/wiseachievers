@@ -3,9 +3,22 @@
     <div class="col-md-12">
       <div class="data-card" *ngIf="TestQuiz">
         <h5>
-          {{ TestName(routeParam) }}: Part {{ RelationMapping(relation) }}
+          {{ TestName(routeParam) }}{{ RelationMapping(relation) }}
         </h5>
-
+        <h3 style="top: 80px;
+        position: sticky;
+        background: #ecf3f4;padding:10px 20px" *ngIf="templateArray.includes(routeParam)" id="time">Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
+        <div *ngIf="templateArray.includes(routeParam)">
+        <timer-based-test [TestQuiz]="TestQuiz"
+        [submissionPart]="submissionPart"
+        [TestType]="relation"
+        [firstRelation]="firstRelation"
+        (questionIncrement)="questionIncremented($event)"
+        (finalObj)="finalObjReturned($event)"
+        (submitExampleTestEmitter)="submitTimerBasedTest($event)"
+        (traverseTestEmitter)="traverseTest($event)"></timer-based-test>
+      </div>
+      <div *ngIf="!templateArray.includes(routeParam)">
         <app-career-profiler
           [TestQuiz]="TestQuiz"
           [submissionPart]="submissionPart"
@@ -16,6 +29,7 @@
           (submitExampleTestEmitter)="submitExampleTest($event)"
           (traverseTestEmitter)="traverseTest($event)"
         ></app-career-profiler>
+        </div>
       </div>
     </div>
   </div>
