@@ -71,7 +71,6 @@ export class TestScreenComponent implements OnInit {
       }
     });
    
-    if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}
   
    
   }
@@ -161,6 +160,9 @@ export class TestScreenComponent implements OnInit {
       (e) => {
         this.answerSheet = [];
         console.log(e, "score submitted");
+        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))){
+          this.router.navigate(["base/test"]);
+        }
       },
       (error) => {
         this.common.snackBar(error.message, "a");
@@ -184,6 +186,8 @@ export class TestScreenComponent implements OnInit {
     this.testService.getTest1Questionlist(testNo).subscribe(
       (res: any) => {
         this.totalQuizQues = res;
+        //start timer when quiz is loaded
+        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}
         let unique = [];
         res.forEach((element) => {
           unique.push(element.relation);
@@ -228,13 +232,21 @@ export class TestScreenComponent implements OnInit {
 
   RelationMapping(relation) {
     let partName;
-    if (relation == "4") {
-      partName = ": Part 1";
+    switch(relation){
+
+      case "1" : partName=": Part 1"
+      break;
+      case "2" : partName=": Part 2"
+      break;
+      case "3" : partName=": Part 3"
+      break;
+      case "4" : partName=": Part 1"
+      break;
+      case "5" : partName=": Part 2" 
+      break;
+      default : ""
     }
-   else if (relation == "5") {
-      partName =  ": Part 2";
-    }
-    else {partName = ""}
+  
     return partName;
   }
 

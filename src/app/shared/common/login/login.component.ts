@@ -46,9 +46,12 @@ export class LoginComponent implements OnInit {
         }
         this.Cancel();
         this.common.snackBar("Login successful", "s");
+        if(!decodedToken["activateAccount"]){this.common.snackBar("Please contact Thomas D'souza to activate your account and access Tests.", "s");
+      }
       },
       (error) => {
         this.common.snackBar(error.error.message, "s");
+        this.Cancel();
       }
     );
   }

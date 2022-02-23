@@ -61,7 +61,7 @@ this.finalObj.emit(this.mainTestObject)
   optionSelected(e, qno, question, value) {
     this.choiceObject["id"] = qno;
     this.choiceObject["question"] = question;
-    this.choiceObject["value"] = e["target"]["defaultValue"];
+    this.choiceObject["value"] = e["target"]["defaultValue"] == 'true' ? true : false;
     this.choiceObject["selected"] = value;
     let filledQues = this.mainTestObject.filter((e) => e["id"] == qno);
     if (filledQues.length < 1) {

@@ -8,10 +8,11 @@
         (click)="TestSelection('test_1', 1, 'test_2', 'test_3')"
       >
         <h4>Career Interest Profiler</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('career')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('career')">Test Attempted</span>
       </div>
     </div>
 
@@ -23,10 +24,11 @@
         (click)="TestSelection('test_4', 2, 'test_5')"
       >
         <h4>Personality Profiler.</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('personality')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('personality')">Test Attempted</span>
       </div>
     </div>
     <div class="col-md-4">
@@ -35,10 +37,11 @@
       (click)="TestSelection('test_6', 3)"
       >
         <h4>Numerical Reasoning.</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('numeric')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('numeric')">Test Attempted</span>
       </div>
     </div>
   </div>
@@ -48,28 +51,31 @@
       <div class="data-card" style="cursor: pointer"[ngClass]="{ disabledClass: disablingClass('english') }"
       (click)="TestSelection('test_7', 4)">
         <h4>English Aptitude.</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('english')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('english')">Test Attempted</span>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="data-card" style="cursor: pointer" [ngClass]="{ disabledClass: disablingClass('english') }" (click)="TestSelection('test_8', 5)">
+      <div class="data-card" style="cursor: pointer" [ngClass]="{ disabledClass: disablingClass('mechanical') }" (click)="TestSelection('test_8', 5)">
         <h4>Mechanical Aptitude.</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('mechanical')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('mechanical')">Test Attempted</span>
       </div>
     </div>
     <div class="col-md-4">
       <div class="data-card" style="cursor: pointer" [ngClass]="{ disabledClass: disablingClass('visual') }"  (click)="TestSelection('test_9', 6)">
         <h4>Visual Spatial Test.</h4>
-        <span class="link-text">
+        <span class="link-text" *ngIf="!commonDisableLogic('visual')">
           Start Test
           <img src="assets/arrow.svg" alt="Wise Acievers winning" />
         </span>
+        <span class="link-text" *ngIf="commonDisableLogic('visual')">Test Attempted</span>
       </div>
     </div>
   </div>

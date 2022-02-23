@@ -51,4 +51,86 @@
       <hr />
     </div>
   </div>
+
+  <h4 *ngIf="reportInfo?.['test4']?.['info'].length > 0 || reportInfo?.['test5']?.['info'].length > 0">Personality Profiler</h4>
+  <div *ngIf="reportInfo?.['test4']?.['info'].length > 0">
+    <h4>Part 1.</h4>
+
+    <div *ngFor="let ques of reportInfo['test4']['info']">
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+      <div class="reportQuesContainer">
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.value }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <div *ngIf="reportInfo?.['test5']?.['info'].length > 0">
+    <h4>Part 2.</h4>
+
+    <div *ngFor="let ques of reportInfo['test5']['info']">
+<!--       <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+ -->      <div class="reportQuesContainer">
+   <span><h6 style="margin-top: 2px;
+    margin-right: 10px;">{{ ques.id }}. </h6></span>
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.value }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+
+  <h4 *ngIf="reportInfo?.['test6']?.['info'].length > 0">Numeric Reasoning</h4>
+
+  <div *ngIf="reportInfo?.['test6']?.['info'].length > 0">
+    <div *ngFor="let ques of reportInfo['test6']['info']">
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+      <div class="reportQuesContainer">
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.selected }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <h4 *ngIf="reportInfo?.['test7']?.['info'].length > 0">English Aptitude</h4>
+
+  <div *ngIf="reportInfo?.['test7']?.['info'].length > 0">
+    <div *ngFor="let ques of reportInfo['test7']['info']">
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+      <div class="reportQuesContainer">
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.selected }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <h4 *ngIf="reportInfo?.['test8']?.['info'].length > 0">Mechanical Aptitude</h4>
+
+  <div *ngIf="reportInfo?.['test8']?.['info'].length > 0">
+    <div *ngFor="let ques of reportInfo['test8']['info']">
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+      <div class="reportQuesContainer">
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.selected }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <h4 *ngIf="reportInfo?.['test9']?.['info'].length > 0">Visual Spatial Test</h4>
+
+  <div *ngIf="reportInfo?.['test9']?.['info'].length > 0">
+    <div *ngFor="let ques of reportInfo['test9']['info']">
+      <h6>{{ ques.id }} .&nbsp; &nbsp; {{ ques.question }}</h6>
+      <div class="reportQuesContainer">
+        <span>Selected : &nbsp;</span>
+        <span>{{ ques.selected }}</span>
+      </div>
+      <hr />
+    </div>
+  </div>
 </div>
