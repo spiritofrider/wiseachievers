@@ -581,3 +581,19 @@ input:checked + .slider:before {
     margin-top: 35px;
   }
 }
+
+
+.sticky-timer {
+  top: 80px;
+  position: sticky;
+  padding:10px 20px;
+  box-shadow: 1em 1em 1.5em -0.5em #0000001a;
+  transition: transform .45s ease,background .45s ease;
+  background-color: #fff;
+
+
+}
+
+.cdk-overlay-container {
+  z-index: 1200 !important;
+}

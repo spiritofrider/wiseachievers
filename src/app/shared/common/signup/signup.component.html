@@ -14,84 +14,116 @@
     <div class="login-form-1">
       <form [formGroup]="registerForm">
         <div class="row">
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Name *"
-              formControlName="name"
-              value=""
-            />
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input type="name" matInput formControlName="name"
+              placeholder="Name *">
+              <mat-error *ngIf="registerForm.get('name').hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Email *"
-              formControlName="email"
-              value=""
-            />
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput  formControlName="email"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="registerForm.get('email').hasError('email') && !registerForm.get('email').hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 form-group">
-            <input
-              type="number"
-              class="form-control"
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input type="phone" matInput formControlName="phone"
               placeholder="Phone *"
-              formControlName="phone"
-              value=""
-              max="10"
-            />
+              maxlength="10">
+              <mat-error *ngIf="registerForm.get('phone').hasError('required')">
+                Phone is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('phone').hasError('pattern')&& !registerForm.get('phone').hasError('required')">
+                Please enter only numbers
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Gender(M/F/O) *"
-              formControlName="gender"
-              value=""
-            />
+          <div class="col-md-6 ">
+            <mat-form-field appearance="outline">
+              <mat-label>Gender(M/F/O)</mat-label>
+
+          <select 
+          matNativeControl
+            placeholder="Gender(M/F/O) *"
+            formControlName="gender"  name="gender">
+          <option value="M">M</option>
+          <option value="F">F</option>
+          <option value="O">O</option>
+        </select>
+        <mat-error *ngIf="registerForm.get('gender').hasError('required')">
+          Gender is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="DOB(DD/MM/YYYY) * "
-              formControlName="dob"
-              value=""
-            />
+          <div class="col-md-6">
+            <mat-form-field class="" appearance="outline">
+              <mat-label>DOB(DD/MM/YYYY)</mat-label>
+             <!--  <input type="calender" matInput formControlName="dob"
+              placeholder="DOB(DD/MM/YYYY) *"
+              > -->
+              <input matInput [matDatepicker]="picker"  placeholder="DOB(DD/MM/YYYY) *" formControlName="dob" disabled>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+              <mat-error *ngIf="registerForm.get('dob').hasError('required')">
+                DOB is <strong>required</strong>
+              </mat-error> 
+            </mat-form-field>
           </div>
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>locality</mat-label>
+              <input type="locality" matInput formControlName="locality"
               placeholder="locality *"
-              formControlName="locality"
-              value=""
-            />
+              >
+              <mat-error *ngIf="registerForm.get('locality').hasError('required')">
+                locality is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              class="form-control"
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>last Exam </mat-label>
+              <input type="lastexam" matInput formControlName="lastexam"
               placeholder="last Exam *"
-              formControlName="lastexam"
-              value=""
-            />
+              >
+              <mat-error *ngIf="registerForm.get('lastexam').hasError('required')">
+                last Exam is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="col-md-6 form-group">
-            <input
-              type="password"
-              class="form-control"
+          <div class="col-md-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Password </mat-label>
+              <input type="lastexam" matInput formControlName="password"
               placeholder="Password *"
-              formControlName="password"
-              value=""
-            />
+              >
+              <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('password').hasError('minlength') && !registerForm.get('password').hasError('required')">
+                Password should consist atleast 3 letters
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
         <div class="form-group">

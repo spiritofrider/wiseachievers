@@ -1,1 +1,38 @@
 
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.8em 0 !important;
+
+}
+
+/* .mat-form-field-infix {
+    width: 155px !important;
+} */
+
+mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
+    right: 30px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    width: 205px;
+}
+
+.mat-form-field-label-wrapper {
+    top: -0.94375em;
+}
+
+.mat-form-field{
+    font-size: 14px !important;
+}
+
+input{
+    font-size: 14px;
+}
+
+select {
+    font-size: 14px;
+}
+
+.form-control{
+    margin-top: 10px;
+}
+

@@ -12,9 +12,29 @@ export class AppComponent {
       window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
           document.getElementById('navbar_top').classList.add('nav-sticky');
+          document.getElementById('timer')?.classList.add('sticky-timer');
+
         } else {
           document.getElementById('navbar_top').classList.remove('nav-sticky');
+          document.getElementById('timer')?.classList.remove('sticky-timer');
+
         } 
+
       })
     })
-  }}
+  }
+
+}
+
+
+
+/*   document.addEventListener("DOMContentLoaded", function(){
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          console.log(window.scroll)
+          document.getElementById('timer').classList.add('sticky-timer');
+        } else {
+          document.getElementById('timer').classList.remove('sticky-timer');
+        } 
+      })
+    }) */

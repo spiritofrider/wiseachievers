@@ -82,8 +82,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userList; let i = index">
-          <td scope="row">{{ i + 1 }}</td>
+        <tr *ngFor="let user of userList; let c = count;let i = index">
+          <td scope="row">{{ c - i }}</td>
           <td scope="row">{{ user.fullName }}</td>
           <td scope="row">{{ user.email }}</td>
           <td scope="row">{{ user.phone }}</td>

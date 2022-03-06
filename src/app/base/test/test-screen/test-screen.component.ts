@@ -27,8 +27,10 @@ export class TestScreenComponent implements OnInit {
 
   templateArray : string[] = ['3','4','5','6']   //route param match for timer tests
 
-  timeLeft: number = 900;
+  timeLeft: number ;
   interval;
+
+  decryptCookie: any;
 
   constructor(
     private testService: TestService,
@@ -38,22 +40,6 @@ export class TestScreenComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.currentQuestion = 0;
-
-    /* this.router.events
-    .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
-    .subscribe(event => {
-      if (
-        event.id === 1 &&
-        event.url === event.urlAfterRedirects 
-      ) {
-        console.log("page refreshed")
-        this.router.navigate(["base/test"]);  
-        this.pauseTimer() 
-      }
-      else{ if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}}
-    })
- */
-    
    
   }
 
@@ -61,10 +47,10 @@ export class TestScreenComponent implements OnInit {
     this.common.updatedTestStatus.subscribe((status) => {
       this.statusObject = status;
       if (this.statusObject.length == 0) {
-        const decryptCookie = this.common.tokenDecryption(
+        this.decryptCookie = this.common.tokenDecryption(
           this.storageService.getCookie("token")
         );
-        this.testUserStatus(decryptCookie["_id"]);
+        this.testUserStatus(this.decryptCookie["_id"]);
       } else {
         this.routeParam = this.route.snapshot.paramMap.get("type");
         this.getTest1list(`test${this.routeParam}`);
@@ -131,9 +117,9 @@ export class TestScreenComponent implements OnInit {
           (obj) => obj.relation == this.uniqueRelation[0]
         );
         this.relation = this.TestQuiz[0].relation;
-      } else {
+      } /* else {
         this.router.navigate(["base/test"]);
-      }
+      } */
     } else {
       alert("Please answer all questions");
     }
@@ -186,15 +172,16 @@ export class TestScreenComponent implements OnInit {
     this.testService.getTest1Questionlist(testNo).subscribe(
       (res: any) => {
         this.totalQuizQues = res;
+        const decryptCookie = this.common.tokenDecryption(
+          this.storageService.getCookie("token")
+        );
         //start timer when quiz is loaded
-        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))) { this.startTimer()}
+        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type")) && !decryptCookie["isAdmin"]) { this.startTimer()}
         let unique = [];
         res.forEach((element) => {
           unique.push(element.relation);
         });
-        const decryptCookie = this.common.tokenDecryption(
-          this.storageService.getCookie("token")
-        );
+       
 
         let uniqueList = [...new Set(unique)];
         !decryptCookie["isAdmin"]
@@ -256,6 +243,7 @@ export class TestScreenComponent implements OnInit {
 
 
 startTimer() {
+  this.timeLeft = this.getTimerValue(this.route.snapshot.paramMap.get("type"))
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -272,4 +260,16 @@ startTimer() {
     clearInterval(this.interval);
   }
   formatTime(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+
+
+  getTimerValue(routeParam){
+    const timerObject = {
+      "3" : 25 * 60,
+      "4" : 10 * 60,
+      "5" : 20 * 60,
+      "6" : 30 * 60
+    }
+    return timerObject[routeParam]
+
+  }
 }

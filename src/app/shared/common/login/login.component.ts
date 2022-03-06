@@ -4,7 +4,6 @@ import { CommonService } from "src/app/services/commonservice";
 import { BsModalService } from "ngx-bootstrap/modal";
 import { StorageService } from "src/app/services/storage.service";
 import { Router } from "@angular/router";
-import { JwtHelperService } from "@auth0/angular-jwt";
 import { SignupComponent } from "../signup/signup.component";
 
 @Component({
@@ -33,6 +32,7 @@ export class LoginComponent implements OnInit {
   submitForm(formVal) {
     this.common.loginUser(formVal).subscribe(
       (e) => {
+        this.Cancel();
         this.storageService.setCookie("token", e["token"]);
         let decodedToken = this.common.tokenDecryption(e["token"]);
         this.username = decodedToken["fullName"];
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         } else if (!decodedToken["activateAccount"]) {
           this.route.navigate(["base/home"]);
         }
-        this.Cancel();
         this.common.snackBar("Login successful", "s");
         if(!decodedToken["activateAccount"]){this.common.snackBar("Please contact Thomas D'souza to activate your account and access Tests.", "s");
       }

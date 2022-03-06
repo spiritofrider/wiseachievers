@@ -5,9 +5,7 @@
         <h5>
           {{ TestName(routeParam) }}{{ RelationMapping(relation) }}
         </h5>
-        <h3 style="top: 80px;
-        position: sticky;
-        background: #ecf3f4;padding:10px 20px" *ngIf="templateArray.includes(routeParam)" id="time">Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
+        <h3  *ngIf="templateArray.includes(routeParam) && !decryptCookie['isAdmin']" id="timer" style="text-align: center;">Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
         <div *ngIf="templateArray.includes(routeParam)">
         <timer-based-test [TestQuiz]="TestQuiz"
         [submissionPart]="submissionPart"
@@ -34,6 +32,11 @@
     </div>
   </div>
 </div>
+
+
+<!-- style="top: 80px;
+        position: sticky;
+        background: #ecf3f4;padding:10px 20px" -->
 
 <!--  <div class="questionNumberContainer">
           <div

@@ -19,9 +19,9 @@ export class UsersComponent implements OnInit {
   getAllUsersList() {
     this.common.getAllUsers().subscribe(
       (user:any) => {
-        //this.userList = user;
         this.userList = [...user].reverse();
         this.userListCopy = [...user].reverse();
+        console.log(this.userList)
       },
       (error) => {
         this.common.snackBar(error.error, "s");

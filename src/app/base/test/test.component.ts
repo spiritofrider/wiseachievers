@@ -19,7 +19,8 @@ export class TestComponent implements OnInit {
     private BsModalService: BsModalService,
     private common: CommonService,
     private storageService: StorageService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     const decryptCookie = this.common.tokenDecryption(
@@ -35,11 +36,17 @@ export class TestComponent implements OnInit {
       this.statusObject?.[attri].completed !== true ||
       this.statusObject?.[subattri1].completed !== true ||
       this.statusObject?.[subattri2].completed !== true;
+    
     if (condition) {
       this.bsModalRef = this.BsModalService.show(InstructionModalComponent, {
         backdrop: "static",
         keyboard: false,
+        initialState: {
+          typeOfTest : routeParam == '1' || routeParam == '2' ? 'non-timer': 'timer',
+          timerValue : this.getTimerValue(routeParam)
+        }
       });
+      
       let subsciber = this.BsModalService.onHide.subscribe((res) => {
         let action = this.bsModalRef.content.action;
         if (action == "ok") {
@@ -48,6 +55,17 @@ export class TestComponent implements OnInit {
         }
       });
     }
+  }
+
+  getTimerValue(routeParam){
+    const timerObject = {
+      "3" : 25,
+      "4" : 10,
+      "5" : 20,
+      "6" : 30
+    }
+    return timerObject[routeParam]
+
   }
 
   testUserStatus(userId) {

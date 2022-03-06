@@ -1,15 +1,30 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { BsModalService } from "ngx-bootstrap/modal";
 import { CommonService } from "src/app/services/commonservice";
+
+import {FormControl,FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+import * as moment from "moment";
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"],
+  encapsulation : ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
+  matcher :any;
+
 
   constructor(
     private bsModalService: BsModalService,
@@ -17,18 +32,20 @@ export class SignupComponent implements OnInit {
   ) {
     this.registerForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required,Validators.email]),
       phone: new FormControl("", [
         Validators.required,
         Validators.maxLength(10),
         Validators.minLength(10),
+        Validators.pattern(/^[0-9]\d*$/)
       ]),
       gender: new FormControl("", [Validators.required]),
       locality: new FormControl("", [Validators.required]),
       lastexam: new FormControl("", [Validators.required]),
       dob: new FormControl("", [Validators.required]),
-      password: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required,Validators.minLength(3)]),
     });
+this.matcher = new MyErrorStateMatcher();
   }
   ngOnInit(): void {}
 
@@ -44,7 +61,7 @@ export class SignupComponent implements OnInit {
       email: email,
       phone: phone,
       gender: gender,
-      dob: dob,
+      dob: moment(new Date(dob)).format('DD/MM/YYYY'),
       locality: locality,
       lastExam: lastexam,
       password: password,

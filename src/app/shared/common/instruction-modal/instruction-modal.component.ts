@@ -10,6 +10,8 @@ export class InstructionModalComponent implements OnInit {
   constructor(private BsModalService: BsModalService) {}
 
   action: string = "cancel";
+  typeOfTest : string ;
+  timerValue : number;
   ngOnInit(): void {}
   Cancel() {
     this.BsModalService.hide();

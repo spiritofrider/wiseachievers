@@ -35,6 +35,9 @@ export class TimerBasedTestComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"];
   }
 
   ngOnChanges() {
@@ -90,4 +93,15 @@ this.finalObj.emit(this.mainTestObject)
     return assetLoc
   }
 
+
+  widthAdjustment(imageName){
+    let imagesToFix = ['i1','i5','i7']
+    if(imagesToFix.includes(imageName)){
+      return '200px'
+    }
+    if(imageName == 'i3') {
+      return '300px'
+    }
+
+  }
 }

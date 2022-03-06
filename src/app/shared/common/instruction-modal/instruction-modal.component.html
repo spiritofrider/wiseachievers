@@ -11,7 +11,7 @@
         ></a>
       </div>
     </div>
-    <ul>
+    <ul *ngIf="typeOfTest != 'timer'">
       <li>
         1) There is no right or wrong answer in the options provided for each
         question, choose the one which is most appropriate for yourself.
@@ -21,6 +21,15 @@
         3) You can go back and change the answers within the same part. Once the
         part is submitted you cannot access it again.
       </li>
+    </ul>
+    <ul *ngIf="typeOfTest == 'timer'">
+      <li>1)  There is one RIGHT answer among the options provided in this test.  
+        The rest of the options are WRONG answers. 
+        Marks will be given for clicking only the right answer.</li>
+      <li>2)  This test is having a time limit of {{timerValue}} minutes. 
+         The timer is shown on the top right of the test page.  
+         In case the test is not completed and submitted within this time the test will stop and auto-submit</li>
+      <li>3)  Answers can be changed by clicking another option before the test is submitted.</li>
     </ul>
     <div class="buttonContainer">
       <button class="btn btn-primary squareButtons" (click)="testAction('ok')">
