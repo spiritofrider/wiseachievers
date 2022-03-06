@@ -76,9 +76,6 @@
           <div class="col-md-6">
             <mat-form-field class="" appearance="outline">
               <mat-label>DOB(DD/MM/YYYY)</mat-label>
-             <!--  <input type="calender" matInput formControlName="dob"
-              placeholder="DOB(DD/MM/YYYY) *"
-              > -->
               <input matInput [matDatepicker]="picker"  placeholder="DOB(DD/MM/YYYY) *" formControlName="dob" disabled>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker disabled="false"></mat-datepicker>
