@@ -10,6 +10,7 @@ export class UsersComponent implements OnInit {
   userList: any = [];
   userListCopy: any = [];
   reportInfo: Object;
+  graphInfo:Object;
   constructor(private common: CommonService) {}
 
   ngOnInit(): void {
@@ -21,7 +22,6 @@ export class UsersComponent implements OnInit {
       (user:any) => {
         this.userList = [...user].reverse();
         this.userListCopy = [...user].reverse();
-        console.log(this.userList)
       },
       (error) => {
         this.common.snackBar(error.error, "s");
@@ -38,7 +38,6 @@ export class UsersComponent implements OnInit {
     };
     this.common.editUsers(record._id, body).subscribe(
       (e) => {
-        console.log(e);
         let msg = flag ? "activated" : "deactivated";
         this.common.snackBar(`User successfully ${msg}`, "s");
       },
@@ -48,14 +47,14 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  viewReport(userId) {
+  viewReport(userId,type) {
     this.common.viewReport(userId).subscribe(
       (e) => {
         if (e) {
-          this.reportInfo = e;
+          type == 'report' ? this.reportInfo = e : this.graphInfo = e;
         } else {
           this.common.snackBar(
-            "The reports are not available for this user",
+            `The ${type}s are not available for this user`,
             "a"
           );
         }
@@ -68,5 +67,6 @@ export class UsersComponent implements OnInit {
   goBack() {
     this.getAllUsersList();
     this.reportInfo = undefined;
+    this.graphInfo = undefined;
   }
 }

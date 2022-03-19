@@ -16,7 +16,7 @@ export class TimerBasedTestComponent implements OnInit {
   @Input() firstRelation;
   @Output() questionIncrement = new EventEmitter();
   @Output() finalObj = new EventEmitter();
-  @Output() submitExampleTestEmitter = new EventEmitter();
+  @Output() submitExampleTestEmitter1 = new EventEmitter();
   @Output() traverseTestEmitter = new EventEmitter();
 
   mainTestObject: any = [];
@@ -35,9 +35,7 @@ export class TimerBasedTestComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isAdmin = this.common.tokenDecryption(
-      this.storageService.getCookie("token")
-    )["isAdmin"];
+   
   }
 
   ngOnChanges() {
@@ -58,7 +56,7 @@ export class TimerBasedTestComponent implements OnInit {
   submitTest() {
 this.finalObj.emit(this.mainTestObject)
 
-    this.submitExampleTestEmitter.emit("test");
+    this.submitExampleTestEmitter1.emit("test");
   }
 
   optionSelected(e, qno, question, value) {

@@ -27,6 +27,8 @@ export class TestScreenComponent implements OnInit {
 
   templateArray : string[] = ['3','4','5','6']   //route param match for timer tests
 
+  relationForRedirection : string[] = ['3','5','6','7','8','9']
+
   timeLeft: number ;
   interval;
 
@@ -146,7 +148,7 @@ export class TestScreenComponent implements OnInit {
       (e) => {
         this.answerSheet = [];
         console.log(e, "score submitted");
-        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type"))){
+        if(this.relationForRedirection.includes(this.relation)){
           this.router.navigate(["base/test"]);
         }
       },

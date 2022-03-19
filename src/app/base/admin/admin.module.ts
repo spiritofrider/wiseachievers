@@ -4,6 +4,7 @@ import { UsersComponent } from "./users/users.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { ReportComponent } from "./report/report.component";
+import { GraphsComponent } from './graphs/graphs.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UsersComponent, ReportComponent],
+  declarations: [UsersComponent, ReportComponent, GraphsComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
 })
 export class AdminModule {}

@@ -51,7 +51,6 @@ export class CareerProfilerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.TestType, this.TestType == "4", this.TestType != "4");
   }
 
   ngOnChanges() {

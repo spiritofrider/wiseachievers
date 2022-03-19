@@ -1,4 +1,4 @@
-<div class="user-container" *ngIf="!reportInfo && userList">
+<div class="user-container" *ngIf="!reportInfo && !graphInfo && userList">
   <div class="table-responsive mat-elevation-z8">
     <table class="table table-striped" *ngIf="userList">
       <thead>
@@ -79,6 +79,7 @@
           <th scope="col" id="pwd">Password</th>
           <th scope="col" id="active">Acivate/Deactivate</th>
           <th scope="col" id="report">Report</th>
+          <th scope="col" id="graph">Graph</th>
         </tr>
       </thead>
       <tbody>
@@ -107,7 +108,8 @@
               ></span>
             </label>
           </td>
-          <td><a (click)="viewReport(user._id)">View Report</a></td>
+          <td><a (click)="viewReport(user._id,'report')">View Report</a></td>
+          <td><a (click)="viewReport(user._id,'graph')">View Graph</a></td>
         </tr>
       </tbody>
     </table>
@@ -120,3 +122,12 @@
   </button>
   <app-report [reportInfo]="reportInfo"></app-report>
 </div>
+
+<div class="user-container" *ngIf="graphInfo">
+  <button class="btn btn-primary squareButtons" (click)="goBack()">
+    Go back
+  </button>
+<app-graphs [graphInfo]="graphInfo"></app-graphs>
+</div>
+
+
