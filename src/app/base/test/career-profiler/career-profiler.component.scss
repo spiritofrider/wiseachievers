@@ -5,7 +5,6 @@
   border-radius: 0.5em;
   text-decoration: none;
   margin: 1em;
-  //padding: 20px 2.5em;
   box-shadow: 1em 1em 1.5em -0.5em #0000001a;
   transition: transform 0.45s ease, background 0.45s ease;
   background-color: rgb(236, 243, 244);
@@ -90,13 +89,7 @@ h5 {
 }
 
 .table-responsive {
-  /* max-height: 320px;
-  overflow-y: auto; */
   table {
-    /*  tbody {
-      max-height: 320px;
-      overflow-y: auto;
-    } */
     th,
     td {
       padding: 3px 10px;
@@ -104,8 +97,6 @@ h5 {
     th {
       background-color: #f0f2f3;
       font-size: 13px;
-      /*  position: sticky;
-      top: -1px; */
     }
     .input {
       text-align: center;

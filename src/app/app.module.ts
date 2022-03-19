@@ -26,7 +26,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
     HttpClientModule,
     MaterialModule,
     ModalModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     ],
   providers: [
     {provide:HTTP_INTERCEPTORS,

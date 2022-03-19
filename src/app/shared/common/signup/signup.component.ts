@@ -61,7 +61,7 @@ this.matcher = new MyErrorStateMatcher();
       email: email,
       phone: phone,
       gender: gender,
-      dob: moment(new Date(dob)).format('DD/MM/YYYY'),
+      dob: new Date(dob),
       locality: locality,
       lastExam: lastexam,
       password: password,

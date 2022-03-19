@@ -47,14 +47,14 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  viewReport(userId,type) {
+  viewReport(userId) {
     this.common.viewReport(userId).subscribe(
       (e) => {
         if (e) {
-          type == 'report' ? this.reportInfo = e : this.graphInfo = e;
+         this.reportInfo = e 
         } else {
           this.common.snackBar(
-            `The ${type}s are not available for this user`,
+            `The reports are not available for this user`,
             "a"
           );
         }
@@ -63,6 +63,10 @@ export class UsersComponent implements OnInit {
         this.common.snackBar(error.message, "s");
       }
     );
+  }
+
+  viewGraph(user){
+    this.graphInfo = user;
   }
   goBack() {
     this.getAllUsersList();

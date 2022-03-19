@@ -5,7 +5,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { TestScreenComponent } from "./test-screen/test-screen.component";
 import { FormsModule } from "@angular/forms";
-import { ChartsModule } from "ng2-charts";
 import { CareerProfilerComponent } from "./career-profiler/career-profiler.component";
 import { TimerBasedTestComponent } from './timer-based-test/timer-based-test.component';
 
@@ -48,7 +47,6 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FormsModule,
-    ChartsModule,
   ],
 })
 export class TestModule {}

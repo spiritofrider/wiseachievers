@@ -1,0 +1,16 @@
+.data-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 20px;
+  border-radius: 0.5em;
+  text-decoration: none;
+  margin: 1em;
+  box-shadow: 1em 1em 1.5em -0.5em #0000001a;
+  transition: transform 0.45s ease, background 0.45s ease;
+  background-color: rgb(236, 243, 244);
+  justify-content: center;
+}
+
+.graphContainer {
+  padding: 10px;
+}

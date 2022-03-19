@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExampleTestService } from '../../services/example-test.service';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 @Component({
   selector: 'app-test-example',
   templateUrl: './test-example.component.html',
@@ -28,12 +27,12 @@ export class TestExampleComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true
   };
-  public barChartLabels: Label[] = ['Intellectual', 'Business', 'Artist', 'Pragmatic', 'Organiser', 'Social', 'Sports'];
+  public barChartLabels: string[] = ['Intellectual', 'Business', 'Artist', 'Pragmatic', 'Organiser', 'Social', 'Sports'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  public barChartData: ChartDataSets[];
+  public barChartData: ChartDataset[];
   constructor(private testExample: ExampleTestService) { }
 
   ngOnInit() {

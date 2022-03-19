@@ -1,13 +1,79 @@
-<p>graphs works!</p>
+<button (click)="exportHTML()" class="ml-auto btn btn-primary squareButtons">
+  download
+</button>
 
+<div class="data-card graphContainer" id="source-html">
+  <div *ngIf="graphInfo.test_2.completed && graphInfo.test_3.completed">
+    <h2>Career Interest</h2>
+    <div class="data-card" style="background-color: white">
+      <h5 style="text-align: center; padding-top: 10px">
+        Career interest chart
+      </h5>
+      <canvas
+        baseChart
+        [datasets]="career2Data"
+        [labels]="career2Labels"
+        [legend]="chartLegend"
+        [type]="chartType"
+      >
+      </canvas>
+    </div>
+    <div class="data-card" style="background-color: white">
+      <h5 style="text-align: center; padding-top: 10px">
+        Career interest chart
+      </h5>
+      <div style="text-align: center; width: 600px; height: 600px">
+        <canvas
+          height="600px"
+          width="600px"
+          baseChart
+          [datasets]="career3Data"
+          [labels]="career3Labels"
+          [legend]="pieChartLegend"
+          [type]="pieChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="graphInfo.test_4.completed && graphInfo.test_5.completed">
+    <h2>Personality</h2>
+    <div class="data-card" style="background-color: white">
+      <h5 style="text-align: center; padding-top: 10px">Personality chart</h5>
+      <canvas
+        baseChart
+        [datasets]="personality1Data"
+        [labels]="personality1Labels"
+        [legend]="chartLegend"
+        [type]="chartType"
+      >
+      </canvas>
+    </div>
 
-
-<!-- 
-<canvas baseChart height="50%" width="50%"
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas> -->
+    <div class="data-card" style="background-color: white">
+      <h5 style="text-align: center; padding-top: 10px">Personality chart</h5>
+      <canvas
+        baseChart
+        [datasets]="personality2Data"
+        [labels]="personality2Labels"
+        [legend]="chartLegend"
+        [type]="chartType"
+      >
+      </canvas>
+    </div>
+  </div>
+  <!-- <div *ngIf="graphInfo.test_4.completed && graphInfo.test_5.completed">
+</div> -->
+  <h2>Aptitudes and Abilities</h2>
+  <div class="data-card" style="background-color: white">
+    <h5 style="text-align: center; padding-top: 10px">Aptitude results</h5>
+    <canvas
+      baseChart
+      [datasets]="aptitudeData"
+      [labels]="aptitudeLabels"
+      [legend]="chartLegend"
+      [type]="chartType"
+    >
+    </canvas>
+  </div>
+</div>
