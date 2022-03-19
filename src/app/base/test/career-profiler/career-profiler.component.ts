@@ -48,7 +48,11 @@ export class CareerProfilerComponent implements OnInit {
     private storageService: StorageService,
     private common: CommonService,
     private router: Router
-  ) {}
+  ) {
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"];
+  }
 
   ngOnInit(): void {
   }

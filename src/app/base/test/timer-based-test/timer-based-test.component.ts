@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/internal/operators/filter';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/commonservice';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -35,13 +34,17 @@ export class TimerBasedTestComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"] || false; 
+
    
   }
 
   ngOnChanges() {
-    this.isAdmin = this.common.tokenDecryption(
+   this.isAdmin = this.common.tokenDecryption(
       this.storageService.getCookie("token")
-    )["isAdmin"];
+    )["isAdmin"] || false; 
     if (!this.submissionPart) {
       this.currentQuestion = 0;
       this.mainTestObject = [];

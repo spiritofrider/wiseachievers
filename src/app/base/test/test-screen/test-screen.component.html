@@ -5,7 +5,7 @@
         <h5>
           {{ TestName(routeParam) }}{{ RelationMapping(relation) }}
         </h5>
-        <h3  *ngIf="templateArray.includes(routeParam) && !decryptCookie['isAdmin']" id="timer" style="text-align: center;">Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
+        <h3  *ngIf="templateArray.includes(routeParam) && !isAdmin" id="timer" class="ml-auto pr-4" >Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
         <div *ngIf="templateArray.includes(routeParam)">
         <timer-based-test [TestQuiz]="TestQuiz"
         [submissionPart]="submissionPart"
@@ -14,7 +14,8 @@
         (questionIncrement)="questionIncremented($event)"
         (finalObj)="finalObjReturned($event)"
         (submitExampleTestEmitter1)="submitTimerBasedTest($event)"
-        (traverseTestEmitter)="traverseTest($event)"></timer-based-test>
+        (traverseTestEmitter)="traverseTest($event)"
+        ></timer-based-test>
       </div>
       <div *ngIf="!templateArray.includes(routeParam)">
         <app-career-profiler

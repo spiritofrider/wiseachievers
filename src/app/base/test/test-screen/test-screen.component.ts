@@ -33,6 +33,7 @@ export class TestScreenComponent implements OnInit {
   interval;
 
   decryptCookie: any;
+  isAdmin: any;
 
   constructor(
     private testService: TestService,
@@ -42,10 +43,15 @@ export class TestScreenComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.currentQuestion = 0;
-   
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"] || false; 
   }
 
   ngOnInit() {
+     this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"];
     this.common.updatedTestStatus.subscribe((status) => {
       this.statusObject = status;
       if (this.statusObject.length == 0) {
@@ -61,6 +67,12 @@ export class TestScreenComponent implements OnInit {
    
   
    
+  }
+
+  ngOnChanges(){
+    this.isAdmin = this.common.tokenDecryption(
+      this.storageService.getCookie("token")
+    )["isAdmin"] || false; 
   }
 
   testUserStatus(userId) {
@@ -86,7 +98,6 @@ export class TestScreenComponent implements OnInit {
     testNo[0] == "next"
       ? this.uniqueRelation.shift()
       : this.uniqueRelation.unshift((+testNo[1] - 1).toString()); // need to check for prev
-    console.log(this.uniqueRelation);
     this.relation = this.TestQuiz[0].relation;
     this.submissionPart = false;
   }
@@ -97,7 +108,6 @@ export class TestScreenComponent implements OnInit {
 
   finalObjReturned(obj) {
     this.answerSubmittedObj = obj;
-    console.log("emit every obj",obj)
   }
 
   submitExampleTest(test) {
@@ -112,14 +122,7 @@ export class TestScreenComponent implements OnInit {
       this.answerSubmittedObj = [];
       this.storeTest();
 
-      if (this.uniqueRelation.length > 1) {
-        this.uniqueRelation.shift();
-        this.submissionPart = false;
-        this.TestQuiz = this.totalQuizQues.filter(
-          (obj) => obj.relation == this.uniqueRelation[0]
-        );
-        this.relation = this.TestQuiz[0].relation;
-      } /* else {
+   /* else {
         this.router.navigate(["base/test"]);
       } */
     } else {
@@ -131,7 +134,6 @@ export class TestScreenComponent implements OnInit {
     if(this.answerSubmittedObj){
       if(this.answerSubmittedObj?.length > 0){
     this.answerSheet.push(...this.answerSubmittedObj);
-    console.log("timerbase test",this.answerSheet)
     this.currentQuestion = 0;
     this.answerSubmittedObj = [];
     this.storeTest();
@@ -147,9 +149,16 @@ export class TestScreenComponent implements OnInit {
     this.testService.storeTestApi(body).subscribe(
       (e) => {
         this.answerSheet = [];
-        console.log(e, "score submitted");
         if(this.relationForRedirection.includes(this.relation)){
           this.router.navigate(["base/test"]);
+        }
+        if (this.uniqueRelation.length > 1) {
+          this.uniqueRelation.shift();
+          this.submissionPart = false;
+          this.TestQuiz = this.totalQuizQues.filter(
+            (obj) => obj.relation == this.uniqueRelation[0]
+          );
+          this.relation = this.TestQuiz[0].relation;
         }
       },
       (error) => {
@@ -178,7 +187,7 @@ export class TestScreenComponent implements OnInit {
           this.storageService.getCookie("token")
         );
         //start timer when quiz is loaded
-        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type")) && !decryptCookie["isAdmin"]) { this.startTimer()}
+        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type")) && !decryptCookie['isAdmin']) { this.startTimer()}
         let unique = [];
         res.forEach((element) => {
           unique.push(element.relation);
