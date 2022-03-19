@@ -1,6 +1,10 @@
-<button (click)="exportHTML()" class="ml-auto btn btn-primary squareButtons">
+<a
+  type="button"
+  (click)="exportHTML()"
+  class="ml-auto btn btn-primary squareButtons"
+>
   download
-</button>
+</a>
 
 <div class="data-card graphContainer" id="source-html">
   <div *ngIf="graphInfo.test_2.completed && graphInfo.test_3.completed">
@@ -10,6 +14,7 @@
         Career interest chart
       </h5>
       <canvas
+        id="canvas1"
         baseChart
         [datasets]="career2Data"
         [labels]="career2Labels"

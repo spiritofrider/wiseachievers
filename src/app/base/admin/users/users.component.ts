@@ -1,3 +1,4 @@
+import { LocationStrategy } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { CommonService } from "src/app/services/commonservice";
 
@@ -10,8 +11,16 @@ export class UsersComponent implements OnInit {
   userList: any = [];
   userListCopy: any = [];
   reportInfo: Object;
-  graphInfo:Object;
-  constructor(private common: CommonService) {}
+  graphInfo: Object;
+  constructor(
+    private common: CommonService,
+    private location: LocationStrategy
+  ) {
+    history.pushState(null, null, window.location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+    });
+  }
 
   ngOnInit(): void {
     this.getAllUsersList();
@@ -19,7 +28,7 @@ export class UsersComponent implements OnInit {
 
   getAllUsersList() {
     this.common.getAllUsers().subscribe(
-      (user:any) => {
+      (user: any) => {
         this.userList = [...user].reverse();
         this.userListCopy = [...user].reverse();
       },
@@ -51,7 +60,7 @@ export class UsersComponent implements OnInit {
     this.common.viewReport(userId).subscribe(
       (e) => {
         if (e) {
-         this.reportInfo = e 
+          this.reportInfo = e;
         } else {
           this.common.snackBar(
             `The reports are not available for this user`,
@@ -65,7 +74,7 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  viewGraph(user){
+  viewGraph(user) {
     this.graphInfo = user;
   }
   goBack() {

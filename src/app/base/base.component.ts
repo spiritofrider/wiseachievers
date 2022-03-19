@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { LocationStrategy } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.scss']
+  selector: "app-base",
+  templateUrl: "./base.component.html",
+  styleUrls: ["./base.component.scss"],
 })
 export class BaseComponent implements OnInit {
-
-  constructor() { 
+  constructor(private location: LocationStrategy) {
+    history.pushState(null, null, window.location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+    });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

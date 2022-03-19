@@ -28,6 +28,7 @@
     "bootstrap": "^4.5.0",
     "chart.js": "^3.7.1",
     "chartjs-plugin-datalabels": "^2.0.0",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "ng2-charts": "^3.0.8",
     "ngx-bootstrap": "^7.1.2",

@@ -119,29 +119,29 @@
       <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="question">{{ question.question }}</span>
 
-     <div class="container">
-       <div
-        class="questionContainer"
-        *ngFor="let quiz of question['options']; let i = index"
-      >
-        <input
-          type="radio"
-          name="{{ question.qno }}"
-          id="t{{ i + 1 }}"
-          value="{{ quiz.value }}"
-          (change)="
-            choiceSelected(
-              $event,
-              question.qno,
-              question.question,
-              question.category,
-              quiz.option
-            )
-          "
-        />
-        <span>{{ quiz.option }}</span>
+      <div class="qContainer">
+        <div
+          class="questionContainer"
+          *ngFor="let quiz of question['options']; let i = index"
+        >
+          <input
+            type="radio"
+            name="{{ question.qno }}"
+            id="t{{ i + 1 }}"
+            value="{{ quiz.value }}"
+            (change)="
+              choiceSelected(
+                $event,
+                question.qno,
+                question.question,
+                question.category,
+                quiz.option
+              )
+            "
+          />
+          <span>{{ quiz.option }}</span>
+        </div>
       </div>
-    </div> 
     </div>
     <div *ngIf="TestType == '5'">
       <div class="row">

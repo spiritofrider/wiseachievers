@@ -1,40 +1,23 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'wiseachievers';
-  constructor(){
-    document.addEventListener("DOMContentLoaded", function(){
-      window.addEventListener('scroll', function() {
+  title = "wiseachievers";
+  constructor() {
+    document.addEventListener("DOMContentLoaded", function () {
+      window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
-          document.getElementById('navbar_top').classList.add('nav-sticky');
-          document.getElementById('timer')?.classList.add('sticky-timer');
-
+          document.getElementById("navbar_top").classList.add("nav-sticky");
+          document.getElementById("timer")?.classList.add("sticky-timer");
         } else {
-          document.getElementById('navbar_top').classList.remove('nav-sticky');
-          document.getElementById('timer')?.classList.remove('sticky-timer');
-
-        } 
-
-      })
-    })
+          document.getElementById("navbar_top").classList.remove("nav-sticky");
+          document.getElementById("timer")?.classList.remove("sticky-timer");
+        }
+      });
+    });
   }
-
 }
-
-
-
-/*   document.addEventListener("DOMContentLoaded", function(){
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-          console.log(window.scroll)
-          document.getElementById('timer').classList.add('sticky-timer');
-        } else {
-          document.getElementById('timer').classList.remove('sticky-timer');
-        } 
-      })
-    }) */
