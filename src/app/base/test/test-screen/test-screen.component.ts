@@ -126,7 +126,17 @@ export class TestScreenComponent implements OnInit {
         this.router.navigate(["base/test"]);
       } */
     } else {
-      alert("Please answer all questions");
+      let testObArr = [];
+      let answeredObArr = [];
+      console.log(this.answerSubmittedObj);
+      console.log(this.TestQuiz);
+      this.TestQuiz.forEach((ob)=>{
+        testObArr.push(Number(ob['qno']));
+      });
+      this.answerSubmittedObj.forEach((ob)=>{
+        answeredObArr.push(Number(ob['id']));
+      });
+      alert(`Please answer questions ${String(testObArr.filter(x=> !answeredObArr.includes(x)))} to submit the test.`);
     }
   }
   submitTimerBasedTest(){
