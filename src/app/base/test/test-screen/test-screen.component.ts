@@ -117,6 +117,8 @@ export class TestScreenComponent implements OnInit {
       ) &&
       this.answerSubmittedObj.length == this.TestQuiz.length
     ) {
+      this.answerSubmittedObj = this.answerSubmittedObj.sort((a,b)=> Number(a['id'] - Number(b['id'])));
+      console.log(this.answerSubmittedObj);
       this.answerSheet.push(...this.answerSubmittedObj);
       this.currentQuestion = 0;
       this.answerSubmittedObj = [];
@@ -143,6 +145,7 @@ export class TestScreenComponent implements OnInit {
     console.log("heree trouble",this.answerSubmittedObj)
     if(this.answerSubmittedObj){
       if(this.answerSubmittedObj?.length > 0){
+    this.answerSubmittedObj = this.answerSubmittedObj.sort((a,b)=> Number(a['id'] - Number(b['id'])));
     this.answerSheet.push(...this.answerSubmittedObj);
     this.currentQuestion = 0;
     this.answerSubmittedObj = [];
