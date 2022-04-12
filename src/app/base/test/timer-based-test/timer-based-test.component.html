@@ -1,35 +1,57 @@
-<div class="data-card inner-data-card" >
-    <div class="testContainer" *ngFor="let question of TestQuiz; let i = index">
-      <div style="padding-bottom: 8px;">
-        <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span class="question">{{ question.question }}</span>
-        <div *ngIf="question.img" style="text-align: center;">
-          <img src="{{AssetLocation(question.img)}}" style="  
-          object-fit: contain;" [ngStyle]="{width : widthAdjustment(question.img)}">
-        </div>
-            <div class="questionContainer" *ngFor="let quiz of question['options']; let i = index">
-              <input type="radio" name="{{ question.qno }}" id="t{{ i + 1 }}" value="{{ quiz.value }}"
-            (change)="optionSelected($event,question.qno,question.question,quiz['option'])"/>
-            <span>{{ quiz.option }}</span>
-          </div>
+<div class="data-card inner-data-card">
+  <div class="testContainer" *ngFor="let question of TestQuiz; let i = index">
+    <div style="padding-bottom: 8px">
+      <span class="quesClass">{{ question.qno }}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span
+        class="question"
+        id="{{ question.qno }}"
+        [innerHTML]="
+          numericalQuestionFormatting(question.question, question.qno)
+        "
+      ></span>
+      <div *ngIf="question.img" style="text-align: center">
+        <img
+          src="{{ AssetLocation(question.img) }}"
+          style="object-fit: contain"
+          [ngStyle]="{ width: widthAdjustment(question.img) }"
+        />
       </div>
-     
-     
-    </div>
-    <div class="button-container">
-      <button
-        class="btn btn-primary squareButtons"
-        *ngIf="!isAdmin"
-        (click)="submitTest()"
+      <div
+        class="questionContainer"
+        *ngFor="let quiz of question['options']; let i = index"
       >
-        Submit Test
-      </button>
-      <button
-        class="btn btn-primary squareButtons ml-2"
-        *ngIf="isAdmin"
-        (click)="goToMainScreen()"
-      >
-        Go to Main Test Screen
-      </button>
+        <input
+          type="radio"
+          name="{{ question.qno }}"
+          id="t{{ i + 1 }}"
+          value="{{ quiz.value }}"
+          (change)="
+            optionSelected(
+              $event,
+              question.qno,
+              question.question,
+              quiz['option']
+            )
+          "
+        />
+        <span>{{ quiz.option }}</span>
+      </div>
     </div>
   </div>
+  <div class="button-container">
+    <button
+      class="btn btn-primary squareButtons"
+      *ngIf="!isAdmin"
+      (click)="submitTest()"
+    >
+      Submit Test
+    </button>
+    <button
+      class="btn btn-primary squareButtons ml-2"
+      *ngIf="isAdmin"
+      (click)="goToMainScreen()"
+    >
+      Go to Main Test Screen
+    </button>
+  </div>
+</div>

@@ -1,12 +1,15 @@
 <a
   type="button"
-  (click)="exportHTML()"
+  (click)="downloadCanvas($event)"
   class="ml-auto btn btn-primary squareButtons"
 >
   download
 </a>
 
 <div class="data-card graphContainer" id="source-html">
+  <h5>Name : {{ graphInfo.fullName }}</h5>
+  <!--     <h3>Agae : </h3>
+ -->
   <div *ngIf="graphInfo.test_2.completed && graphInfo.test_3.completed">
     <h2>Career Interest</h2>
     <div class="data-card" style="background-color: white">
@@ -24,21 +27,8 @@
       </canvas>
     </div>
     <div class="data-card" style="background-color: white">
-      <h5 style="text-align: center; padding-top: 10px">
-        Career interest chart
-      </h5>
-      <div style="text-align: center; width: 600px; height: 600px">
-        <canvas
-          height="600px"
-          width="600px"
-          baseChart
-          [datasets]="career3Data"
-          [labels]="career3Labels"
-          [legend]="pieChartLegend"
-          [type]="pieChartType"
-        >
-        </canvas>
-      </div>
+      <div id="container"></div>
+      <div id="container1"></div>
     </div>
   </div>
   <div *ngIf="graphInfo.test_4.completed && graphInfo.test_5.completed">

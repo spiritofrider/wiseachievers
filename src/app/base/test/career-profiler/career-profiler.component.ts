@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
 
@@ -54,10 +54,11 @@ export class CareerProfilerComponent implements OnInit {
     )["isAdmin"];
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges() {
+    window.scrollTo(0, 0);
+
     this.isAdmin = this.common.tokenDecryption(
       this.storageService.getCookie("token")
     )["isAdmin"];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs/internal/Subscription";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
 import { TestService } from "../test.service";
@@ -25,15 +26,17 @@ export class TestScreenComponent implements OnInit {
   routeParam: string;
   statusObjectCopy: any[];
 
-  templateArray : string[] = ['3','4','5','6']   //route param match for timer tests
+  templateArray: string[] = ["3", "4", "5", "6"]; //route param match for timer tests
 
-  relationForRedirection : string[] = ['3','5','6','7','8','9']
+  relationForRedirection: string[] = ["3", "5", "6", "7", "8", "9"];
 
-  timeLeft: number ;
+  timeLeft: number;
   interval;
 
   decryptCookie: any;
   isAdmin: any;
+
+  subscriptionTestStatus: Subscription;
 
   constructor(
     private testService: TestService,
@@ -43,36 +46,41 @@ export class TestScreenComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.currentQuestion = 0;
-    this.isAdmin = this.common.tokenDecryption(
-      this.storageService.getCookie("token")
-    )["isAdmin"] || false; 
+    this.isAdmin =
+      this.common.tokenDecryption(this.storageService.getCookie("token"))[
+        "isAdmin"
+      ] || false;
   }
 
   ngOnInit() {
-     this.common.tokenDecryption(
-      this.storageService.getCookie("token")
-    )["isAdmin"];
-    this.common.updatedTestStatus.subscribe((status) => {
-      this.statusObject = status;
-      if (this.statusObject.length == 0) {
-        this.decryptCookie = this.common.tokenDecryption(
-          this.storageService.getCookie("token")
-        );
-        this.testUserStatus(this.decryptCookie["_id"]);
-      } else {
-        this.routeParam = this.route.snapshot.paramMap.get("type");
-        this.getTest1list(`test${this.routeParam}`);
+    this.common.tokenDecryption(this.storageService.getCookie("token"))[
+      "isAdmin"
+    ];
+    this.subscriptionTestStatus = this.common.updatedTestStatus.subscribe(
+      (status) => {
+        this.statusObject = status;
+        if (this.statusObject.length == 0) {
+          this.decryptCookie = this.common.tokenDecryption(
+            this.storageService.getCookie("token")
+          );
+          this.testUserStatus(this.decryptCookie["_id"]);
+        } else {
+          this.routeParam = this.route.snapshot.paramMap.get("type");
+          this.getTest1list(`test${this.routeParam}`);
+        }
       }
-    });
-   
-  
-   
+    );
   }
 
-  ngOnChanges(){
-    this.isAdmin = this.common.tokenDecryption(
-      this.storageService.getCookie("token")
-    )["isAdmin"] || false; 
+  ngOnChanges() {
+    this.isAdmin =
+      this.common.tokenDecryption(this.storageService.getCookie("token"))[
+        "isAdmin"
+      ] || false;
+  }
+
+  ngOnDestroy() {
+    this.subscriptionTestStatus.unsubscribe();
   }
 
   testUserStatus(userId) {
@@ -111,20 +119,23 @@ export class TestScreenComponent implements OnInit {
   }
 
   submitExampleTest(test) {
-    if (this.answerSubmittedObj?.length > 0 &&
-        Object.values(this.answerSubmittedObj).every((v) =>
+    if (
+      this.answerSubmittedObj?.length > 0 &&
+      Object.values(this.answerSubmittedObj).every((v) =>
         Object.values(v).every((val) => val)
       ) &&
       this.answerSubmittedObj.length == this.TestQuiz.length
     ) {
-      this.answerSubmittedObj = this.answerSubmittedObj.sort((a,b)=> Number(a['id'] - Number(b['id'])));
+      this.answerSubmittedObj = this.answerSubmittedObj.sort((a, b) =>
+        Number(a["id"] - Number(b["id"]))
+      );
       console.log(this.answerSubmittedObj);
       this.answerSheet.push(...this.answerSubmittedObj);
       this.currentQuestion = 0;
       this.answerSubmittedObj = [];
       this.storeTest();
 
-   /* else {
+      /* else {
         this.router.navigate(["base/test"]);
       } */
     } else {
@@ -132,26 +143,32 @@ export class TestScreenComponent implements OnInit {
       let answeredObArr = [];
       console.log(this.answerSubmittedObj);
       console.log(this.TestQuiz);
-      this.TestQuiz.forEach((ob)=>{
-        testObArr.push(Number(ob['qno']));
+      this.TestQuiz.forEach((ob) => {
+        testObArr.push(Number(ob["qno"]));
       });
-      this.answerSubmittedObj.forEach((ob)=>{
-        answeredObArr.push(Number(ob['id']));
+      this.answerSubmittedObj.forEach((ob) => {
+        answeredObArr.push(Number(ob["id"]));
       });
-      alert(`Please answer questions ${String(testObArr.filter(x=> !answeredObArr.includes(x)))} to submit the test.`);
+      alert(
+        `Please answer questions ${String(
+          testObArr.filter((x) => !answeredObArr.includes(x))
+        )} to submit the test.`
+      );
     }
   }
-  submitTimerBasedTest(){
-    console.log("heree trouble",this.answerSubmittedObj)
-    if(this.answerSubmittedObj){
-      if(this.answerSubmittedObj?.length > 0){
-    this.answerSubmittedObj = this.answerSubmittedObj.sort((a,b)=> Number(a['id'] - Number(b['id'])));
-    this.answerSheet.push(...this.answerSubmittedObj);
-    this.currentQuestion = 0;
-    this.answerSubmittedObj = [];
-    this.storeTest();
+  submitTimerBasedTest() {
+    console.log("heree trouble", this.answerSubmittedObj);
+    if (this.answerSubmittedObj) {
+      if (this.answerSubmittedObj?.length > 0) {
+        this.answerSubmittedObj = this.answerSubmittedObj.sort((a, b) =>
+          Number(a["id"] - Number(b["id"]))
+        );
+        this.answerSheet.push(...this.answerSubmittedObj);
+        this.currentQuestion = 0;
+        this.answerSubmittedObj = [];
+        this.storeTest();
+      }
     }
-  }
   }
 
   storeTest() {
@@ -162,7 +179,7 @@ export class TestScreenComponent implements OnInit {
     this.testService.storeTestApi(body).subscribe(
       (e) => {
         this.answerSheet = [];
-        if(this.relationForRedirection.includes(this.relation)){
+        if (this.relationForRedirection.includes(this.relation)) {
           this.router.navigate(["base/test"]);
         }
         if (this.uniqueRelation.length > 1) {
@@ -200,12 +217,18 @@ export class TestScreenComponent implements OnInit {
           this.storageService.getCookie("token")
         );
         //start timer when quiz is loaded
-        if(this.templateArray.includes(this.route.snapshot.paramMap.get("type")) && !decryptCookie['isAdmin']) { this.startTimer()}
+        if (
+          this.templateArray.includes(
+            this.route.snapshot.paramMap.get("type")
+          ) &&
+          !decryptCookie["isAdmin"]
+        ) {
+          this.startTimer();
+        }
         let unique = [];
         res.forEach((element) => {
           unique.push(element.relation);
         });
-       
 
         let uniqueList = [...new Set(unique)];
         !decryptCookie["isAdmin"]
@@ -236,64 +259,67 @@ export class TestScreenComponent implements OnInit {
       "3": "Numerical Reasoning.",
       "4": "English Aptitude.",
       "5": "Mechanical Aptitude.",
-      "6": "Visual Spatial Test"
+      "6": "Visual Spatial Test",
     };
     return nameMapping[key];
   }
 
   RelationMapping(relation) {
     let partName;
-    switch(relation){
-
-      case "1" : partName=": Part 1"
-      break;
-      case "2" : partName=": Part 2"
-      break;
-      case "3" : partName=": Part 3"
-      break;
-      case "4" : partName=": Part 1"
-      break;
-      case "5" : partName=": Part 2" 
-      break;
-      default : ""
+    switch (relation) {
+      case "1":
+        partName = ": Part 1";
+        break;
+      case "2":
+        partName = ": Part 2";
+        break;
+      case "3":
+        partName = ": Part 3";
+        break;
+      case "4":
+        partName = ": Part 1";
+        break;
+      case "5":
+        partName = ": Part 2";
+        break;
+      default:
+        "";
     }
-  
+
     return partName;
   }
 
-
   /* Timer  */
 
-
-
-startTimer() {
-  this.timeLeft = this.getTimerValue(this.route.snapshot.paramMap.get("type"))
+  startTimer() {
+    this.timeLeft = this.getTimerValue(
+      this.route.snapshot.paramMap.get("type")
+    );
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.router.navigate(["base/test"]);  
-        this.pauseTimer()  
-        this.submitTimerBasedTest()
+        this.router.navigate(["base/test"]);
+        this.pauseTimer();
+        this.submitTimerBasedTest();
       }
-    },1000)
-
+    }, 1000);
   }
 
   pauseTimer() {
     clearInterval(this.interval);
   }
-  formatTime(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+  formatTime(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+  }
 
-
-  getTimerValue(routeParam){
+  getTimerValue(routeParam) {
     const timerObject = {
-      "3" : 25 * 60,
-      "4" : 10 * 60,
-      "5" : 20 * 60,
-      "6" : 30 * 60
-    }
-    return timerObject[routeParam]
-
+      "3": 25 * 60,
+      "4": 10 * 60,
+      "5": 20 * 60,
+      "6": 30 * 60,
+    };
+    return timerObject[routeParam];
   }
 }

@@ -12,7 +12,12 @@ export class AppComponent {
       window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
           document.getElementById("navbar_top").classList.add("nav-sticky");
-          document.getElementById("timer")?.classList.add("sticky-timer");
+          if (document.getElementById("timer")) {
+            document.getElementById("timer")?.classList.add("sticky-timer");
+            document
+              .getElementById("navbar_top")
+              .classList.remove("nav-sticky");
+          }
         } else {
           document.getElementById("navbar_top").classList.remove("nav-sticky");
           document.getElementById("timer")?.classList.remove("sticky-timer");

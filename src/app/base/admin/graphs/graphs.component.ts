@@ -1,6 +1,14 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ChartOptions, ChartType, ChartDataset } from "chart.js";
 import html2canvas from "html2canvas";
+import * as Highcharts from "highcharts";
+import HC_exporting from "highcharts/modules/exporting";
+import HC_exportData from "highcharts/modules/export-data";
+import highcharts3d from "highcharts/highcharts-3d";
+import { saveAs } from "file-saver";
+
+import * as fs from "fs";
+import { Document, ImageRun, Media, Packer, Paragraph, TextRun } from "docx";
 
 @Component({
   selector: "app-graphs",
@@ -50,6 +58,7 @@ export class GraphsComponent implements OnInit {
     "#a9ba9d",
     "#ccccff",
   ];
+
   public chartType: ChartType = "bar";
 
   public pieChartType: ChartType = "pie";
@@ -98,6 +107,10 @@ export class GraphsComponent implements OnInit {
     this.aptitudeData = this.aptitudeObject("Aptitude results");
   }
 
+  ngAfterViewInit() {
+    this.generating3DPieChart(this.graphInfo.test_3.info);
+  }
+
   chartObject(testNumber, header) {
     return [
       {
@@ -127,75 +140,150 @@ export class GraphsComponent implements OnInit {
     ];
   }
 
-  exportHTML(filename = "") {
-    /*  var header =
-      "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
-      "xmlns:w='urn:schemas-microsoft-com:office:word' " +
-      "xmlns='http://www.w3.org/TR/REC-html40'>" +
-      "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
-    var footer = "</body></html>";
-    var sourceHTML =
-      header + document.getElementById("source-html").innerHTML + footer;
-
-    var source =
-      "data:application/vnd.ms-word;charset=utf-8," +
-      encodeURIComponent(sourceHTML);
-    var fileDownload = document.createElement("a");
-    document.body.appendChild(fileDownload);
-    fileDownload.href = source;
-    fileDownload.download = "document.docx";
-    fileDownload.click();
-    document.body.removeChild(fileDownload); */
-    var HtmlHead =
-      "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-
-    var EndHtml = "</body></html>";
-
-    //complete html
-    var html =
-      HtmlHead + document.getElementById("source-html").innerHTML + EndHtml;
-
-    //specify the type
-    var blob = new Blob(["\ufeff", html], {
-      type: "application/msword",
-    });
-
-    // Specify link url
-    var url =
-      "data:application/vnd.ms-word;charset=utf-8," + encodeURIComponent(html);
-
-    // Specify file name
-    filename = filename ? filename + ".docx" : "document.docx";
-
-    // Create download link element
-    var downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-
-    /*  if(navigator.msSaveOrOpenBlob ){
-        navigator.msSaveOrOpenBlob(blob, filename);
-    }else{ */
-    // Create a link to the file
-    downloadLink.href = url;
-
-    // Setting the file name
-    downloadLink.download = filename;
-
-    //triggering the function
-    downloadLink.click();
-    // }
-
-    document.body.removeChild(downloadLink);
-  }
-
   downloadCanvas(event) {
     // get the `<a>` element from click event
     var anchor = event.target;
     // get the canvas, I'm getting it by tag name, you can do by id
     // and set the href of the anchor to the canvas dataUrl
-    anchor.href = document.getElementsByTagName("canvas")[0].toDataURL();
+    console.log(
+      document.getElementById("container"),
+      document.getElementsByClassName("highcharts-container")
+    );
+
+    anchor.href = (
+      document.getElementById("canvas1") as HTMLCanvasElement
+    ).toDataURL();
+
+    //anchor.href = imgWrap.toDataURL();
     // set the anchors 'download' attibute (name of the file to be downloaded)
-    console.log(anchor.href);
-    anchor.download = "test.png";
+    //console.log(imgWrap, anchor.href.toString());
+    //anchor.download = "test.png";
+
+    var svg = document.getElementById("container").children[0].innerHTML;
+    var base_image = new Image();
+
+    svg = "data:image/svg+xml," + svg;
+
+    base_image.src = svg;
+
+    console.log(base_image.src.toString());
+
+    let link = document.createElement("a");
+
+    html2canvas(document.getElementById("container")).then(function (canvas) {
+      // Convert the canvas to blob
+      canvas.toBlob(function (blob) {
+        // To download directly on browser default 'downloads' location
+
+        //link.download = "image.png";
+        link.href = URL.createObjectURL(blob);
+        console.log(link.href);
+
+        // To save manually somewhere in file explorer
+        // saveAs(blob, "image.png");
+      }, "image/png");
+    });
+
+    const doc = new Document({
+      sections: [
+        {
+          properties: {},
+          children: [
+            new Paragraph({
+              children: [
+                new TextRun("Hello World"),
+                new TextRun({
+                  text: "Foo Bar",
+                  bold: true,
+                }),
+                new TextRun({
+                  text: "\tGithub is the best",
+                  bold: true,
+                }),
+              ],
+            }),
+            new Paragraph({
+              children: [
+                new ImageRun({
+                  data: link.href,
+                  transformation: {
+                    width: 100,
+                    height: 100,
+                  },
+                }),
+              ],
+            }),
+          ],
+        },
+      ],
+    });
+
+    Packer.toBlob(doc).then((blob) => {
+      console.log(blob);
+      saveAs(blob, "example.docx");
+      console.log("Document created successfully");
+    });
+  }
+
+  generating3DPieChart(chartData) {
+    //HC_exporting(Highcharts);
+    //HC_exportData(Highcharts);
+
+    let pieChartData = [];
+    Object.keys(chartData).forEach((element) => {
+      pieChartData.push([element, chartData[element]]);
+    });
+    highcharts3d(Highcharts);
+    Highcharts.chart("container", {
+      chart: {
+        type: "pie",
+        options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0,
+        },
+      },
+      title: {
+        text: "Career interest chart",
+      },
+      accessibility: {
+        point: {
+          valueSuffix: "%",
+        },
+      },
+      tooltip: {
+        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          depth: 35,
+          dataLabels: {
+            enabled: true,
+            format: "{point.name}",
+          },
+        },
+      },
+      series: [
+        {
+          type: "pie",
+          name: "Career interest chart",
+          data:
+            /*  ["Firefox", 45.0],
+            ["IE", 26.8],
+            {
+              name: "Chrome",
+              y: 12.8,
+              sliced: true,
+              selected: true,
+            },
+            ["Safari", 8.5],
+            ["Opera", 6.2],
+            ["Others", 0.7], */
+            pieChartData,
+        },
+      ],
+    });
   }
 }

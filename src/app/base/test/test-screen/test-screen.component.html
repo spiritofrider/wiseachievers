@@ -2,38 +2,44 @@
   <div class="row">
     <div class="col-md-12">
       <div class="data-card" *ngIf="TestQuiz">
-        <h3>
-          {{ TestName(routeParam) }}{{ RelationMapping(relation) }}
-        </h3>
-        <h3  *ngIf="templateArray.includes(routeParam) && !isAdmin" id="timer" class="ml-auto pr-4" >Time Remaining &nbsp; : &nbsp;{{formatTime(timeLeft)}}</h3>
+        <h3>{{ TestName(routeParam) }}{{ RelationMapping(relation) }}</h3>
+        <div
+          *ngIf="templateArray.includes(routeParam) && !isAdmin"
+          class="timerClass"
+          id="timer"
+        >
+          <h5 class="pr-4">
+            Time Remaining &nbsp; : &nbsp;{{ formatTime(timeLeft) }}
+          </h5>
+        </div>
         <div *ngIf="templateArray.includes(routeParam)">
-        <timer-based-test [TestQuiz]="TestQuiz"
-        [submissionPart]="submissionPart"
-        [TestType]="relation"
-        [firstRelation]="firstRelation"
-        (questionIncrement)="questionIncremented($event)"
-        (finalObj)="finalObjReturned($event)"
-        (submitExampleTestEmitter1)="submitTimerBasedTest($event)"
-        (traverseTestEmitter)="traverseTest($event)"
-        ></timer-based-test>
-      </div>
-      <div *ngIf="!templateArray.includes(routeParam)">
-        <app-career-profiler
-          [TestQuiz]="TestQuiz"
-          [submissionPart]="submissionPart"
-          [TestType]="relation"
-          [firstRelation]="firstRelation"
-          (questionIncrement)="questionIncremented($event)"
-          (finalObj)="finalObjReturned($event)"
-          (submitExampleTestEmitter)="submitExampleTest($event)"
-          (traverseTestEmitter)="traverseTest($event)"
-        ></app-career-profiler>
+          <timer-based-test
+            [TestQuiz]="TestQuiz"
+            [submissionPart]="submissionPart"
+            [TestType]="relation"
+            [firstRelation]="firstRelation"
+            (questionIncrement)="questionIncremented($event)"
+            (finalObj)="finalObjReturned($event)"
+            (submitExampleTestEmitter1)="submitTimerBasedTest($event)"
+            (traverseTestEmitter)="traverseTest($event)"
+          ></timer-based-test>
+        </div>
+        <div *ngIf="!templateArray.includes(routeParam)">
+          <app-career-profiler
+            [TestQuiz]="TestQuiz"
+            [submissionPart]="submissionPart"
+            [TestType]="relation"
+            [firstRelation]="firstRelation"
+            (questionIncrement)="questionIncremented($event)"
+            (finalObj)="finalObjReturned($event)"
+            (submitExampleTestEmitter)="submitExampleTest($event)"
+            (traverseTestEmitter)="traverseTest($event)"
+          ></app-career-profiler>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- style="top: 80px;
         position: sticky;
