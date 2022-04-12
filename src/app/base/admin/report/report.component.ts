@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class ReportComponent implements OnInit {
   @Input() reportInfo;
+  @Input() candidateFullName;
   constructor() {}
 
   ngOnInit(): void {}
