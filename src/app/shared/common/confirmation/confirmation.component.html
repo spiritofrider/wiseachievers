@@ -1,12 +1,23 @@
 <div class="modal-conent">
-   
- 
-    <div class="modal-body">
-        <div class="row">
-        <div class="col-md-12">
-        <a class="float-right" style="margin-left:auto;" href="javascript:;" (click)="Cancel()"><i class="fa fa-times" aria-hidden="true"></i></a>
-        </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <a
+          class="float-right"
+          style="margin-left: auto"
+          href="javascript:;"
+          (click)="Cancel()"
+          ><i class="fa fa-times" aria-hidden="true"></i
+        ></a>
+      </div>
     </div>
-    <p>confirm</p>
+    <h6 style="padding: 4px">
+      There are two options choose the option which is appropriate for you.
+    </h6>
+    <div style="display: flex; justify-content: flex-end">
+      <button class="btn btn-primary squareButtons" (click)="Cancel()">
+        OK
+      </button>
     </div>
+  </div>
 </div>

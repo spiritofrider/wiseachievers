@@ -6,11 +6,13 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { TestScreenComponent } from "./test-screen/test-screen.component";
 import { FormsModule } from "@angular/forms";
 import { CareerProfilerComponent } from "./career-profiler/career-profiler.component";
-import { TimerBasedTestComponent } from './timer-based-test/timer-based-test.component';
+import { TimerBasedTestComponent } from "./timer-based-test/timer-based-test.component";
+import { AuthenticationGuardTest } from "src/app/authentication.guard";
 
 const routes: Routes = [
   {
     path: "",
+    canActivate: [AuthenticationGuardTest],
     children: [
       {
         path: "",
@@ -41,7 +43,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TestComponent, TestScreenComponent, CareerProfilerComponent, TimerBasedTestComponent],
+  declarations: [
+    TestComponent,
+    TestScreenComponent,
+    CareerProfilerComponent,
+    TimerBasedTestComponent,
+  ],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

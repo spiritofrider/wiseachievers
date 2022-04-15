@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { CommonService } from "src/app/services/commonservice";
 import { StorageService } from "src/app/services/storage.service";
+import { ConfirmationComponent } from "src/app/shared/common/confirmation/confirmation.component";
+import { BsModalService } from "ngx-bootstrap/modal";
 
 @Component({
   selector: "app-career-profiler",
@@ -44,10 +46,13 @@ export class CareerProfilerComponent implements OnInit {
     value: "",
   };
   isAdmin: any;
+  bsModalRef: any;
+
   constructor(
     private storageService: StorageService,
     private common: CommonService,
-    private router: Router
+    private router: Router,
+    private BsModalService: BsModalService
   ) {
     this.isAdmin = this.common.tokenDecryption(
       this.storageService.getCookie("token")
@@ -57,6 +62,18 @@ export class CareerProfilerComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges() {
+    console.log(
+      "searching personality profiler part 2",
+      this.firstRelation,
+      this.router.url,
+      this.TestType
+    );
+    if (this.TestType == 5) {
+      this.bsModalRef = this.BsModalService.show(ConfirmationComponent, {
+        backdrop: "static",
+        keyboard: false,
+      });
+    }
     window.scrollTo(0, 0);
 
     this.isAdmin = this.common.tokenDecryption(
