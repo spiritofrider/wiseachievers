@@ -10,10 +10,8 @@ import { ValuesComponent } from "./values/values.component";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { ReviewsComponent } from "./reviews/reviews.component";
 import { MentorsComponent } from "./mentors/mentors.component";
-//import { TestExampleComponent } from "./test-example/test-example.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
-import { AuthenticationChildGuard } from "../authentication-child.guard";
-import { AuthenticationGuard, Redirection } from "../authentication.guard";
+import { Redirection } from "../authentication.guard";
 
 const routes: Routes = [
   {
