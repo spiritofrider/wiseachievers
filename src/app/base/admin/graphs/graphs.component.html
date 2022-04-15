@@ -1,11 +1,3 @@
-<a
-  type="button"
-  (click)="downloadCanvas($event)"
-  class="ml-auto btn btn-primary squareButtons"
->
-  download
-</a>
-
 <div class="data-card graphContainer" id="source-html">
   <h5>Name : {{ graphInfo.fullName }}</h5>
   <!--     <h3>Agae : </h3>
@@ -13,62 +5,24 @@
   <div *ngIf="graphInfo.test_2.completed && graphInfo.test_3.completed">
     <h2>Career Interest</h2>
     <div class="data-card" style="background-color: white">
-      <h5 style="text-align: center; padding-top: 10px">
-        Career interest chart
-      </h5>
-      <canvas
-        id="canvas1"
-        baseChart
-        [datasets]="career2Data"
-        [labels]="career2Labels"
-        [legend]="chartLegend"
-        [type]="chartType"
-      >
-      </canvas>
+      <div id="barContainerCareer2"></div>
     </div>
     <div class="data-card" style="background-color: white">
       <div id="container"></div>
-      <div id="container1"></div>
     </div>
   </div>
   <div *ngIf="graphInfo.test_4.completed && graphInfo.test_5.completed">
     <h2>Personality</h2>
     <div class="data-card" style="background-color: white">
-      <h5 style="text-align: center; padding-top: 10px">Personality chart</h5>
-      <canvas
-        baseChart
-        [datasets]="personality1Data"
-        [labels]="personality1Labels"
-        [legend]="chartLegend"
-        [type]="chartType"
-      >
-      </canvas>
+      <div id="barContainerPersonality1"></div>
     </div>
 
     <div class="data-card" style="background-color: white">
-      <h5 style="text-align: center; padding-top: 10px">Personality chart</h5>
-      <canvas
-        baseChart
-        [datasets]="personality2Data"
-        [labels]="personality2Labels"
-        [legend]="chartLegend"
-        [type]="chartType"
-      >
-      </canvas>
+      <div id="barContainerPersonality2"></div>
     </div>
   </div>
-  <!-- <div *ngIf="graphInfo.test_4.completed && graphInfo.test_5.completed">
-</div> -->
   <h2>Aptitudes and Abilities</h2>
   <div class="data-card" style="background-color: white">
-    <h5 style="text-align: center; padding-top: 10px">Aptitude results</h5>
-    <canvas
-      baseChart
-      [datasets]="aptitudeData"
-      [labels]="aptitudeLabels"
-      [legend]="chartLegend"
-      [type]="chartType"
-    >
-    </canvas>
+    <div id="barContainerAptitude"></div>
   </div>
 </div>

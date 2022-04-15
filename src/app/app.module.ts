@@ -1,23 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TopLayoutComponent } from './layout/top-layout/top-layout.component';
-import { SharedModule } from './shared/shared.module';
-import { BaseModule } from './base/base.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './app.material.module';
-import {ModalModule} from 'ngx-bootstrap/modal'
-import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { LoaderComponent } from './shared/loader/loader.component';
-
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { TopLayoutComponent } from "./layout/top-layout/top-layout.component";
+import { SharedModule } from "./shared/shared.module";
+import { BaseModule } from "./base/base.module";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "./app.material.module";
+import { ModalModule } from "ngx-bootstrap/modal";
+import { JwtInterceptor } from "./helpers/jwt.interceptor";
+import { LoaderComponent } from "./shared/loader/loader.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopLayoutComponent
-  ],
+  declarations: [AppComponent, TopLayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,13 +23,11 @@ import { LoaderComponent } from './shared/loader/loader.component';
     MaterialModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
-    ],
-  providers: [
-    {provide:HTTP_INTERCEPTORS,
-    useClass:JwtInterceptor,
-  multi:true}
   ],
-  exports : [LoaderComponent],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
+  exports: [LoaderComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

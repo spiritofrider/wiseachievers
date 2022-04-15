@@ -90,8 +90,6 @@ export class GraphsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.graphInfo);
-
     this.career2Labels = Object.keys(this.graphInfo.test_2.info);
     this.career2Data = this.chartObject("test_2", "Career interest chart");
 
@@ -109,14 +107,36 @@ export class GraphsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.generating3DPieChart(this.graphInfo.test_3.info);
+    this.generating3DBarChart(
+      this.career2Data,
+      this.career2Labels,
+      "Career interest chart",
+      "barContainerCareer2"
+    );
+    this.generating3DBarChart(
+      this.personality1Data,
+      this.personality1Labels,
+      "Personality chart",
+      "barContainerPersonality1"
+    );
+    this.generating3DBarChart(
+      this.personality2Data,
+      this.personality2Labels,
+      "Personality chart",
+      "barContainerPersonality2"
+    );
+    this.generating3DBarChart(
+      this.aptitudeData,
+      this.aptitudeLabels,
+      "Aptitude results",
+      "barContainerAptitude"
+    );
   }
 
   chartObject(testNumber, header) {
     return [
       {
         data: this.chartData(testNumber),
-        //label: header,
-        backgroundColor: this.barGraphColors,
       },
     ];
   }
@@ -135,9 +155,112 @@ export class GraphsComponent implements OnInit {
           this.graphInfo.test_9.info,
         ],
         label: header,
-        backgroundColor: this.barGraphColors,
       },
     ];
+  }
+
+  generating3DPieChart(chartData) {
+    HC_exporting(Highcharts);
+    HC_exportData(Highcharts);
+
+    let pieChartData = [];
+    Object.keys(chartData).forEach((element) => {
+      pieChartData.push([element, chartData[element]]);
+    });
+    highcharts3d(Highcharts);
+    Highcharts.chart("container", {
+      chart: {
+        type: "pie",
+        options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0,
+        },
+      },
+      title: {
+        text: "Career interest chart",
+      },
+      accessibility: {
+        point: {
+          valueSuffix: "%",
+        },
+      },
+      tooltip: {
+        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          depth: 35,
+          dataLabels: {
+            enabled: true,
+            format: "{point.name} : <b>{point.percentage:.1f}</b>",
+          },
+        },
+      },
+      series: [
+        {
+          type: "pie",
+          name: "Career interest chart",
+          data: pieChartData,
+        },
+      ],
+    });
+  }
+
+  generating3DBarChart(chartData, chartLables, title, id) {
+    const barChartData = chartData[0].data.map((data, index) => ({
+      y: data,
+      color: this.barGraphColors[index],
+    }));
+
+    highcharts3d(Highcharts);
+
+    const chart = new Highcharts.Chart({
+      chart: {
+        renderTo: id,
+        type: "column",
+
+        options3d: {
+          enabled: true,
+          alpha: 15,
+          beta: 15,
+          depth: 50,
+          viewDistance: 30,
+        },
+      },
+      title: {
+        text: title,
+      },
+      plotOptions: {
+        column: {
+          depth: 25,
+        },
+      },
+      colors: this.barGraphColors,
+      xAxis: {
+        categories: chartLables,
+        labels: {
+          skew3d: true,
+          style: {
+            fontSize: "16px",
+          },
+        },
+      },
+      yAxis: {
+        title: {
+          text: null,
+        },
+      },
+      series: [
+        {
+          type: "column",
+          name: title,
+          data: barChartData,
+        },
+      ],
+    });
   }
 
   downloadCanvas(event) {
@@ -222,68 +345,6 @@ export class GraphsComponent implements OnInit {
       console.log(blob);
       saveAs(blob, "example.docx");
       console.log("Document created successfully");
-    });
-  }
-
-  generating3DPieChart(chartData) {
-    //HC_exporting(Highcharts);
-    //HC_exportData(Highcharts);
-
-    let pieChartData = [];
-    Object.keys(chartData).forEach((element) => {
-      pieChartData.push([element, chartData[element]]);
-    });
-    highcharts3d(Highcharts);
-    Highcharts.chart("container", {
-      chart: {
-        type: "pie",
-        options3d: {
-          enabled: true,
-          alpha: 45,
-          beta: 0,
-        },
-      },
-      title: {
-        text: "Career interest chart",
-      },
-      accessibility: {
-        point: {
-          valueSuffix: "%",
-        },
-      },
-      tooltip: {
-        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: "pointer",
-          depth: 35,
-          dataLabels: {
-            enabled: true,
-            format: "{point.name}",
-          },
-        },
-      },
-      series: [
-        {
-          type: "pie",
-          name: "Career interest chart",
-          data:
-            /*  ["Firefox", 45.0],
-            ["IE", 26.8],
-            {
-              name: "Chrome",
-              y: 12.8,
-              sliced: true,
-              selected: true,
-            },
-            ["Safari", 8.5],
-            ["Opera", 6.2],
-            ["Others", 0.7], */
-            pieChartData,
-        },
-      ],
     });
   }
 }

@@ -83,13 +83,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userList; let c = count;let i = index">
+        <tr *ngFor="let user of userList; let c = count; let i = index">
           <td scope="row">{{ c - i }}</td>
           <td scope="row">{{ user.fullName }}</td>
           <td scope="row">{{ user.email }}</td>
           <td scope="row">{{ user.phone }}</td>
           <td scope="row">{{ user.dob | date: "dd MMM yyyy" }}</td>
-          <td scope="row">{{user.createdDate | date: "dd MMM yyyy" }}</td>
+          <td scope="row">{{ user.createdDate | date: "dd MMM yyyy" }}</td>
           <td scope="row">{{ user.gender }}</td>
           <td scope="row">{{ user.lastExam }}</td>
           <td scope="row">{{ user.locality }}</td>
@@ -108,7 +108,11 @@
               ></span>
             </label>
           </td>
-          <td><a (click)="viewReport(user._id)">View Answer Sheet</a></td>
+          <td>
+            <a (click)="viewReport(user._id, user.fullName)"
+              >View Answer Sheet</a
+            >
+          </td>
           <td><a (click)="viewGraph(user)">View Graph</a></td>
         </tr>
       </tbody>
@@ -120,14 +124,15 @@
   <button class="btn btn-primary squareButtons" (click)="goBack()">
     Go back
   </button>
-  <app-report [reportInfo]="reportInfo"></app-report>
+  <app-report
+    [reportInfo]="reportInfo"
+    [candidateFullName]="candidateFullName"
+  ></app-report>
 </div>
 
 <div class="user-container" *ngIf="graphInfo">
   <button class="btn btn-primary squareButtons" (click)="goBack()">
     Go back
   </button>
-<app-graphs [graphInfo]="graphInfo"></app-graphs>
+  <app-graphs [graphInfo]="graphInfo"></app-graphs>
 </div>
-
-

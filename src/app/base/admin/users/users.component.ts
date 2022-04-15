@@ -12,6 +12,7 @@ export class UsersComponent implements OnInit {
   userListCopy: any = [];
   reportInfo: Object;
   graphInfo: Object;
+  candidateFullName: string;
   constructor(
     private common: CommonService,
     private location: LocationStrategy
@@ -56,11 +57,12 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  viewReport(userId) {
+  viewReport(userId, fullName) {
     this.common.viewReport(userId).subscribe(
       (e) => {
         if (e) {
           this.reportInfo = e;
+          this.candidateFullName = fullName;
         } else {
           this.common.snackBar(
             `The reports are not available for this user`,
