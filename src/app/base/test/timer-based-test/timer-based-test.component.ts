@@ -96,12 +96,30 @@ export class TimerBasedTestComponent implements OnInit {
   }
 
   widthAdjustment(imageName) {
-    let imagesToFix = ["i1", "i5", "i7"];
+    let imagesToFix = ["i1", "i5", "i7", "i28"];
     if (imagesToFix.includes(imageName)) {
       return "200px";
     }
     if (imageName == "i3") {
       return "300px";
+    }
+    let spatialImages500 = [
+      "i22",
+      "i23",
+      "i24",
+      "i25",
+      "i26",
+      "i27",
+      "i30",
+      "i35",
+      "i36",
+    ];
+    if (spatialImages500.includes(imageName)) {
+      return "500px";
+    }
+    const spatialImages400 = ["i30", "i31"];
+    if (spatialImages400.includes(imageName)) {
+      return "350px";
     }
   }
 
