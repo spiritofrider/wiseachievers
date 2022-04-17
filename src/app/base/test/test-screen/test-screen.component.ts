@@ -157,6 +157,7 @@ export class TestScreenComponent implements OnInit {
     }
   }
   submitTimerBasedTest() {
+    this.pauseTimer();
     console.log("heree trouble", this.answerSubmittedObj);
     if (this.answerSubmittedObj) {
       if (this.answerSubmittedObj?.length > 0) {
