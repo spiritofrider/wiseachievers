@@ -168,6 +168,7 @@ export class GraphsComponent implements OnInit {
       pieChartData.push([element, chartData[element]]);
     });
     highcharts3d(Highcharts);
+
     Highcharts.chart("container", {
       chart: {
         type: "pie",
@@ -182,11 +183,11 @@ export class GraphsComponent implements OnInit {
       },
       accessibility: {
         point: {
-          valueSuffix: "%",
+          //valueSuffix: "%",
         },
       },
       tooltip: {
-        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        pointFormat: "{series.name}: <b>{point.y}</b>",
       },
       plotOptions: {
         pie: {
@@ -195,7 +196,7 @@ export class GraphsComponent implements OnInit {
           depth: 35,
           dataLabels: {
             enabled: true,
-            format: "{point.name} : <b>{point.percentage:.1f}</b>",
+            format: "{point.name} : <b>{point.y}</b>",
           },
         },
       },

@@ -62,12 +62,6 @@ export class CareerProfilerComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges() {
-    console.log(
-      "searching personality profiler part 2",
-      this.firstRelation,
-      this.router.url,
-      this.TestType
-    );
     if (this.TestType == 5) {
       this.bsModalRef = this.BsModalService.show(ConfirmationComponent, {
         backdrop: "static",
@@ -94,6 +88,7 @@ export class CareerProfilerComponent implements OnInit {
   }
 
   nextQuestion() {
+    window.scrollTo(0, 0);
     if (this.currentQuestion < this.TestQuiz.length - 1) {
       this.currentQuestion += 1;
       this.CheckBoxLogicCommon();
@@ -101,6 +96,7 @@ export class CareerProfilerComponent implements OnInit {
   }
 
   prevQues() {
+    window.scrollTo(0, 0);
     if (this.currentQuestion > 0) {
       this.currentQuestion -= 1;
     }

@@ -40,6 +40,7 @@
     "ng2-charts": "^3.0.8",
     "ngx-bootstrap": "^7.1.2",
     "ngx-cookie-service": "^13.1.2",
+    "ngx-ui-loader": "^1.1.9",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

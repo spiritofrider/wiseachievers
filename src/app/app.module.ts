@@ -11,6 +11,22 @@ import { MaterialModule } from "./app.material.module";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { LoaderComponent } from "./shared/loader/loader.component";
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderConfig,
+  SPINNER_TYPES,
+  NGX_POSITIONS,
+  PB_DIRECTIONS,
+} from "ngx-ui-loader";
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: "#0062cc",
+  bgsPosition: NGX_POSITIONS.bottomCenter,
+  bgsSize: 40,
+  bgsType: SPINNER_TYPES.ballSpinClockwiseFadeRotating,
+  pbDirection: PB_DIRECTIONS.leftToRight, // progress bar direction
+  pbThickness: 5, // progress bar thickness
+};
 
 @NgModule({
   declarations: [AppComponent, TopLayoutComponent],
@@ -23,6 +39,7 @@ import { LoaderComponent } from "./shared/loader/loader.component";
     MaterialModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
