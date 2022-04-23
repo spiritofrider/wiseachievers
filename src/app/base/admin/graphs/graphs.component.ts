@@ -225,8 +225,8 @@ export class GraphsComponent implements OnInit {
 
         options3d: {
           enabled: true,
-          alpha: 15,
-          beta: 15,
+          alpha: 0,
+          beta: 8,
           depth: 50,
           viewDistance: 30,
         },

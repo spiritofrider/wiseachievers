@@ -129,7 +129,6 @@ export class TestScreenComponent implements OnInit {
       this.answerSubmittedObj = this.answerSubmittedObj.sort((a, b) =>
         Number(a["id"] - Number(b["id"]))
       );
-      console.log(this.answerSubmittedObj);
       this.answerSheet.push(...this.answerSubmittedObj);
       this.currentQuestion = 0;
       this.answerSubmittedObj = [];
@@ -141,8 +140,6 @@ export class TestScreenComponent implements OnInit {
     } else {
       let testObArr = [];
       let answeredObArr = [];
-      console.log(this.answerSubmittedObj);
-      console.log(this.TestQuiz);
       this.TestQuiz.forEach((ob) => {
         testObArr.push(Number(ob["qno"]));
       });

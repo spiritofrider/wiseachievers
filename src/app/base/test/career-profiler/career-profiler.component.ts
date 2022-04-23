@@ -152,7 +152,6 @@ export class CareerProfilerComponent implements OnInit {
       const Index = this.mainTestObject.findIndex((e) => e.id == qno);
       this.mainTestObject[Index]["value"] = this.choiceObjectTest3["value"];
       this.mainTestObject[Index]["selected"] = e["target"]["defaultValue"];
-      console.log("mainObj", this.mainTestObject);
     }
     this.resetChoiceObject();
   }
