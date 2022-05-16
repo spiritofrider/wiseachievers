@@ -7,18 +7,17 @@ body {
   height: 100%;
 }
 body {
-  margin: 0; //font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #d7dbf1; //linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
+  margin: 0;
+  background: #ffffff;
 }
 
 h2 {
-  font-family: "Charm", cursive;
-  //text-shadow: 1px 9px 4px rgb(144, 140, 140);
+  font-family: "Roboto"; //"Charm", cursive;
   font-weight: bold;
 }
 
 h4 {
-  font-family: "Courgette", cursive;
+  font-family: "Roboto"; //"Courgette", cursive;
   font-size: 28px;
 }
 
@@ -37,17 +36,23 @@ h4 {
 }
 
 .squareButtons {
-  //background-color:#0081d6;
-  //color: white;
+  color: #fff;
   cursor: pointer;
   border: none;
   outline: none;
   padding: 6px 18px;
   border-radius: 50px;
-  color: #333;
-  background: #fff;
-  //margin-bottom: 50px;
+  //color: #333;
+  //background: #fff;
   box-shadow: 0 3px 20px 0 #0000003b;
+  background-color: #0062cc;
+  border-color: #0062cc;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #1f4e80;
+  border-color: #1f4e80;
 }
 
 a {
