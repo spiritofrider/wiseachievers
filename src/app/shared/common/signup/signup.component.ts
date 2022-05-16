@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { BsModalService } from "ngx-bootstrap/modal";
 import { CommonService } from "src/app/services/commonservice";
+import { DateAdapter } from '@angular/material/core';
 
 import {
   FormControl,
@@ -38,7 +39,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private bsModalService: BsModalService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private dateAdapter: DateAdapter<Date>
   ) {
     this.registerForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -59,6 +61,7 @@ export class SignupComponent implements OnInit {
       ]),
     });
     this.matcher = new MyErrorStateMatcher();
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
   ngOnInit(): void {}
 
