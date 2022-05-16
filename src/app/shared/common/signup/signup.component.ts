@@ -10,7 +10,6 @@ import {
   Validators,
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
-import * as moment from "moment";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

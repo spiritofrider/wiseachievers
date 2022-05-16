@@ -297,8 +297,6 @@ export class TestScreenComponent implements OnInit {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.router.navigate(["base/test"]);
-        this.pauseTimer();
         this.submitTimerBasedTest();
       }
     }, 1000);

@@ -10,6 +10,7 @@
   box-shadow: 1em 1em 1.5em -0.5em #0000001a;
   transition: transform 0.45s ease, background 0.45s ease;
   background-color: white;
+  border: 1px solid #0062cc;
 
   h3 {
     color: #2e3c40;
@@ -115,6 +116,3 @@
 .testContainer > * {
   margin: 0 10px;
 }
-
-
-
