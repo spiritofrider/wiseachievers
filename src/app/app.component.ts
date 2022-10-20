@@ -11,7 +11,7 @@ export class AppComponent {
     document.addEventListener("DOMContentLoaded", function () {
       window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
-          if (!document.getElementById("Test_Screen")) {
+          if (!(document.getElementById("Test_Screen")||document.getElementById("Report_Page")||document.getElementById("Graph_Page"))) {
             document.getElementById("navbar_top").classList.add("nav-sticky");
           }
           if (document.getElementById("timer")) {

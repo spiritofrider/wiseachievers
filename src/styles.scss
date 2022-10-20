@@ -6,6 +6,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   background: #ffffff;
@@ -75,33 +76,42 @@ table {
 
 //============= Home/Values (Main Page) styling ===========
 .homeContainer {
+
   h4,
   ul,
   .section2Container,
   .section3Container,
   .section4Container,
-  .section5Container {
+  .section5Container,
+  .section6Container {
     padding-top: 30px;
   }
+
   .section3Container,
   .section4Container,
-  .section5Container {
+  .section5Container,
+  .section6Container {
     padding-top: 30px;
+
     h2 {
       text-align: center;
     }
   }
+
   .section5Paragraphs,
   .valueMessage {
     display: flex;
     align-items: center;
   }
+
   p {
     font-size: 18px;
   }
+
   img {
     width: 100%;
   }
+
   .valuesSVG {
     height: 400px;
   }
@@ -380,15 +390,18 @@ table {
   height: 500px;
   width: 666px;
 }
+
 //*===== gallery ends =======
 
 //*======== mentor styling ========
 .mentor-container {
   .card {
     padding: 10px;
+
     p {
       margin-top: 40px;
     }
+
     h2 {
       color: #0081d6;
       margin-left: 140px;
@@ -402,6 +415,7 @@ table {
 
 .contactContainer {
   padding-top: 80px;
+
   i {
     color: #0081d6;
     font-size: 40px;
@@ -409,6 +423,7 @@ table {
 
   .contactContent {
     text-align: center;
+
     h2 {
       margin-top: 10px;
       font-weight: 500;
@@ -416,6 +431,7 @@ table {
     }
   }
 }
+
 //****************contact page ends ****************
 
 //=============== Admin ===================
@@ -445,10 +461,12 @@ table {
         vertical-align: middle;
         z-index: 5;
       }
+
       tbody {
         tr {
           border: #bbe1f8;
         }
+
         td {
           padding: 6px 10px;
           font-size: 13px;
@@ -461,8 +479,10 @@ table {
           &:nth-child(odd) {
             background: #ffffff;
           }
+
           &:nth-child(even) {
             background: #f2f2f2;
+
             table {
               tr {
                 background-color: #f2fafe;
@@ -516,15 +536,15 @@ table {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #2196f3;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -542,18 +562,22 @@ input:checked + .slider:before {
 //================== Login Container ==================
 
 .modal-content {
+
   //background-image: linear-gradient(to bottom right, #ddeaed69 5.88%, rgba(140, 214, 248, 0.41) 36.55%, #8208fc6b);
   i {
     color: #0081d6;
   }
 }
+
 .login-container {
   margin-top: 5%;
   margin-bottom: 5%;
 }
+
 .login-form-1 {
   padding: 5% 2%;
 }
+
 .login-form-1 h3 {
   text-align: center;
   color: #333;
@@ -562,6 +586,7 @@ input:checked + .slider:before {
 .login-container form {
   padding: 10%;
 }
+
 .btnSubmit {
   width: 100%;
   border-radius: 5px;
@@ -569,6 +594,7 @@ input:checked + .slider:before {
   border: none;
   cursor: pointer;
 }
+
 .login-form-1 .btnSubmit {
   font-weight: 600;
   color: #fff;

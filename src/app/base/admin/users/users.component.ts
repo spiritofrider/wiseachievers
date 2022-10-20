@@ -1,6 +1,8 @@
 import { LocationStrategy } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { CommonService } from "src/app/services/commonservice";
+import * as moment from 'moment';
+import { ReportComponent } from "../report/report.component";
 
 @Component({
   selector: "app-users",
@@ -13,9 +15,11 @@ export class UsersComponent implements OnInit {
   reportInfo: Object;
   graphInfo: Object;
   candidateFullName: string;
+  @ViewChild(ReportComponent,{static:true}) reports: ReportComponent;
   constructor(
     private common: CommonService,
-    private location: LocationStrategy
+    private location: LocationStrategy,
+    private commonService: CommonService
   ) {
     history.pushState(null, null, window.location.href);
     this.location.onPopState(() => {
@@ -31,7 +35,13 @@ export class UsersComponent implements OnInit {
     this.common.getAllUsers().subscribe(
       (user: any) => {
         this.userList = [...user].reverse();
+        this.userList.forEach((user)=>{
+          user['age'] = moment().diff(user['dob'],'years');
+        });
         this.userListCopy = [...user].reverse();
+        this.userListCopy.forEach((user)=>{
+          user['age'] = moment().diff(user['dob'],'years');
+        });
       },
       (error) => {
         this.common.snackBar(error.error, "s");
@@ -74,6 +84,11 @@ export class UsersComponent implements OnInit {
         this.common.snackBar(error.message, "s");
       }
     );
+  }
+  
+
+  downloadAnswerSheet(classId:string) {
+    this.commonService.exportAsPDF(classId);
   }
 
   viewGraph(user) {

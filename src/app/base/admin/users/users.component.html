@@ -40,6 +40,15 @@
               (ChangedData)="filteredData($event)"
             ></filter>
           </th>
+          <th scope="col" id="age">
+            <filter
+              [displayData]="'Age'"
+              [property]="'age'"
+              [mainData]="userList"
+              [mainDataCopy]="userListCopy"
+              (ChangedData)="filteredData($event)"
+            ></filter>
+          </th>
           <th scope="col" id="createdDate">
             <filter
               [displayData]="'Date of Registration'"
@@ -89,6 +98,7 @@
           <td scope="row">{{ user.email }}</td>
           <td scope="row">{{ user.phone }}</td>
           <td scope="row">{{ user.dob | date: "dd MMM yyyy" }}</td>
+          <td scope="row">{{ user.age }}</td>
           <td scope="row">{{ user.createdDate | date: "dd MMM yyyy" }}</td>
           <td scope="row">{{ user.gender }}</td>
           <td scope="row">{{ user.lastExam }}</td>
@@ -123,6 +133,9 @@
 <div class="user-container" *ngIf="reportInfo">
   <button class="btn btn-primary squareButtons" (click)="goBack()">
     Go back
+  </button>
+  <button class="btn btn-primary squareButtons ml-2" (click)="downloadAnswerSheet('Report_Page')">
+    Download Report
   </button>
   <app-report
     [reportInfo]="reportInfo"

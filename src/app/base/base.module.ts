@@ -12,6 +12,7 @@ import { ReviewsComponent } from "./reviews/reviews.component";
 import { MentorsComponent } from "./mentors/mentors.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { Redirection } from "../authentication.guard";
+import { PricingTablesComponent } from './pricing-tables/pricing-tables.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,7 @@ const routes: Routes = [
     MentorsComponent,
     ReviewsComponent,
     ContactUsComponent,
+    PricingTablesComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
