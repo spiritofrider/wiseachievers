@@ -39,7 +39,7 @@
     "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "ng2-charts": "^3.0.8",
-    "ngx-bootstrap": "^5.5.0",
+    "ngx-bootstrap": "^6.5.0",
     "ngx-cookie-service": "^13.1.2",
     "ngx-ui-loader": "^1.1.9",
     "rxjs": "~6.6.0",
