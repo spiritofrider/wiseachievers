@@ -11,13 +11,13 @@ export class TestService {
 
   getTest1Questionlist(testNo) {
     return this.httpClient.get(
-      environment.baseTestUrlNode + CONSTOBJ["test"]["getTest1List"] + testNo
+      environment.baseTestUrlNodeRender + CONSTOBJ["test"]["getTest1List"] + testNo
     );
   }
 
   storeTestApi(body) {
     return this.httpClient.post(
-      environment.baseCalculationUrl + CONSTOBJ["test"]["storeTest"],
+      environment.baseCalculationUrlRender + CONSTOBJ["test"]["storeTest"],
       body
     );
   }

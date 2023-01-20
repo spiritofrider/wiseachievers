@@ -16,40 +16,40 @@ export class CommonService {
 
   getAllUsers() {
     return this.httpClient.get(
-      environment.baseUrlNode + CONSTOBJ["admin"]["getAllUsers"]
+      environment.baseUrlNodeRender + CONSTOBJ["admin"]["getAllUsers"]
     );
   }
 
   editUsers(id, body) {
     return this.httpClient.put(
-      environment.baseUrlNode + CONSTOBJ["admin"]["editUser"] + id,
+      environment.baseUrlNodeRender + CONSTOBJ["admin"]["editUser"] + id,
       body
     );
   }
 
   loginUser(formbody) {
     return this.httpClient.post(
-      environment.baseUrlNode + CONSTOBJ["login"],
+      environment.baseUrlNodeRender + CONSTOBJ["login"],
       formbody
     );
   }
 
   registerUser(formbody) {
     return this.httpClient.post(
-      environment.baseUrlNode + CONSTOBJ["register"],
+      environment.baseUrlNodeRender + CONSTOBJ["register"],
       formbody
     );
   }
 
   testUserStatus(userId) {
     return this.httpClient.get(
-      environment.baseUrlNode + CONSTOBJ["testStatus"] + userId
+      environment.baseUrlNodeRender + CONSTOBJ["testStatus"] + userId
     );
   }
 
   viewReport(userId) {
     return this.httpClient.get(
-      environment.baseCalculationUrl + CONSTOBJ["admin"]["viewReports"] + userId
+      environment.baseCalculationUrlRender + CONSTOBJ["admin"]["viewReports"] + userId
     );
   }
 
