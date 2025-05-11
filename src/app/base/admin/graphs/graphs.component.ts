@@ -249,11 +249,7 @@ export class GraphsComponent implements OnInit {
           },
         },
       },
-      yAxis: {
-        title: {
-          text: null,
-        },
-      },
+      yAxis: this.setYAxisForBarChart(id),
       series: [
         {
           type: "column",
@@ -262,6 +258,23 @@ export class GraphsComponent implements OnInit {
         },
       ],
     });
+  }
+
+  setYAxisForBarChart(id: string) {
+    if (id === "barContainerAptitude") {
+      return {
+        min: 0,
+        max: 15,
+        title: {
+          text: null,
+        },
+      };
+    }
+    return {
+      title: {
+        text: null,
+      },
+    };
   }
 
   downloadCanvas(event) {
