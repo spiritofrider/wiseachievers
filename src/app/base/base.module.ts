@@ -13,6 +13,7 @@ import { MentorsComponent } from "./mentors/mentors.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { Redirection } from "../authentication.guard";
 import { PricingTablesComponent } from './pricing-tables/pricing-tables.component';
+import { NewAICareersComponent } from '../new-aicareers/new-aicareers.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
         component: ContactUsComponent,
       },
       {
+        path: "new-ai-careers",
+        component: NewAICareersComponent
+      },
+      {
         path: "test",
         loadChildren: () =>
           import("./test/test.module").then((mod) => mod.TestModule),
@@ -84,6 +89,7 @@ const routes: Routes = [
     ReviewsComponent,
     ContactUsComponent,
     PricingTablesComponent,
+    NewAICareersComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

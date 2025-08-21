@@ -1,66 +1,167 @@
 <div class="navbar navbar-expand-lg bg-dark navbar-dark" id="navbar_top">
   <div class="container-fluid">
-  <span><img src="assets/eagle.png" alt="Eagle Logo" class="logoImage"></span>
-  <span class="logoText"><h4 class=""><strong>Wise Achievers</strong></h4></span>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+    <span
+      ><img src="assets/eagle.png" alt="Eagle Logo" class="logoImage"
+    /></span>
+    <span class="logoText"
+      ><h4 class=""><strong>Wise Achievers</strong></h4></span
+    >
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-          <div class="navbar-nav ml-auto">
-              <a  class="nav-item nav-link " href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/home')}" routerLinkActive="active" [routerLink]="['home']" *ngIf="!isActive ">Home</a>
-              <a  class="nav-item nav-link"href="javascript:;"[ngClass]="{'activeRoute': getActiveRoutes('/values')}" [routerLink]="['values']" routerLinkActive="active" *ngIf="!isActive ">Our Values</a>
-              <a  class="nav-item nav-link" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/gallery')}" [routerLink]="['gallery']"   routerLinkActive="active" *ngIf="!isActive ">Gallery</a>
-              <a  class="nav-item nav-link" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/test')}" [routerLink]="['test']"   routerLinkActive="active" *ngIf="admin  || isActive ">Tests</a>
-              <a  class="nav-item nav-link" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/mentor')}" [routerLink]="['mentor']"   routerLinkActive="active" *ngIf="!isActive ">Mentor</a>
-              <a class="nav-item nav-link " href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/reviews')}" [routerLink]="['reviews']"   routerLinkActive="active" *ngIf="!isActive">Reviews</a>
-              <a  class="nav-item nav-link" href="javascript:;"  *ngIf="isActive  && !admin">Add Reviews</a>
-              <a  class="nav-item nav-link" href="javascript:;" >Blog</a>
-              <a  class="nav-item nav-link" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/contact')}" [routerLink]="['contact']"   routerLinkActive="active"  *ngIf="!isActive">Contact Us</a>
-              <a  class="nav-item nav-link" href="javascript:;" [ngClass]="{'activeRoute': getActiveRoutes('/admin')}" [routerLink]="['admin']"   routerLinkActive="active" *ngIf="admin">View Users</a>
-              <a  class="nav-item nav-link" href="javascript:;"  *ngIf="!token" (click)="openLoginModal()">Sign-In</a>
-              <a  class="nav-item nav-link" href="javascript:;"  *ngIf="!token" (click)="openSignupModal()">Sign-Up</a>
-              <div class="nav-item dropdown" *ngIf="token">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
-                <div class="dropdown-menu">
-                    <a href="javascript:;" class="dropdown-item" style="font-family: 'Lucida Console', cursive;">{{username}}</a>
-                    <a href="javascript:;" class="dropdown-item" (click)="logout()">Sign-Out</a>
-                </div>
-            </div>
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarCollapse"
+    >
+      <div class="navbar-nav ml-auto">
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/home') }"
+          routerLinkActive="active"
+          [routerLink]="['home']"
+          (click)="closeMobileNavBar()"
+          *ngIf="!isActive"
+          >Home</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/values') }"
+          [routerLink]="['values']"
+          routerLinkActive="active"
+          *ngIf="!isActive"
+                    (click)="closeMobileNavBar()"
 
+          >Our Values</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/gallery') }"
+          [routerLink]="['gallery']"
+          routerLinkActive="active"
+          *ngIf="!isActive"
+                    (click)="closeMobileNavBar()"
 
-          </div>
-      </div>
-  </div>
-</div>
+          >Gallery</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/test') }"
+          [routerLink]="['test']"
+          routerLinkActive="active"
+          *ngIf="admin || isActive"
+                    (click)="closeMobileNavBar()"
 
-<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Contact Us</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card" style="width: 18rem; margin-left: 85px;">
-          <div class="card-body">
-            <h5 class="card-title" style="text-align: center;">Phone: <a href="https://wa.me/9819439307" target="_blank" rel="noopener noreferrer">9819439307</a></h5>
+          >Tests</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/mentor') }"
+          [routerLink]="['mentor']"
+          routerLinkActive="active"
+                    (click)="closeMobileNavBar()"
+
+          *ngIf="!isActive"
+          >Mentor</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/reviews') }"
+          [routerLink]="['reviews']"
+          routerLinkActive="active"
+                    (click)="closeMobileNavBar()"
+
+          *ngIf="!isActive"
+          >Reviews</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+                    (click)="closeMobileNavBar()"
+
+          *ngIf="isActive && !admin"
+          >Add Reviews</a
+        >
+        <div class="nav-item dropdown">
+          <a
+            href="javascript:;"
+            class="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            data-bs-toggle="dropdown"
+            
+            >Resources</a
+          >
+          <div class="dropdown-menu">
+            <a
+              class="dropdown-item"
+              [routerLink]="['new-ai-careers']"
+                        (click)="closeMobileNavBar()"
+
+              >New AI Careers</a
+            >
           </div>
         </div>
-      </div>
-      <div class="modal-body">
-        <div class="card" style="width: 22rem; margin-left: 52px;">
-          <div class="card-body">
-            <h5 class="card-title" style="text-align: center;">Email: wiseachievers1@gmail.com</h5>
-          </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="card" style="width: 18rem; margin-left: 92px;">
-          <div class="card-body">
-            <h5 class="card-title" style="text-align: center;">Address: <a href="https://www.google.com/maps/place/Om+Chaitanya+Co-op+Housing+Soceity/@19.2808503,72.8666072,19.17z/data=!4m5!3m4!1s0x0:0xc59361491bbfbfe2!8m2!3d19.2812043!4d72.8667254" target="_blank" rel="noopener noreferrer">503/504, Om Chaitanya, Shanti Park, Mira Road (E) Thane 401107 Maharashtra India</a></h5>
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/contact') }"
+          [routerLink]="['contact']"
+          routerLinkActive="active"
+          *ngIf="!isActive"
+                    (click)="closeMobileNavBar()"
+
+          >Contact Us</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/admin') }"
+          [routerLink]="['admin']"
+          routerLinkActive="active"
+          *ngIf="admin"
+                    (click)="closeMobileNavBar()"
+
+          >View Users</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          *ngIf="!token"
+          (click)="openLoginModal()"
+          >Sign-In</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          *ngIf="!token"
+          (click)="openSignupModal()"
+          >Sign-Up</a
+        >
+        <div class="nav-item dropdown" *ngIf="token">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+            ><i class="fa fa-user"></i
+          ></a>
+          <div class="dropdown-menu">
+            <a
+              href="javascript:;"
+              class="dropdown-item"
+              style="font-family: 'Lucida Console', cursive"
+              >{{ username }}</a
+            >
+            <a href="javascript:;" class="dropdown-item" (click)="logout()"
+              >Sign-Out</a
+            >
           </div>
         </div>
       </div>
@@ -68,4 +169,67 @@
   </div>
 </div>
 
-
+<div
+  class="modal fade"
+  id="contactModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="contactModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Contact Us</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="width: 18rem; margin-left: 85px">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Phone:
+              <a
+                href="https://wa.me/9819439307"
+                target="_blank"
+                rel="noopener noreferrer"
+                >9819439307</a
+              >
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="width: 22rem; margin-left: 52px">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Email: wiseachievers1@gmail.com
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="width: 18rem; margin-left: 92px">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Address:
+              <a
+                href="https://www.google.com/maps/place/Om+Chaitanya+Co-op+Housing+Soceity/@19.2808503,72.8666072,19.17z/data=!4m5!3m4!1s0x0:0xc59361491bbfbfe2!8m2!3d19.2812043!4d72.8667254"
+                target="_blank"
+                rel="noopener noreferrer"
+                >503/504, Om Chaitanya, Shanti Park, Mira Road (E) Thane 401107
+                Maharashtra India</a
+              >
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

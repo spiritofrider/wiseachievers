@@ -1,3 +1,4 @@
+/* Existing styles (unchanged, included for context) */
 .navbar {
   position: relative;
   transition: 0.5s;
@@ -36,17 +37,11 @@
 
 .navbar .navbar-brand {
   margin: 0;
-  //color: #ffffff;
   font-size: 45px;
   line-height: 0px;
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
-}
-
-.navbar .navbar-brand img {
-  max-width: 100%;
-  max-height: 40px;
 }
 
 .navbar-dark .navbar-nav .nav-link,
@@ -55,7 +50,6 @@
 .navbar-dark .navbar-nav .nav-link.active {
   padding: 10px 15px 8px 15px;
   color: black;
-  //color: #ffffff;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
@@ -106,19 +100,12 @@
   color: #0062cc;
 }
 
-.navbar .dropdown-menu {
-  margin-top: 0;
-  border: 0;
-  border-radius: 0;
-  background: #f8f9fa;
-  left: -45px;
-}
-
 .logoImage {
   width: 70px;
   height: 70px;
 }
 
+/* Modified and new styles for mobile view */
 @media (max-width: 991.98px) {
   .navbar {
     padding: 15px;
@@ -131,18 +118,16 @@
   }
 
   .navbar a.nav-link {
-    padding: 5px;
+    padding: 10px 15px; /* Increased padding for better tap target size */
+    font-size: 16px; /* Ensure readable font size */
+    color: #ffffff; /* Consistent text color for mobile */
   }
 
-  .navbar .dropdown-menu {
-    box-shadow: none;
-  }
   .navbar-dark .navbar-nav .nav-link,
   .navbar-dark .navbar-nav .nav-link:focus,
   .navbar-dark .navbar-nav .nav-link:hover,
   .navbar-dark .navbar-nav .nav-link.active {
-    padding: 10px 15px 8px 15px;
-    //color:black
+    padding: 10px 15px;
     color: #ffffff;
   }
 
@@ -150,5 +135,30 @@
   .navbar-dark .navbar-nav .nav-link.active {
     color: #0062cc;
     transition: none;
+  }
+
+  .navbar .dropdown-menu {
+    box-shadow: none;
+    background: #20212b; /* Match navbar background for seamless look */
+    border: none; /* Remove border for cleaner mobile appearance */
+    width: 100%; /* Full width for better fit */
+    left: 0; /* Remove the -45px offset for mobile */
+  }
+
+  .navbar .dropdown-menu .dropdown-item {
+    color: #ffffff; /* White text for dropdown items */
+    padding: 10px 20px; /* Larger tap target for mobile */
+    font-size: 16px; /* Readable font size */
+  }
+
+  .navbar .dropdown-menu .dropdown-item:hover,
+  .navbar .dropdown-menu .dropdown-item:focus {
+    background: #0062cc; /* Highlight background on hover/tap */
+    color: #ffffff; /* Keep text white */
+  }
+
+  .navbar .dropdown-menu .dropdown-item.active {
+    background: #004a99; /* Slightly darker shade for active state */
+    color: #ffffff;
   }
 }

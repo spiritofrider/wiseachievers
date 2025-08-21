@@ -1,33 +1,227 @@
-
-<div style="text-align: center;">
+<div class="review-section">
+  <div class="header">
     <h2>See what our clients have to say about us.</h2>
-</div>
-<div style="float: left;">
-<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel" style="margin-left: 300px; margin-top: 20px;">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="card" style="width:760px;">
-            <div class="card-header">
-              Review
-            </div>
+  </div>
+  <div class="carousel-container">
+    <div
+      id="carouselExampleControls"
+      class="carousel slide carousel-fade"
+      data-ride="carousel"
+      data-touch="true"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="card">
+            <div class="card-header">Review</div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
-                <p>My son is in 8th Grade. And we took Thomas sir counseling for subject selection and career guidance. . His insight and knowledge boast positivity in my child. He counseling helped us to take our decision with confidence.</p>
-                <br>
-                <footer class="blockquote-footer">Meghal Shah 14/06/2021</footer> 
+                <p>
+                  My son is in 8th Grade. And we took Thomas sir counseling for
+                  subject selection and career guidance. His insight and
+                  knowledge boast positivity in my child. He counseling helped
+                  us to take our decision with confidence.
+                </p>
+                <br />
+                <footer class="blockquote-footer">
+                  Meghal Shah 14/06/2021
+                </footer>
               </blockquote>
             </div>
+          </div>
         </div>
       </div>
+      <!-- <a
+        class="carousel-control-prev"
+        href="#carouselExampleControls"
+        role="button"
+        data-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleControls"
+        role="button"
+        data-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a> -->
     </div>
-    <a class="carousel-control-prev" style="margin-left: -76px; width: 65px;" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span style="background-color: black;" class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
-    <a class="carousel-control-next" style="margin-right: -76px; width: 65px;" href="#carouselExampleControls" role="button" data-slide="next">
-      <span style="background-color: black;" class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
+  </div>
 </div>
-</div> 
 
+<style>
+.review-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 20px auto 0;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 100%;
+}
+
+.carousel-inner {
+  width: 100%;
+  overflow: hidden;
+}
+
+.card {
+  width: 760px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.blockquote p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.blockquote-footer {
+  font-size: 0.9rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 65px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-control-prev {
+  margin-left: -76px;
+}
+
+.carousel-control-next {
+  margin-right: -76px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  padding: 20px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .review-section {
+    padding: 10px;
+  }
+
+  .header h2 {
+    font-size: 1.5rem; /* Smaller header text for mobile */
+  }
+
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .card {
+    width: 100%; /* Full width for mobile */
+    max-width: 100%;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 40px; /* Smaller controls for mobile */
+  }
+
+  .carousel-control-prev {
+    margin-left: -40px;
+  }
+
+  .carousel-control-next {
+    margin-right: -40px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 12px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .blockquote p {
+    font-size: 1rem; /* Slightly smaller text for mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .header h2 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 30px;
+  }
+
+  .carousel-control-prev {
+    margin-left: -30px;
+  }
+
+  .carousel-control-next {
+    margin-right: -30px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 8px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .blockquote p {
+    font-size: 0.9rem;
+  }
+
+  .blockquote-footer {
+    font-size: 0.8rem;
+  }
+}
+
+/* Prevent page-wide overflow */
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+</style>

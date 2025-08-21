@@ -1,6 +1,5 @@
-
-<div class="galleryContainer container" >
-<div id="carouselExampleControls" class="carousel slide carousel-fade mat-elevation-z8" data-ride="carousel" >
+<div class="galleryContainer">
+  <div id="carouselExampleControls" class="carousel slide carousel-fade mat-elevation-z8" data-ride="carousel" data-touch="true">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img class="d-block w-100" src="assets/slide1.jpg" alt="First slide">
@@ -13,12 +12,107 @@
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span style="background-color: black;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span style="background-color: black;" class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+  </div>
 </div>
-</div>
+
+<style>
+.galleryContainer {
+  width: 100%;
+  max-width: 1200px; /* Constrain max width */
+  margin: 0 auto; /* Center container */
+  padding: 20px;
+  box-sizing: border-box; /* Prevent padding from causing overflow */
+  overflow-x: hidden; /* Explicitly prevent x-axis overflow */
+}
+
+.carousel {
+  width: 100%;
+  max-width: 100%; /* Ensure carousel doesn't exceed container */
+  margin: 0 auto;
+}
+
+.carousel-inner {
+  width: 100%;
+  overflow: hidden; /* Prevent inner content from overflowing */
+}
+
+.carousel-inner img {
+  object-fit: cover;
+  height: 500px;
+  width: 100%;
+  max-width: 100%; /* Ensure image doesn't exceed container */
+  display: block; /* Remove any inline-block spacing issues */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 15%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  padding: 20px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .galleryContainer {
+    padding: 10px;
+  }
+
+  .carousel-inner img {
+    height: 300px; /* Reduced height for mobile */
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 10%; /* Smaller control areas for mobile */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 15px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-inner img {
+    height: 200px; /* Further reduced height for smaller screens */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 10px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Ensure viewport meta tag is respected */
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevent page-wide overflow */
+  }
+}
+</style>

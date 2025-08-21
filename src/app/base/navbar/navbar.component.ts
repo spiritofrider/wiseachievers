@@ -93,4 +93,12 @@ export class NavbarComponent implements OnInit {
         keyboard: false
       })
     }
+
+    closeMobileNavBar() {
+      // Select the navbar collapse element and the toggler button
+      const navbarCollapse = document.querySelector('#navbarCollapse');
+      const togglerButton = document.querySelector('.navbar-toggler');
+      navbarCollapse.classList.remove('show');
+      togglerButton.setAttribute('aria-expanded', 'false');
+    }
 }
