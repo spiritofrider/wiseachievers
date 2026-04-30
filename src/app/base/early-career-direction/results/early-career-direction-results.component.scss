@@ -1,0 +1,69 @@
+.results-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 6rem);
+}
+
+.results-card {
+  width: 100%;
+  max-width: 640px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 45px rgba(18, 52, 77, 0.1);
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: #0081d6;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: #17354d;
+}
+
+.results-copy {
+  margin-bottom: 1.5rem;
+  color: #557084;
+  line-height: 1.8;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #17354d;
+  font-weight: 600;
+}
+
+.form-control {
+  height: 48px;
+  border-radius: 12px;
+}
+
+.submit-button {
+  margin-top: 1rem;
+  min-width: 160px;
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  color: #b42318;
+  font-weight: 600;
+}
+
+.success-message {
+  margin-top: 1rem;
+  color: #1d6f42;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .results-card {
+    padding: 2rem 1.25rem;
+  }
+}

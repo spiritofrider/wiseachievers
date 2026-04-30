@@ -1,0 +1,15 @@
+<section class="landing-page">
+  <div class="content-card">
+    <p class="eyebrow">Early Career Direction</p>
+    <h1>{{ assessmentTitle || "Find your next career move with more clarity." }}</h1>
+    <p class="placeholder-copy">
+      {{
+        assessmentDescription ||
+          "This is a placeholder paragraph for young professionals who want to change careers or improve their existing career path with clearer direction and stronger decision-making support."
+      }}
+    </p>
+    <button class="btn btn-primary cta-button" (click)="startTest()">
+      Take the Test
+    </button>
+  </div>
+</section>

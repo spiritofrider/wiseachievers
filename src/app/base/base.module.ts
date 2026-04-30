@@ -55,6 +55,13 @@ const routes: Routes = [
         component: NewAICareersComponent
       },
       {
+        path: "early-career-direction",
+        loadChildren: () =>
+          import("./early-career-direction/early-career-direction.module").then(
+            (mod) => mod.EarlyCareerDirectionModule
+          ),
+      },
+      {
         path: "test",
         loadChildren: () =>
           import("./test/test.module").then((mod) => mod.TestModule),

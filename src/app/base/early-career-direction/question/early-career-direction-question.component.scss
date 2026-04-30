@@ -1,0 +1,79 @@
+.question-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 6rem);
+}
+
+.question-card {
+  width: 100%;
+  max-width: 720px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 45px rgba(18, 52, 77, 0.1);
+}
+
+.step-label {
+  margin-bottom: 0.5rem;
+  color: #0081d6;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: #17354d;
+}
+
+.question-copy {
+  margin-bottom: 1.5rem;
+  color: #17354d;
+  line-height: 1.7;
+  font-size: 1.2rem;
+}
+
+.assessment-description {
+  margin-bottom: 2rem;
+  color: #557084;
+  line-height: 1.8;
+}
+
+.scale-options {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.scale-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d7e3ec;
+  border-radius: 14px;
+  background: #f9fbfc;
+  color: #28495f;
+  cursor: pointer;
+}
+
+.scale-option input {
+  accent-color: #0081d6;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .question-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

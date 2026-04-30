@@ -1,0 +1,13 @@
+.early-career-direction-shell {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  background:
+    radial-gradient(circle at top left, rgba(0, 129, 214, 0.14), transparent 30%),
+    linear-gradient(180deg, #f7fbff 0%, #eef5f9 100%);
+}
+
+@media (max-width: 767px) {
+  .early-career-direction-shell {
+    padding-top: 1rem;
+  }
+}

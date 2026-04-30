@@ -1,0 +1,53 @@
+<section class="question-page">
+  <div class="question-card" *ngIf="assessment && currentQuestion">
+    <p class="step-label">
+      Question {{ questionNumber }} of {{ assessment.questions.length }}
+    </p>
+    <h2>{{ assessment.title }}</h2>
+    <p class="assessment-description">{{ assessment.description }}</p>
+    <p class="question-copy">{{ currentQuestion.question }}</p>
+
+    <div class="scale-options">
+      <label
+        class="scale-option"
+        *ngFor="let scaleValue of assessment.scale"
+        [attr.for]="'question-' + currentQuestion.id + '-' + scaleValue"
+      >
+        <input
+          type="radio"
+          [id]="'question-' + currentQuestion.id + '-' + scaleValue"
+          [name]="'question-' + currentQuestion.id"
+          [value]="scaleValue"
+          [checked]="selectedAnswers[currentQuestion.id] === scaleValue"
+          (change)="saveAnswer(scaleValue)"
+        />
+        <span>{{ scaleValue }}</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button
+        class="btn btn-outline-primary"
+        (click)="goToPreviousQuestion()"
+        [disabled]="isFirstQuestion()"
+      >
+        Previous Question
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="goToNextQuestion()"
+        *ngIf="!isLastQuestion()"
+      >
+        Next Question
+      </button>
+      <button
+        class="btn btn-success"
+        (click)="submitTest()"
+        *ngIf="isLastQuestion()"
+        [disabled]="!hasAnsweredCurrentQuestion()"
+      >
+        Submit Test
+      </button>
+    </div>
+  </div>
+</section>
