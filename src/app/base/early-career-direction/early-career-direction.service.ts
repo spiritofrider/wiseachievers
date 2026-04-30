@@ -35,7 +35,7 @@ export interface EarlyCareerDirectionSubmissionPayload {
 })
 export class EarlyCareerDirectionService {
   private readonly assessment: EarlyCareerDirectionAssessment = {
-    title: "Career Guidance Assessment (3-5 Years Experience)",
+    title: "Career Guidance Assessment",
     description:
       "Assessment for young professionals with 3-5 years of work experience to evaluate career clarity, growth, and satisfaction.",
     scale: [
