@@ -16,6 +16,7 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
   questionNumber = 1;
   assessment: EarlyCareerDirectionAssessment | null = null;
   currentQuestion: EarlyCareerDirectionQuestion | null = null;
+  currentQuestionOptions: string[] = [];
   selectedAnswers: { [questionId: number]: string } = {};
 
   constructor(
@@ -35,7 +36,7 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
   }
 
   goToNextQuestion(): void {
-    if (this.isLastQuestion()) {
+    if (this.isLastQuestion() || !this.hasAnsweredCurrentQuestion()) {
       return;
     }
 
@@ -118,10 +119,8 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
         : routeQuestionNumber;
 
     this.questionNumber = safeQuestionNumber;
-    this.currentQuestion =
-      this.assessment.questions.find(
-        (question) => question.id === safeQuestionNumber
-      ) || this.assessment.questions[0];
+    this.currentQuestion = this.assessment.questions[safeQuestionNumber - 1];
+    this.currentQuestionOptions = this.getQuestionOptions(this.currentQuestion);
 
     if (safeQuestionNumber !== routeQuestionNumber) {
       this.router.navigate([
@@ -129,5 +128,11 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
         `early-career-direction-question-${safeQuestionNumber}`,
       ]);
     }
+  }
+
+  private getQuestionOptions(question: EarlyCareerDirectionQuestion): string[] {
+    return question.options && question.options.length
+      ? question.options
+      : this.assessment?.scale || [];
   }
 }

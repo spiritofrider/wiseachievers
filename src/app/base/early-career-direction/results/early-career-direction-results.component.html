@@ -34,4 +34,33 @@
       Your request has been captured. Check the console for the payload.
     </p>
   </div>
+
+  <div
+    class="resubmission-alert-backdrop"
+    *ngIf="showResubmissionAlert"
+    role="presentation"
+  >
+    <div
+      class="resubmission-alert"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="resubmission-alert-title"
+    >
+      <p class="alert-eyebrow">Form Resubmission Alert</p>
+      <h3 id="resubmission-alert-title">Do you want to restart the test?</h3>
+      <p>
+        Going back to the questions after submitting may require a fresh
+        response. Choose No to stay on this page, or Yes to return to the
+        starting page.
+      </p>
+      <div class="alert-actions">
+        <button class="btn btn-outline-primary" (click)="stayOnResults()">
+          No
+        </button>
+        <button class="btn btn-primary" (click)="returnToLanding()">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
 </section>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, UrlTree } from "@angular/router";
+import { Observable, Subject } from "rxjs";
 import { EarlyCareerDirectionService } from "../early-career-direction.service";
 
 @Component({
@@ -12,6 +13,9 @@ export class EarlyCareerDirectionResultsComponent implements OnInit {
   submitted = false;
   submissionExists = false;
   emailTouched = false;
+  showResubmissionAlert = false;
+  private allowLandingNavigation = false;
+  private pendingNavigation: Subject<boolean | UrlTree> | null = null;
   private readonly emailPattern =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
 
@@ -56,7 +60,44 @@ export class EarlyCareerDirectionResultsComponent implements OnInit {
     return this.emailTouched && !this.isValidEmail();
   }
 
+  confirmResubmissionNavigation(): boolean | Observable<boolean | UrlTree> {
+    if (!this.submissionExists || this.allowLandingNavigation) {
+      return true;
+    }
+
+    if (this.pendingNavigation) {
+      return this.pendingNavigation.asObservable();
+    }
+
+    this.showResubmissionAlert = true;
+    this.pendingNavigation = new Subject<boolean | UrlTree>();
+    return this.pendingNavigation.asObservable();
+  }
+
+  stayOnResults(): void {
+    this.showResubmissionAlert = false;
+    this.resolvePendingNavigation(false);
+  }
+
+  returnToLanding(): void {
+    this.allowLandingNavigation = true;
+    this.showResubmissionAlert = false;
+    this.resolvePendingNavigation(
+      this.router.parseUrl("/base/early-career-direction")
+    );
+  }
+
   private isValidEmail(): boolean {
     return this.emailPattern.test(this.email.trim());
+  }
+
+  private resolvePendingNavigation(result: boolean | UrlTree): void {
+    if (!this.pendingNavigation) {
+      return;
+    }
+
+    this.pendingNavigation.next(result);
+    this.pendingNavigation.complete();
+    this.pendingNavigation = null;
   }
 }

@@ -62,8 +62,58 @@ h2 {
   font-weight: 600;
 }
 
+.resubmission-alert-backdrop {
+  position: fixed;
+  z-index: 1050;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(23, 53, 77, 0.48);
+}
+
+.resubmission-alert {
+  width: 100%;
+  max-width: 460px;
+  padding: 2rem;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(18, 52, 77, 0.24);
+}
+
+.alert-eyebrow {
+  margin-bottom: 0.5rem;
+  color: #b42318;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resubmission-alert h3 {
+  margin-bottom: 0.75rem;
+  color: #17354d;
+}
+
+.resubmission-alert p {
+  color: #557084;
+  line-height: 1.7;
+}
+
+.alert-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
 @media (max-width: 767px) {
   .results-card {
     padding: 2rem 1.25rem;
+  }
+
+  .alert-actions {
+    flex-direction: column-reverse;
   }
 }

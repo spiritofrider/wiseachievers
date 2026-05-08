@@ -4,13 +4,16 @@
       Question {{ questionNumber }} of {{ assessment.questions.length }}
     </p>
     <h2>{{ assessment.title }}</h2>
-    <p class="assessment-description">{{ assessment.description }}</p>
+    <blockquote class="question-quote">
+      <p>{{ currentQuestion.quote }}</p>
+      <cite>{{ currentQuestion.quoteAuthor }}</cite>
+    </blockquote>
     <p class="question-copy">{{ currentQuestion.question }}</p>
 
     <div class="scale-options">
       <label
         class="scale-option"
-        *ngFor="let scaleValue of assessment.scale"
+        *ngFor="let scaleValue of currentQuestionOptions"
         [attr.for]="'question-' + currentQuestion.id + '-' + scaleValue"
       >
         <input
@@ -37,6 +40,7 @@
         class="btn btn-primary"
         (click)="goToNextQuestion()"
         *ngIf="!isLastQuestion()"
+        [disabled]="!hasAnsweredCurrentQuestion()"
       >
         Next Question
       </button>

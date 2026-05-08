@@ -11,6 +11,7 @@ import {
 import { EarlyCareerDirectionLandingComponent } from "./landing/early-career-direction-landing.component";
 import { EarlyCareerDirectionQuestionComponent } from "./question/early-career-direction-question.component";
 import { EarlyCareerDirectionResultsComponent } from "./results/early-career-direction-results.component";
+import { EarlyCareerDirectionResultsGuard } from "./results/early-career-direction-results.guard";
 import { EarlyCareerDirectionShellComponent } from "./shell/early-career-direction-shell.component";
 
 export function earlyCareerDirectionQuestionMatcher(
@@ -54,6 +55,7 @@ const routes: Routes = [
       {
         path: "results",
         component: EarlyCareerDirectionResultsComponent,
+        canDeactivate: [EarlyCareerDirectionResultsGuard],
       },
       questionRoute,
       {
