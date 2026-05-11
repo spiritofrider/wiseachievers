@@ -49,187 +49,188 @@ export class EarlyCareerDirectionService {
       "Strongly Agree",
     ],
     questions: [
-  {
-    id: 1,
-    question:
-      "Have I clearly defined my career goals and the strategy needed to achieve them?",
-    quote: "If one does not know to which port one is sailing, no wind is favorable.",
-    quoteAuthor: "Seneca",
-    options: [
-      "My goals are clear and I know how to achieve them",
-      "My goals are clear but I do not have a strategy yet",
-      "I have not set clear goals yet",
+      {
+        id: 1,
+        question:
+          "Goal setting is a madatory and important aspect for success in your career.",
+        quote: "The future depends on what you do today.",
+        quoteAuthor: "Mahatma Gandhi",
+        options: [
+          "I have set all my goals and am clear about achieveing them",
+          "I have set my goals but have no stratergy in place to achieve them",
+          "I have not set any goals as I do not understand how by just setting a goal it will help me in achieving it. ",
+        ],
+      },
+      {
+        id: 2,
+        question:
+          "Without focus it is futile to try to achieve success in any career",
+        quote: "Concentrate all your thoughts upon the work in hand.",
+        quoteAuthor: "Alexander Graham Bell",
+        options: [
+          "Focus comes eaisly to me and I am totally focused in my career",
+          "I understand focus but am not able to achieve the required level of focus in my career",
+          "What is focus, Why do I need focus and how do I achieve it",
+        ],
+      },
+      {
+        id: 3,
+        question:
+          "The ability to take risk is directly propotional to success in your career. Often misunderstood to be a trait you have to be born with but is not so.",
+        quote: "Life is either a daring adventure or nothing.",
+        quoteAuthor: "Helen Keller",
+        options: [
+          "I know what is risk taking and most of the time I come out winners",
+          "I respect courage but am afraid to take major risk",
+          "I do not believe in taking any risk as I am afraid of the consequences",
+        ],
+      },
+      {
+        id: 4,
+        question:
+          "Criticism if not handled correctly is the fastest route to the destruction of your career",
+        quote: "Criticism may not be agreeable, but it is necessary.",
+        quoteAuthor: "Winston Churchill",
+        options: [
+          "I can handle criticism very well. It is not an issue I face",
+          "I am aware of the need to face criticism but am afraid of it's destructive power",
+          "I work in such ways that I do not give anybody an oppurtunity to criticise me at all",
+        ],
+      },
+      {
+        id: 5,
+        question:
+          "In personal life as well as in any career, confidence is the key word between success and failure.",
+        quote: "Believe you can and you're halfway there.",
+        quoteAuthor: "Theodore Roosevelt",
+        options: [
+          "I could call myself a confident person in many aspects",
+          "My confidence is with me most of the time, but sometimes is lost when I need it most",
+          "Confidence is something I lack.",
+        ],
+      },
+      {
+        id: 6,
+        question:
+          "Qualifications, Experience, Expertise is the name of the game. This is the key that opens doors",
+        quote: "An investment in knowledge pays the best interest.",
+        quoteAuthor: "Benjamin Franklin",
+        options: [
+          "I am well qualified and experienced for my work",
+          "I am sufficiently qualified and experienced but am not going anywhere in my career",
+          "I need more qualification and experience for the work which I am doing",
+        ],
+      },
+      {
+        id: 7,
+        question:
+          "Relevant hard and soft skills are required for chosen work area. May or may not be related to qualifications and experience",
+        quote: "The expert in anything was once a beginner.",
+        quoteAuthor: "Helen Hayes",
+        options: [
+          "I am a skilled individual and use my skills for my work",
+          "I realise the importance of skills and am working at obtaining more skills required for my work",
+          "I lack the required hard and soft skills for my work",
+        ],
+      },
+      {
+        id: 8,
+        question:
+          "Worthiness of self is often underestimated. Persons lacking self worth may find work difficult in a team. Lack of self worth can severly retard the ability to delegate work.",
+        quote: "No one can make you feel inferior without your consent.",
+        quoteAuthor: "Eleanor Roosevelt",
+        options: [
+          "I consider my self a worthy person",
+          "Self worth is very important. I am looking for areas on how to improve my self worth",
+          "I lack self worth",
+        ],
+      },
+      {
+        id: 9,
+        question:
+          "Being passionate about what you are doing is of utmost importance otherwise it could be said that you are in the wrong career",
+        quote: "The only way to do great work is to love what you do.",
+        quoteAuthor: "Steve Jobs",
+        options: [
+          "I abosolutely enjoy my work. I am in a career which is the right one for me",
+          "I enjoy some aspects of my work and hate some aspects",
+          "I have no liking for the work that I have to do for my income",
+        ],
+      },
+      {
+        id: 10,
+        question:
+          "Clear distintive line should be defined between positive ambition and blind ambition.  Blind ambition creates a feel good emotion but can lead to severe loss",
+        quote: "A man's worth is no greater than his ambitions.",
+        quoteAuthor: "Marcus Aurelius",
+        options: [
+          "I am an ambitious person. I think ambition is required for any sort of achievement. ",
+          "I have some ambition but I not sure how to channalise it",
+          "I lack any sort of ambition. I am happy with what I am, where I am and what income I get out of it.  ",
+        ],
+      },
+      {
+        id: 11,
+        question:
+          "The importance of partical foresight can never be underestimated. Without that you may be moving in a blind alley. ",
+        quote: "The best way to predict the future is to create it.",
+        quoteAuthor: "Peter Drucker",
+        options: [
+          "I could say that I have good foresight. I can foresee the good and bad consequenses of the actions I take",
+          "Practical Foresight is very important but it does not come to me naturally and the future is unclear most of the time",
+          "I cannot forsee anything, judging the outcome of things is very confusing to me",
+        ],
+      },
+      {
+        id: 12,
+        question:
+          "What are your inherent qualities, what drives you are the deciding factors in how far you will go in life",
+        quote: "Knowing yourself is the beginning of all wisdom.",
+        quoteAuthor: "Aristotle",
+        options: [
+          "Compared to many other people I have great inherent qualities and a positive drive which has surely helped me in my career",
+          "I think I do have some inherent qualities and drive but I do not know how that would help me in my career",
+          "I do not have any inherent qualities and drive which I see in other people. I have a weak outlook",
+        ],
+      },
+      {
+        id: 13,
+        question:
+          "The abilitiy to communicate well and be a team player is one of the utmost requirements for career success",
+        quote: "Alone we can do so little; together we can do so much.",
+        quoteAuthor: "Helen Keller",
+        options: [
+          "I am a great communicator, I work best in a team",
+          "I communicate enough to get my work done. I realise the importance of team work ",
+          "I do not see the need to be very communicative. Most of the time I work best alone",
+        ],
+      },
+      {
+        id: 14,
+        question:
+          "Situational and circumstantial awareness is an absolute necessity, also inculdes awareness of pros and cons of chosen field of work. Better awareness leads to right decision making Capacity",
+        quote: "Awareness is the greatest agent for change.",
+        quoteAuthor: "Eckhart Tolle",
+        options: [
+          "I keep myself well aware of situations and circumstances surronding me. ",
+          "I am aware of things but fail to use them to grab opportunites or to avoid dangers",
+          "Awareness does not come naturally to me.",
+        ],
+      },
+      {
+        id: 15,
+        question:
+          "External forces and circumstances are not in your control. How you handle them goes a long way in deciding success in career and life",
+        quote:
+          "You may not control all the events that happen to you, but you can decide not to be reduced by them.",
+        quoteAuthor: "Maya Angelou",
+        options: [
+          "I am not facing many situations which are not in my control. ",
+          "I do realise that everybody has external forces and circumstances to manage. I do manage an few but am also controlled by a few",
+          "I am very much bound by situations not caused by me and not in my control. I never have a free hand in my work or my dealings",
+        ],
+      },
     ],
-  },
-  {
-    id: 2,
-    question:
-      "Am I able to stay focused on the work and habits that will help me succeed in my career?",
-    quote: "My experience is what I agree to attend to.",
-    quoteAuthor: "William James",
-    options: [
-      "Focus comes easily to me and I stay committed to my career",
-      "I understand the importance of focus but struggle to maintain it",
-      "I am not clear on why focus matters or how to develop it",
-    ],
-  },
-  {
-    id: 3,
-    question:
-      "Do I have the courage to take meaningful career risks when growth requires it?",
-    quote: "Life is either a daring adventure or nothing.",
-    quoteAuthor: "Helen Keller",
-    options: [
-      "I understand risk-taking and usually handle it well",
-      "I respect courage but hesitate to take major risks",
-      "I avoid risk because I fear the consequences",
-    ],
-  },
-  {
-    id: 4,
-    question:
-      "Can I handle criticism constructively without letting it damage my confidence or career progress?",
-    quote: "The impediment to action advances action. What stands in the way becomes the way.",
-    quoteAuthor: "Marcus Aurelius",
-    options: [
-      "I handle criticism well and learn from it",
-      "I try to avoid situations where I may be criticized",
-      "I am afraid of criticism and find it difficult to deal with",
-    ],
-  },
-  {
-    id: 5,
-    question:
-      "Do I have enough confidence in myself to take action, make decisions, and move forward professionally?",
-    quote: "Believe you can and you're halfway there.",
-    quoteAuthor: "Theodore Roosevelt",
-    options: [
-      "I consider myself confident in many areas",
-      "My confidence depends heavily on the situation",
-      "I lack confidence and often feel weak in my outlook",
-    ],
-  },
-  {
-    id: 6,
-    question:
-      "Do I have the qualifications, experience, and expertise needed to grow in my field of work?",
-    quote: "An investment in knowledge pays the best interest.",
-    quoteAuthor: "Benjamin Franklin",
-    options: [
-      "I am qualified and experienced for my work",
-      "I have some qualifications and experience but feel stuck",
-      "I need more qualifications and experience for my current work",
-    ],
-  },
-  {
-    id: 7,
-    question:
-      "Am I building the hard and soft skills required to succeed in my chosen career path?",
-    quote: "The expert in anything was once a beginner.",
-    quoteAuthor: "Helen Hayes",
-    options: [
-      "I have strong skills and use them well in my work",
-      "I understand the importance of skills and am actively improving",
-      "I lack some important hard or soft skills required for my work",
-    ],
-  },
-  {
-    id: 8,
-    question:
-      "Do I recognize my own worth and believe that I can contribute meaningfully at work?",
-    quote: "No one can make you feel inferior without your consent.",
-    quoteAuthor: "Eleanor Roosevelt",
-    options: [
-      "I consider myself a worthy and capable person",
-      "I understand self-worth is important and want to improve it",
-      "I struggle with low self-worth",
-    ],
-  },
-  {
-    id: 9,
-    question:
-      "Am I genuinely passionate about the work I do, or am I only doing it for income?",
-    quote: "Where your talents and the needs of the world cross, there lies your vocation.",
-    quoteAuthor: "Aristotle",
-    options: [
-      "I genuinely enjoy my work and feel I am in the right career",
-      "I enjoy some parts of my work but dislike others",
-      "I do not like the work I currently do for income",
-    ],
-  },
-  {
-    id: 10,
-    question:
-      "Do I have healthy ambition and a competitive drive that pushes me toward meaningful achievement?",
-    quote: "A man's worth is no greater than his ambitions.",
-    quoteAuthor: "Marcus Aurelius",
-    options: [
-      "I am ambitious and believe ambition is important for achievement",
-      "I have some ambition but do not know how to channel it",
-      "I lack ambition and feel satisfied with where I currently am",
-    ],
-  },
-  {
-    id: 11,
-    question:
-      "Do I have the practical foresight to judge the possible outcomes of my career decisions?",
-    quote: "The best way to predict the future is to create it.",
-    quoteAuthor: "Peter Drucker",
-    options: [
-      "I have good foresight and can judge consequences well",
-      "I understand foresight is important but the future often feels unclear",
-      "I find it difficult to foresee outcomes or judge consequences",
-    ],
-  },
-  {
-    id: 12,
-    question:
-      "Do I understand my inherent qualities and inner drive, and how they can help me progress in life and career?",
-    quote: "Knowing yourself is the beginning of all wisdom.",
-    quoteAuthor: "Aristotle",
-    options: [
-      "I have strong inherent qualities and a positive drive",
-      "I have some qualities and drive but do not know how to use them",
-      "I feel I lack the qualities and drive that I see in others",
-    ],
-  },
-  {
-    id: 13,
-    question:
-      "Am I able to communicate well and work effectively with others as part of a team?",
-    quote: "Alone we can do so little; together we can do so much.",
-    quoteAuthor: "Helen Keller",
-    options: [
-      "I communicate well and work best in a team",
-      "I communicate enough to get work done and understand teamwork matters",
-      "I prefer working alone and do not see much need for communication",
-    ],
-  },
-  {
-    id: 14,
-    question:
-      "Am I aware of the situations, opportunities, risks, and realities that affect my career decisions?",
-    quote: "The unexamined life is not worth living.",
-    quoteAuthor: "Socrates",
-    options: [
-      "I stay aware of the situations and circumstances around me",
-      "I am aware of things but often fail to use that awareness well",
-      "Awareness does not come naturally to me",
-    ],
-  },
-  {
-    id: 15,
-    question:
-      "How well do I handle external forces and circumstances that are outside my control?",
-    quote: "You have power over your mind — not outside events. Realize this, and you will find strength.",
-    quoteAuthor: "Marcus Aurelius",
-    options: [
-      "I am not facing many situations outside my control",
-      "I manage some external circumstances but still feel controlled by others",
-      "I feel bound by circumstances outside my control",
-    ],
-  },
-],
     createdAt: {
       $date: "2026-04-23T00:00:00Z",
     },
