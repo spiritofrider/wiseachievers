@@ -10,19 +10,28 @@ export class AppComponent {
   constructor() {
     document.addEventListener("DOMContentLoaded", function () {
       window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar_top");
+        const timer = document.getElementById("timer");
+        const isEarlyCareerLanding =
+          window.location.hash === "#/base/early-career-direction";
+
+        if (isEarlyCareerLanding) {
+          navbar?.classList.remove("nav-sticky");
+          timer?.classList.remove("sticky-timer");
+          return;
+        }
+
         if (window.scrollY > 50) {
           if (!(document.getElementById("Test_Screen")||document.getElementById("Report_Page")||document.getElementById("Graph_Page"))) {
-            document.getElementById("navbar_top").classList.add("nav-sticky");
+            navbar?.classList.add("nav-sticky");
           }
-          if (document.getElementById("timer")) {
-            document.getElementById("timer")?.classList.add("sticky-timer");
-            document
-              .getElementById("navbar_top")
-              .classList.remove("nav-sticky");
+          if (timer) {
+            timer.classList.add("sticky-timer");
+            navbar?.classList.remove("nav-sticky");
           }
         } else {
-          document.getElementById("navbar_top").classList.remove("nav-sticky");
-          document.getElementById("timer")?.classList.remove("sticky-timer");
+          navbar?.classList.remove("nav-sticky");
+          timer?.classList.remove("sticky-timer");
         }
       });
     });

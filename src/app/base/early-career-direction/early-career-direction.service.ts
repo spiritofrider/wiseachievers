@@ -5,6 +5,7 @@ import { delay } from "rxjs/operators";
 export interface EarlyCareerDirectionQuestion {
   id: number;
   question: string;
+  questionTitle: string;
   quote: string;
   quoteAuthor: string;
   options?: string[];
@@ -51,6 +52,7 @@ export class EarlyCareerDirectionService {
     questions: [
       {
         id: 1,
+        questionTitle: "Goal Setting",
         question:
           "Goal setting is a madatory and important aspect for success in your career.",
         quote: "The future depends on what you do today.",
@@ -63,6 +65,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 2,
+        questionTitle: "Focus",
         question:
           "Without focus it is futile to try to achieve success in any career",
         quote: "Concentrate all your thoughts upon the work in hand.",
@@ -75,6 +78,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 3,
+        questionTitle: "Courage",
         question:
           "The ability to take risk is directly propotional to success in your career. Often misunderstood to be a trait you have to be born with but is not so.",
         quote: "Life is either a daring adventure or nothing.",
@@ -87,6 +91,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 4,
+        questionTitle: "Ability to face Criticism",
         question:
           "Criticism if not handled correctly is the fastest route to the destruction of your career",
         quote: "Criticism may not be agreeable, but it is necessary.",
@@ -99,6 +104,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 5,
+        questionTitle: "Confidence",
         question:
           "In personal life as well as in any career, confidence is the key word between success and failure.",
         quote: "Believe you can and you're halfway there.",
@@ -111,6 +117,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 6,
+        questionTitle: "Knowledge of your field of work",
         question:
           "Qualifications, Experience, Expertise is the name of the game. This is the key that opens doors",
         quote: "An investment in knowledge pays the best interest.",
@@ -123,6 +130,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 7,
+        questionTitle: "Skills",
         question:
           "Relevant hard and soft skills are required for chosen work area. May or may not be related to qualifications and experience",
         quote: "The expert in anything was once a beginner.",
@@ -135,6 +143,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 8,
+        questionTitle: "Self Worth",
         question:
           "Worthiness of self is often underestimated. Persons lacking self worth may find work difficult in a team. Lack of self worth can severly retard the ability to delegate work.",
         quote: "No one can make you feel inferior without your consent.",
@@ -147,6 +156,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 9,
+        questionTitle: "Passion",
         question:
           "Being passionate about what you are doing is of utmost importance otherwise it could be said that you are in the wrong career",
         quote: "The only way to do great work is to love what you do.",
@@ -159,6 +169,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 10,
+        questionTitle: "Ambition and competitive nature",
         question:
           "Clear distintive line should be defined between positive ambition and blind ambition.  Blind ambition creates a feel good emotion but can lead to severe loss",
         quote: "A man's worth is no greater than his ambitions.",
@@ -171,6 +182,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 11,
+        questionTitle: "Practical Foresight",
         question:
           "The importance of partical foresight can never be underestimated. Without that you may be moving in a blind alley. ",
         quote: "The best way to predict the future is to create it.",
@@ -183,6 +195,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 12,
+        questionTitle: "Inherent Qualities and Drive",
         question:
           "What are your inherent qualities, what drives you are the deciding factors in how far you will go in life",
         quote: "Knowing yourself is the beginning of all wisdom.",
@@ -195,6 +208,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 13,
+        questionTitle: "Communication and Team Work",
         question:
           "The abilitiy to communicate well and be a team player is one of the utmost requirements for career success",
         quote: "Alone we can do so little; together we can do so much.",
@@ -207,6 +221,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 14,
+        questionTitle: "Awareness",
         question:
           "Situational and circumstantial awareness is an absolute necessity, also inculdes awareness of pros and cons of chosen field of work. Better awareness leads to right decision making Capacity",
         quote: "Awareness is the greatest agent for change.",
@@ -219,6 +234,7 @@ export class EarlyCareerDirectionService {
       },
       {
         id: 15,
+        questionTitle: "External Forces and Circumstances",
         question:
           "External forces and circumstances are not in your control. How you handle them goes a long way in deciding success in career and life",
         quote:

@@ -12,6 +12,7 @@
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 20px 45px rgba(18, 52, 77, 0.1);
+  font-size: 0.9rem;
 }
 
 .step-label {
@@ -25,13 +26,14 @@
 h2 {
   margin-bottom: 1rem;
   color: #17354d;
+  font-size: 1.35rem;
 }
 
 .question-copy {
   margin-bottom: 1.5rem;
   color: #17354d;
-  line-height: 1.7;
-  font-size: 1.2rem;
+  line-height: 1.6;
+  font-size: 0.92rem;
 }
 
 .question-quote {
@@ -60,7 +62,7 @@ h2 {
   position: relative;
   margin: 0 0 0.65rem;
   padding-left: 1.1rem;
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   font-style: italic;
 }
 
@@ -95,6 +97,7 @@ h2 {
   background: #f9fbfc;
   color: #28495f;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .scale-option input {
@@ -105,6 +108,16 @@ h2 {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .previous-action {
+    order: 1;
+  }
+
+  .next-action {
+    order: 2;
+  }
 }
 
 @media (max-width: 767px) {

@@ -8,8 +8,9 @@ import { EarlyCareerDirectionService } from "../early-career-direction.service";
   styleUrls: ["./early-career-direction-landing.component.scss"],
 })
 export class EarlyCareerDirectionLandingComponent {
-  assessmentTitle = "";
-  assessmentDescription = "";
+  assessmentTitle = "Career Guidance Assessment";
+  assessmentDescription =
+    "This is a test for young professionals who want to change careers or improve their existing career path with clearer direction and stronger decision-making support.";
 
   constructor(
     private router: Router,
@@ -18,8 +19,7 @@ export class EarlyCareerDirectionLandingComponent {
 
   ngOnInit(): void {
     this.earlyCareerDirectionService.getAssessment().subscribe((assessment) => {
-      this.assessmentTitle = assessment.title;
-      this.assessmentDescription = assessment.description;
+      this.assessmentTitle = assessment.title || this.assessmentTitle;
     });
   }
 

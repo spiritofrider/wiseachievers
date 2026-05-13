@@ -29,6 +29,13 @@ export class TopLayoutComponent implements OnInit {
     )["fullName"];
     this.token = this.storageService.getCookie("token");
   }
+
+  isEarlyCareerQuestionRoute(): boolean {
+    return /\/base\/early-career-direction\/early-career-direction-question-\d+$/.test(
+      this.route.url
+    );
+  }
+
   openLoginModal() {
     this.bsModalRef = this.BsModalService.show(LoginComponent, {
       backdrop: "static",

@@ -1,5 +1,6 @@
 import { LocationStrategy } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-base",
@@ -7,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./base.component.scss"],
 })
 export class BaseComponent implements OnInit {
-  constructor(private location: LocationStrategy) {
+  constructor(private location: LocationStrategy, private router: Router) {
     history.pushState(null, null, window.location.href);
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
@@ -15,4 +16,14 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  isEarlyCareerQuestionRoute(): boolean {
+    return /\/base\/early-career-direction\/early-career-direction-question-\d+$/.test(
+      this.router.url
+    );
+  }
+
+  isEarlyCareerLandingRoute(): boolean {
+    return /^\/base\/early-career-direction\/?$/.test(this.router.url);
+  }
 }

@@ -1,6 +1,8 @@
-
-<navbar></navbar>
-<div class="base-container">
+<navbar *ngIf="!isEarlyCareerQuestionRoute()"></navbar>
+<div
+  class="base-container"
+  [class.question-route-container]="isEarlyCareerQuestionRoute()"
+  [class.early-career-landing-container]="isEarlyCareerLandingRoute()"
+>
 <router-outlet></router-outlet>
 </div>
-

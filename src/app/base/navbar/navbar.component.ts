@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   getActiveRoutes(route:any){
     let isRoute: boolean = false;
     
-    if(route){
+    if(route && this.route){
       if(this.route.indexOf(route) > -1){
         isRoute = true;
       }
@@ -98,7 +98,7 @@ export class NavbarComponent implements OnInit {
       // Select the navbar collapse element and the toggler button
       const navbarCollapse = document.querySelector('#navbarCollapse');
       const togglerButton = document.querySelector('.navbar-toggler');
-      navbarCollapse.classList.remove('show');
-      togglerButton.setAttribute('aria-expanded', 'false');
+      navbarCollapse?.classList.remove('show');
+      togglerButton?.setAttribute('aria-expanded', 'false');
     }
 }

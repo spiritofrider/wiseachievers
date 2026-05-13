@@ -3,11 +3,11 @@
     <p class="step-label">
       Question {{ questionNumber }} of {{ assessment.questions.length }}
     </p>
-    <h2>{{ assessment.title }}</h2>
-    <blockquote class="question-quote">
+    <h2>{{ currentQuestion.questionTitle }}</h2>
+    <!-- <blockquote class="question-quote">
       <p>{{ currentQuestion.quote }}</p>
       <cite>{{ currentQuestion.quoteAuthor }}</cite>
-    </blockquote>
+    </blockquote> -->
     <p class="question-copy">{{ currentQuestion.question }}</p>
 
     <div class="scale-options">
@@ -30,14 +30,7 @@
 
     <div class="actions">
       <button
-        class="btn btn-outline-primary"
-        (click)="goToPreviousQuestion()"
-        [disabled]="isFirstQuestion()"
-      >
-        Previous Question
-      </button>
-      <button
-        class="btn btn-primary"
+        class="btn btn-primary next-action"
         (click)="goToNextQuestion()"
         *ngIf="!isLastQuestion()"
         [disabled]="!hasAnsweredCurrentQuestion()"
@@ -45,12 +38,19 @@
         Next Question
       </button>
       <button
-        class="btn btn-success"
+        class="btn btn-success next-action"
         (click)="submitTest()"
         *ngIf="isLastQuestion()"
         [disabled]="!hasAnsweredCurrentQuestion()"
       >
         Submit Test
+      </button>
+      <button
+        class="btn btn-outline-primary previous-action"
+        (click)="goToPreviousQuestion()"
+        [disabled]="isFirstQuestion()"
+      >
+        Previous Question
       </button>
     </div>
   </div>
