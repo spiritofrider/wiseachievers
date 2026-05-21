@@ -1,0 +1,72 @@
+{
+    "success": true,
+    "report": {
+        "title": "Career Guidance Assessment Report (3–5 years experience)",
+        "overallSummary": "Your results show strong areas of drive and competence—especially around having goals, maintaining focus, enjoying your current work, and recognizing the value of qualifications/experience. You also demonstrate good situational foresight and an awareness that external circumstances affect outcomes.\n\nAt the same time, the lowest scores cluster around confidence, self-worth, handling criticism, communication/team contribution, and channeling ambition. Together, these patterns suggest that your main growth lever isn’t necessarily your capability or career interest—it’s how secure you feel internally (confidence/self-worth) and how you respond under pressure or feedback (criticism, delegation, collaboration).",
+        "scoreInterpretation": "Based on the selected marks across questions:\n- Positive signals (scored 1): clarity of goals, strong focus, ability to take some risks, alignment/passion with your current career, good foresight, inherent drive/qualities, and confidence in qualifications/experience.\n- Neutral signals (scored 0): confidence around risk/ambition is present but not fully structured (e.g., “not sure how to channel ambition”), skill-building is recognized but not yet consistently demonstrated, and handling external forces feels mixed.\n- Negative signals (scored -1/0 negative themes): confidence and self-worth are significantly low, fear of criticism is slowing you, difficulty with communication/team work, and delegation confidence may be impacted.\n\nIn plain terms: you appear capable and engaged, but self-belief and feedback/collaboration skills are likely limiting your momentum and satisfaction.",
+        "strengths": [
+            "Clear goal orientation and intention to achieve them",
+            "High ability to focus and sustained career attention",
+            "Belief that you understand and can take risks effectively",
+            "Strong enjoyment and alignment with your current career choice",
+            "Good foresight about likely consequences (pros/cons)",
+            "Positive internal drive and perceived inherent qualities supporting progress",
+            "Good foundation in qualifications and experience",
+            "Awareness of situational/circumstantial factors affecting decisions"
+        ],
+        "improvementAreas": [
+            "Confidence is currently low",
+            "Self-worth is currently low, which may affect teamwork and delegation",
+            "Fear of criticism and concern that it could harm your career",
+            "Uncertainty about how to channel ambition into an actionable plan",
+            "Communication/team collaboration approach may be limiting (preference to work alone)",
+            "Hard/soft skill development is recognized, but not yet consistently prioritized or reflected in your responses",
+            "Handling external forces feels partially controlled but also partially controlling (needs a more empowering strategy)"
+        ],
+        "recommendations": [
+            {
+                "area": "Confidence & self-worth",
+                "advice": "Treat confidence and self-worth as skills you can rebuild through evidence (results you’ve already achieved), structured feedback, and small “wins” that prove capability over time.",
+                "actionStep": "Identify 3 past accomplishments (from work) and write what specifically you did well; then choose one small weekly action that directly demonstrates a similar strength (e.g., owning a task end-to-end, presenting a short update, or asking for feedback on a specific deliverable)."
+            },
+            {
+                "area": "Handling criticism (without fear)",
+                "advice": "Reframe criticism from “threat to my career” into “data that improves outcomes.” The goal is to separate intent from impact and convert feedback into next actions.",
+                "actionStep": "When receiving feedback, use a simple 3-step process: (1) clarify what “good” looks like, (2) ask what to change first, (3) confirm one measurable improvement you will try within the next 1–2 weeks."
+            },
+            {
+                "area": "Channeling ambition into a plan",
+                "advice": "Ambition becomes effective when it is translated into priorities, timelines, and skill-building targets rather than staying as a feeling.",
+                "actionStep": "Create a 90-day career plan with: one target role/outcome, 2–3 key milestones, and 1 skill-building focus area tied to those milestones. Review weekly and adjust only one variable at a time."
+            },
+            {
+                "area": "Communication & collaboration",
+                "advice": "Even if you work best alone, career growth often requires visibility, coordination, and relationship-building. Communication doesn’t have to mean being outgoing—it can be purposeful and brief.",
+                "actionStep": "Choose one “communication touchpoint” per week: a short status update to a stakeholder, a request for input before starting a key task, or a brief collaboration moment where you define scope and next steps."
+            },
+            {
+                "area": "Delegation & teamwork readiness",
+                "advice": "Low self-worth can make delegation feel risky. Strong delegation is about clarity and process, not about “trusting yourself less.”",
+                "actionStep": "When delegating (even informally), use a checklist: objective, expected output, timeline, quality standard, and check-in point. Start with low-risk tasks to rebuild comfort."
+            },
+            {
+                "area": "Skill development (hard + soft)",
+                "advice": "You already recognize skills matter—so the next step is making it specific and measurable.",
+                "actionStep": "Pick one hard-skill and one soft-skill relevant to your work (e.g., technical depth + feedback handling/brief communication). Set one practice activity for each each week and track results (what improved, what changed)."
+            },
+            {
+                "area": "Managing external forces more effectively",
+                "advice": "Your results suggest external factors influence you. The improvement is to expand your “control zone” to what you can influence: preparation, response strategy, and choices under constraints.",
+                "actionStep": "For the next 2 weeks, log one situation per week in two columns: “Not in my control” vs “Actions I can take anyway.” Take one control-zone action every time and note the outcome."
+            }
+        ],
+        "nextSteps": [
+            "Share with your counsellor whether you want your next career milestone to focus on: (a) role progression, (b) skill growth, or (c) satisfaction/fit.",
+            "Bring 1–2 examples where you received criticism (or avoided it) and what you believed it meant; we’ll map a healthier interpretation and response plan.",
+            "Draft a simple 90-day plan (target + milestones) using your foresight strength as the backbone for decision-making.",
+            "Identify one communication/team behavior that feels most natural to you and commit to a single weekly practice rather than forcing a personality change.",
+            "Select one delegation or collaboration scenario you’re currently avoiding, and plan a low-risk first step with clear instructions."
+        ],
+        "disclaimer": "This report is based only on the provided questionnaire responses. It does not diagnose mental health conditions or guarantee outcomes, but it offers practical career-development guidance tailored to the patterns shown in your results."
+    }
+}

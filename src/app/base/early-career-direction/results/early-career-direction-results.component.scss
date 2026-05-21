@@ -1,8 +1,35 @@
 .results-page {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   min-height: calc(100vh - 6rem);
+  padding: 2rem clamp(1rem, 4vw, 4rem) 4rem;
+}
+
+.results-graph-panel {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 0 0.25rem;
+  background: transparent;
+}
+
+.results-graph-panel h1 {
+  margin: 0 0 0.35rem;
+  color: #17354d;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+#career-results-score-graph {
+  width: 100%;
+  min-height: 190px;
+}
+
+#career-results-score-graph ::ng-deep .highcharts-background {
+  fill: transparent;
 }
 
 .results-card {
@@ -62,6 +89,154 @@ h2 {
   font-weight: 600;
 }
 
+.ai-report-panel,
+.report-error-panel {
+  width: 100%;
+  max-width: 1200px;
+  margin: 1rem auto 0;
+  padding: 1rem 0 0;
+  background: transparent;
+}
+
+.report-summary {
+  color: #405f73;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.report-section {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid #e5edf3;
+  border-radius: 8px;
+  background: rgba(248, 251, 253, 0.72);
+}
+
+.strengths-section {
+  border-color: #ccebd7;
+  background: #f0fbf4;
+}
+
+.improvement-section {
+  border-color: #f4d2d2;
+  background: #fff4f4;
+}
+
+.report-section.full-width {
+  margin-top: 1rem;
+}
+
+.report-section h3 {
+  margin-bottom: 0.75rem;
+  color: #17354d;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.report-section ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #405f73;
+  line-height: 1.7;
+}
+
+.report-point-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-left: 0 !important;
+  list-style: none;
+}
+
+.report-point-list li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.point-icon {
+  flex: 0 0 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.12rem;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.report-point-list li span:last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.strengths-section .point-icon {
+  color: #16783b;
+  background: #d8f3e2;
+}
+
+.improvement-section .point-icon {
+  color: #b42318;
+  background: #ffe0e0;
+}
+
+.counsellor-contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #cfe0ed;
+  border-radius: 8px;
+  background: #f7fbff;
+}
+
+.contact-eyebrow {
+  margin-bottom: 0.35rem;
+  color: #0081d6;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.counsellor-contact-card h3 {
+  margin-bottom: 0.5rem;
+  color: #17354d;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.counsellor-contact-card p:last-child {
+  margin-bottom: 0;
+  color: #405f73;
+  line-height: 1.6;
+}
+
+.contact-phone-button {
+  flex: 0 0 auto;
+  min-width: 150px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+}
+
+.report-error-panel p {
+  color: #b42318;
+  font-weight: 600;
+}
+
 .resubmission-alert-backdrop {
   position: fixed;
   z-index: 1050;
@@ -109,6 +284,25 @@ h2 {
 }
 
 @media (max-width: 767px) {
+  .results-graph-panel,
+  .ai-report-panel,
+  .report-error-panel {
+    padding: 1rem 0 0;
+  }
+
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .counsellor-contact-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contact-phone-button {
+    width: 100%;
+  }
+
   .results-card {
     padding: 2rem 1.25rem;
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
   EarlyCareerDirectionAssessment,
+  EarlyCareerDirectionOption,
   EarlyCareerDirectionQuestion,
   EarlyCareerDirectionSubmissionPayload,
   EarlyCareerDirectionService,
@@ -16,8 +17,8 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
   questionNumber = 1;
   assessment: EarlyCareerDirectionAssessment | null = null;
   currentQuestion: EarlyCareerDirectionQuestion | null = null;
-  currentQuestionOptions: string[] = [];
-  selectedAnswers: { [questionId: number]: string } = {};
+  currentQuestionOptions: EarlyCareerDirectionOption[] = [];
+  selectedAnswers: { [questionId: number]: EarlyCareerDirectionOption } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -66,12 +67,12 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
     );
   }
 
-  saveAnswer(scaleValue: string): void {
+  saveAnswer(option: EarlyCareerDirectionOption): void {
     if (!this.currentQuestion) {
       return;
     }
 
-    this.selectedAnswers[this.currentQuestion.id] = scaleValue;
+    this.selectedAnswers[this.currentQuestion.id] = option;
   }
 
   hasAnsweredCurrentQuestion(): boolean {
@@ -93,7 +94,8 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
       responses: this.assessment.questions.map((question) => ({
         id: question.id,
         question: question.question,
-        selectedAnswer: this.selectedAnswers[question.id] || null,
+        selectedAnswer: this.selectedAnswers[question.id]?.question || null,
+        selectedMarks: this.selectedAnswers[question.id]?.marks ?? null,
       })),
     };
 
@@ -130,9 +132,14 @@ export class EarlyCareerDirectionQuestionComponent implements OnInit {
     }
   }
 
-  private getQuestionOptions(question: EarlyCareerDirectionQuestion): string[] {
+  private getQuestionOptions(
+    question: EarlyCareerDirectionQuestion
+  ): EarlyCareerDirectionOption[] {
     return question.options && question.options.length
       ? question.options
-      : this.assessment?.scale || [];
+      : (this.assessment?.scale || []).map((scaleValue) => ({
+          question: scaleValue,
+          marks: 0,
+        }));
   }
 }

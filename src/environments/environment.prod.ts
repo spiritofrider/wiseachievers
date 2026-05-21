@@ -6,4 +6,6 @@ export const environment = {
   baseUrlNodeRender: "https://wise-achievers-jwt-auth.onrender.com/",
   baseTestUrlNodeRender: "https://wise-achievers-tests.onrender.com/",
   baseCalculationUrlRender: "https://wise-achievers-calculation.onrender.com/",
+  aiReportFunctionUrl:
+    "https://m776dqqsyd2g3ktrn5bhcfof3u0wnulz.lambda-url.ap-south-1.on.aws/",
 };

@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Observable, of, throwError } from "rxjs";
 import { delay } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 
 export interface EarlyCareerDirectionQuestion {
   id: number;
@@ -8,7 +10,12 @@ export interface EarlyCareerDirectionQuestion {
   questionTitle: string;
   quote: string;
   quoteAuthor: string;
-  options?: string[];
+  options?: EarlyCareerDirectionOption[];
+}
+
+export interface EarlyCareerDirectionOption {
+  question: string;
+  marks: number;
 }
 
 export interface EarlyCareerDirectionAssessment {
@@ -25,6 +32,7 @@ export interface EarlyCareerDirectionSubmissionResponse {
   id: number;
   question: string;
   selectedAnswer: string | null;
+  selectedMarks: number | null;
 }
 
 export interface EarlyCareerDirectionSubmissionPayload {
@@ -32,6 +40,18 @@ export interface EarlyCareerDirectionSubmissionPayload {
   description: string;
   submittedAt: string;
   responses: EarlyCareerDirectionSubmissionResponse[];
+}
+
+export interface EarlyCareerDirectionAiReport {
+  overallSummary: string;
+  strengths: string[];
+  improvementAreas: string[];
+  nextSteps: string[];
+}
+
+export interface EarlyCareerDirectionAiReportResponse {
+  success: boolean;
+  report: EarlyCareerDirectionAiReport;
 }
 
 @Injectable({
@@ -58,9 +78,18 @@ export class EarlyCareerDirectionService {
         quote: "The future depends on what you do today.",
         quoteAuthor: "Mahatma Gandhi",
         options: [
-          "I have set all my goals and am clear about achieveing them",
-          "I have set my goals but have no stratergy in place to achieve them",
-          "I have not set any goals as I do not understand how by just setting a goal it will help me in achieving it. ",
+          {
+            question: "I have set all my goals and am clear about achieveing them",
+            marks: 1,
+          },
+          {
+            question: "I have set my goals but have no stratergy in place to achieve them",
+            marks: 0,
+          },
+          {
+            question: "I have not set any goals as I do not understand how by just setting a goal it will help me in achieving it. ",
+            marks: -1,
+          },
         ],
       },
       {
@@ -71,9 +100,18 @@ export class EarlyCareerDirectionService {
         quote: "Concentrate all your thoughts upon the work in hand.",
         quoteAuthor: "Alexander Graham Bell",
         options: [
-          "Focus comes eaisly to me and I am totally focused in my career",
-          "I understand focus but am not able to achieve the required level of focus in my career",
-          "What is focus, Why do I need focus and how do I achieve it",
+          {
+            question: "Focus comes eaisly to me and I am totally focused in my career",
+            marks: 1,
+          },
+          {
+            question: "I understand focus but am not able to achieve the required level of focus in my career",
+            marks: 0,
+          },
+          {
+            question: "What is focus, Why do I need focus and how do I achieve it",
+            marks: -1,
+          },
         ],
       },
       {
@@ -84,9 +122,18 @@ export class EarlyCareerDirectionService {
         quote: "Life is either a daring adventure or nothing.",
         quoteAuthor: "Helen Keller",
         options: [
-          "I know what is risk taking and most of the time I come out winners",
-          "I respect courage but am afraid to take major risk",
-          "I do not believe in taking any risk as I am afraid of the consequences",
+          {
+            question: "I know what is risk taking and most of the time I come out winners",
+            marks: 1,
+          },
+          {
+            question: "I respect courage but am afraid to take major risk",
+            marks: 0,
+          },
+          {
+            question: "I do not believe in taking any risk as I am afraid of the consequences",
+            marks: -1,
+          },
         ],
       },
       {
@@ -97,9 +144,18 @@ export class EarlyCareerDirectionService {
         quote: "Criticism may not be agreeable, but it is necessary.",
         quoteAuthor: "Winston Churchill",
         options: [
-          "I can handle criticism very well. It is not an issue I face",
-          "I am aware of the need to face criticism but am afraid of it's destructive power",
-          "I work in such ways that I do not give anybody an oppurtunity to criticise me at all",
+          {
+            question: "I can handle criticism very well. It is not an issue I face",
+            marks: 1,
+          },
+          {
+            question: "I am aware of the need to face criticism but am afraid of it's destructive power",
+            marks: 0,
+          },
+          {
+            question: "I work in such ways that I do not give anybody an oppurtunity to criticise me at all",
+            marks: -1,
+          },
         ],
       },
       {
@@ -110,9 +166,18 @@ export class EarlyCareerDirectionService {
         quote: "Believe you can and you're halfway there.",
         quoteAuthor: "Theodore Roosevelt",
         options: [
-          "I could call myself a confident person in many aspects",
-          "My confidence is with me most of the time, but sometimes is lost when I need it most",
-          "Confidence is something I lack.",
+          {
+            question: "I could call myself a confident person in many aspects",
+            marks: 1,
+          },
+          {
+            question: "My confidence is with me most of the time, but sometimes is lost when I need it most",
+            marks: 0,
+          },
+          {
+            question: "Confidence is something I lack.",
+            marks: -1,
+          },
         ],
       },
       {
@@ -123,9 +188,18 @@ export class EarlyCareerDirectionService {
         quote: "An investment in knowledge pays the best interest.",
         quoteAuthor: "Benjamin Franklin",
         options: [
-          "I am well qualified and experienced for my work",
-          "I am sufficiently qualified and experienced but am not going anywhere in my career",
-          "I need more qualification and experience for the work which I am doing",
+          {
+            question: "I am well qualified and experienced for my work",
+            marks: 1,
+          },
+          {
+            question: "I am sufficiently qualified and experienced but am not going anywhere in my career",
+            marks: 0,
+          },
+          {
+            question: "I need more qualification and experience for the work which I am doing",
+            marks: -1,
+          },
         ],
       },
       {
@@ -136,9 +210,18 @@ export class EarlyCareerDirectionService {
         quote: "The expert in anything was once a beginner.",
         quoteAuthor: "Helen Hayes",
         options: [
-          "I am a skilled individual and use my skills for my work",
-          "I realise the importance of skills and am working at obtaining more skills required for my work",
-          "I lack the required hard and soft skills for my work",
+          {
+            question: "I am a skilled individual and use my skills for my work",
+            marks: 1,
+          },
+          {
+            question: "I realise the importance of skills and am working at obtaining more skills required for my work",
+            marks: 0,
+          },
+          {
+            question: "I lack the required hard and soft skills for my work",
+            marks: -1,
+          },
         ],
       },
       {
@@ -149,9 +232,18 @@ export class EarlyCareerDirectionService {
         quote: "No one can make you feel inferior without your consent.",
         quoteAuthor: "Eleanor Roosevelt",
         options: [
-          "I consider my self a worthy person",
-          "Self worth is very important. I am looking for areas on how to improve my self worth",
-          "I lack self worth",
+          {
+            question: "I consider my self a worthy person",
+            marks: 1,
+          },
+          {
+            question: "Self worth is very important. I am looking for areas on how to improve my self worth",
+            marks: 0,
+          },
+          {
+            question: "I lack self worth",
+            marks: -1,
+          },
         ],
       },
       {
@@ -162,9 +254,18 @@ export class EarlyCareerDirectionService {
         quote: "The only way to do great work is to love what you do.",
         quoteAuthor: "Steve Jobs",
         options: [
-          "I abosolutely enjoy my work. I am in a career which is the right one for me",
-          "I enjoy some aspects of my work and hate some aspects",
-          "I have no liking for the work that I have to do for my income",
+          {
+            question: "I abosolutely enjoy my work. I am in a career which is the right one for me",
+            marks: 1,
+          },
+          {
+            question: "I enjoy some aspects of my work and hate some aspects",
+            marks: 0,
+          },
+          {
+            question: "I have no liking for the work that I have to do for my income",
+            marks: -1,
+          },
         ],
       },
       {
@@ -175,9 +276,18 @@ export class EarlyCareerDirectionService {
         quote: "A man's worth is no greater than his ambitions.",
         quoteAuthor: "Marcus Aurelius",
         options: [
-          "I am an ambitious person. I think ambition is required for any sort of achievement. ",
-          "I have some ambition but I not sure how to channalise it",
-          "I lack any sort of ambition. I am happy with what I am, where I am and what income I get out of it.  ",
+          {
+            question: "I am an ambitious person. I think ambition is required for any sort of achievement. ",
+            marks: 1,
+          },
+          {
+            question: "I have some ambition but I not sure how to channalise it",
+            marks: 0,
+          },
+          {
+            question: "I lack any sort of ambition. I am happy with what I am, where I am and what income I get out of it.  ",
+            marks: -1,
+          },
         ],
       },
       {
@@ -188,9 +298,18 @@ export class EarlyCareerDirectionService {
         quote: "The best way to predict the future is to create it.",
         quoteAuthor: "Peter Drucker",
         options: [
-          "I could say that I have good foresight. I can foresee the good and bad consequenses of the actions I take",
-          "Practical Foresight is very important but it does not come to me naturally and the future is unclear most of the time",
-          "I cannot forsee anything, judging the outcome of things is very confusing to me",
+          {
+            question: "I could say that I have good foresight. I can foresee the good and bad consequenses of the actions I take",
+            marks: 1,
+          },
+          {
+            question: "Practical Foresight is very important but it does not come to me naturally and the future is unclear most of the time",
+            marks: 0,
+          },
+          {
+            question: "I cannot forsee anything, judging the outcome of things is very confusing to me",
+            marks: -1,
+          },
         ],
       },
       {
@@ -201,9 +320,18 @@ export class EarlyCareerDirectionService {
         quote: "Knowing yourself is the beginning of all wisdom.",
         quoteAuthor: "Aristotle",
         options: [
-          "Compared to many other people I have great inherent qualities and a positive drive which has surely helped me in my career",
-          "I think I do have some inherent qualities and drive but I do not know how that would help me in my career",
-          "I do not have any inherent qualities and drive which I see in other people. I have a weak outlook",
+          {
+            question: "Compared to many other people I have great inherent qualities and a positive drive which has surely helped me in my career",
+            marks: 1,
+          },
+          {
+            question: "I think I do have some inherent qualities and drive but I do not know how that would help me in my career",
+            marks: 0,
+          },
+          {
+            question: "I do not have any inherent qualities and drive which I see in other people. I have a weak outlook",
+            marks: -1,
+          },
         ],
       },
       {
@@ -214,22 +342,40 @@ export class EarlyCareerDirectionService {
         quote: "Alone we can do so little; together we can do so much.",
         quoteAuthor: "Helen Keller",
         options: [
-          "I am a great communicator, I work best in a team",
-          "I communicate enough to get my work done. I realise the importance of team work ",
-          "I do not see the need to be very communicative. Most of the time I work best alone",
+          {
+            question: "I am a great communicator, I work best in a team",
+            marks: 1,
+          },
+          {
+            question: "I communicate enough to get my work done. I realise the importance of team work ",
+            marks: 0,
+          },
+          {
+            question: "I do not see the need to be very communicative. Most of the time I work best alone",
+            marks: -1,
+          },
         ],
       },
       {
         id: 14,
         questionTitle: "Awareness",
         question:
-          "Situational and circumstantial awareness is an absolute necessity, also inculdes awareness of pros and cons of chosen field of work. Better awareness leads to right decision making Capacity",
+          "Situational and circumstantial awareness is an absolute necessity, also inculdes awareness of pros and cons of chosen field of work. Better awareness leads to right decision making capacity",
         quote: "Awareness is the greatest agent for change.",
         quoteAuthor: "Eckhart Tolle",
         options: [
-          "I keep myself well aware of situations and circumstances surronding me. ",
-          "I am aware of things but fail to use them to grab opportunites or to avoid dangers",
-          "Awareness does not come naturally to me.",
+          {
+            question: "I keep myself well aware of situations and circumstances surronding me. ",
+            marks: 1,
+          },
+          {
+            question: "I am aware of things but fail to use them to grab opportunites or to avoid dangers",
+            marks: 0,
+          },
+          {
+            question: "Awareness does not come naturally to me.",
+            marks: -1,
+          },
         ],
       },
       {
@@ -241,9 +387,18 @@ export class EarlyCareerDirectionService {
           "You may not control all the events that happen to you, but you can decide not to be reduced by them.",
         quoteAuthor: "Maya Angelou",
         options: [
-          "I am not facing many situations which are not in my control. ",
-          "I do realise that everybody has external forces and circumstances to manage. I do manage an few but am also controlled by a few",
-          "I am very much bound by situations not caused by me and not in my control. I never have a free hand in my work or my dealings",
+          {
+            question: "I am not facing many situations which are not in my control. ",
+            marks: 1,
+          },
+          {
+            question: "I do realise that everybody has external forces and circumstances to manage. I do manage an few but am also controlled by a few",
+            marks: 0,
+          },
+          {
+            question: "I am very much bound by situations not caused by me and not in my control. I never have a free hand in my work or my dealings",
+            marks: -1,
+          },
         ],
       },
     ],
@@ -252,6 +407,8 @@ export class EarlyCareerDirectionService {
     },
   };
   private latestSubmission: EarlyCareerDirectionSubmissionPayload | null = null;
+
+  constructor(private http: HttpClient) {}
 
   getAssessment(): Observable<EarlyCareerDirectionAssessment> {
     return of(this.assessment).pipe(delay(250));
@@ -266,5 +423,20 @@ export class EarlyCareerDirectionService {
 
   getLatestSubmission(): EarlyCareerDirectionSubmissionPayload | null {
     return this.latestSubmission;
+  }
+
+  generateAiReport(
+    results: EarlyCareerDirectionSubmissionPayload
+  ): Observable<EarlyCareerDirectionAiReportResponse> {
+    if (!environment.aiReportFunctionUrl) {
+      return throwError(
+        "AI report Lambda URL is missing in the environment config."
+      );
+    }
+
+    return this.http.post<EarlyCareerDirectionAiReportResponse>(
+      environment.aiReportFunctionUrl,
+      { results }
+    );
   }
 }

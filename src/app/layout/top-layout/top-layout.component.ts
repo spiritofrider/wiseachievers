@@ -31,9 +31,13 @@ export class TopLayoutComponent implements OnInit {
   }
 
   isEarlyCareerQuestionRoute(): boolean {
+    return this.isEarlyCareerFullScreenRoute();
+  }
+
+  private isEarlyCareerFullScreenRoute(): boolean {
     return /\/base\/early-career-direction\/early-career-direction-question-\d+$/.test(
       this.route.url
-    );
+    ) || /^\/base\/early-career-direction\/results\/?$/.test(this.route.url);
   }
 
   openLoginModal() {

@@ -1,5 +1,67 @@
 <section class="results-page" *ngIf="submissionExists">
-  <div class="results-card">
+  <div class="results-graph-panel" *ngIf="aiReport">
+    <h1>Your Career Success</h1>
+    <div id="career-results-score-graph"></div>
+  </div>
+
+  <div class="ai-report-panel" *ngIf="aiReport">
+    <p class="eyebrow">AI Generated Report</p>
+
+    <p class="report-summary">{{ aiReport.overallSummary }}</p>
+
+    <div class="report-grid">
+      <div class="report-section strengths-section">
+        <h3>Strengths</h3>
+        <ul class="report-point-list">
+          <li *ngFor="let strength of aiReport.strengths">
+            <span class="point-icon" aria-hidden="true">✓</span>
+            <span>{{ strength }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="report-section improvement-section">
+        <h3>Improvement Areas</h3>
+        <ul class="report-point-list">
+          <li *ngFor="let area of aiReport.improvementAreas">
+            <span class="point-icon" aria-hidden="true">!</span>
+            <span>{{ area }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="report-section full-width">
+      <h3>Next Steps</h3>
+      <ul>
+        <li *ngFor="let step of aiReport.nextSteps">{{ step }}</li>
+      </ul>
+    </div>
+
+    <div class="counsellor-contact-card">
+      <div>
+        <p class="contact-eyebrow">Need Personal Guidance?</p>
+        <h3>Speak with Thomas D'souza</h3>
+        <p>
+          Discuss your report with a counsellor and get clearer next steps for
+          your career direction.
+        </p>
+      </div>
+
+      <a class="btn btn-primary contact-phone-button" href="tel:+919819439307">
+        9819439307
+      </a>
+    </div>
+  </div>
+
+  <div class="report-error-panel" *ngIf="aiReportError">
+    <p>{{ aiReportError }}</p>
+    <button class="btn btn-primary" (click)="generateAiReport()">
+      Try Again
+    </button>
+  </div>
+
+  <!-- <div class="results-card">
     <p class="eyebrow">Get Your Results</p>
     <h2>Enter your email to receive your assessment results.</h2>
     <p class="results-copy">
@@ -33,7 +95,7 @@
     <p class="success-message" *ngIf="submitted">
       Your request has been captured. Check the console for the payload.
     </p>
-  </div>
+  </div> -->
 
   <div
     class="resubmission-alert-backdrop"

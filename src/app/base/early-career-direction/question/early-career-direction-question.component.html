@@ -13,18 +13,20 @@
     <div class="scale-options">
       <label
         class="scale-option"
-        *ngFor="let scaleValue of currentQuestionOptions"
-        [attr.for]="'question-' + currentQuestion.id + '-' + scaleValue"
+        *ngFor="let option of currentQuestionOptions"
+        [attr.for]="'question-' + currentQuestion.id + '-' + option.question"
       >
         <input
           type="radio"
-          [id]="'question-' + currentQuestion.id + '-' + scaleValue"
+          [id]="'question-' + currentQuestion.id + '-' + option.question"
           [name]="'question-' + currentQuestion.id"
-          [value]="scaleValue"
-          [checked]="selectedAnswers[currentQuestion.id] === scaleValue"
-          (change)="saveAnswer(scaleValue)"
+          [value]="option.question"
+          [checked]="
+            selectedAnswers[currentQuestion.id]?.question === option.question
+          "
+          (change)="saveAnswer(option)"
         />
-        <span>{{ scaleValue }}</span>
+        <span>{{ option.question }}</span>
       </label>
     </div>
 

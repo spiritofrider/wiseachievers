@@ -18,9 +18,13 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   isEarlyCareerQuestionRoute(): boolean {
+    return this.isEarlyCareerFullScreenRoute();
+  }
+
+  isEarlyCareerFullScreenRoute(): boolean {
     return /\/base\/early-career-direction\/early-career-direction-question-\d+$/.test(
       this.router.url
-    );
+    ) || /^\/base\/early-career-direction\/results\/?$/.test(this.router.url);
   }
 
   isEarlyCareerLandingRoute(): boolean {
