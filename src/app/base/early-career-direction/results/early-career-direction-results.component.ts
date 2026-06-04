@@ -125,29 +125,45 @@ export class EarlyCareerDirectionResultsComponent
 
     this.graphRendered = true;
     const score = Math.max(-15, Math.min(15, this.totalScore));
+    const scoreLabels = this.getScoreLabels();
 
     Highcharts.chart("career-results-score-graph", {
       chart: {
         type: "line",
-        height: 220,
+        height: "100%",
         backgroundColor: "transparent",
-        spacing: [18, 24, 24, 24],
+        spacing: [18, 78, 24, 82],
         events: {
           render: function () {
             const chart = this as Highcharts.Chart & {
               scoreBar?: Highcharts.SVGElement;
+              scorePointerLine?: Highcharts.SVGElement;
+              scorePointerArrow?: Highcharts.SVGElement;
             };
             const xAxis = chart.xAxis[0];
             const yAxis = chart.yAxis[0];
-            const left = xAxis.toPixels(-15, false);
-            const right = xAxis.toPixels(15, false);
-            const barHeight = 22;
-            const top = yAxis.toPixels(0, false) - barHeight / 2;
+            const centerX = xAxis.toPixels(0, false);
+            const pointerY = yAxis.toPixels(score, false);
+            const top = yAxis.toPixels(15, false);
+            const bottom = yAxis.toPixels(-15, false);
+            const barWidth = 14;
+            const pointerStartX = centerX + 72;
+            const pointerEndX = centerX + barWidth / 2 + 3;
+            const pointerPath: Highcharts.SVGPathArray = [
+              ["M", pointerStartX, pointerY],
+              ["L", pointerEndX, pointerY],
+            ];
+            const pointerArrowPath: Highcharts.SVGPathArray = [
+              ["M", pointerEndX, pointerY],
+              ["L", pointerEndX + 11, pointerY - 7],
+              ["L", pointerEndX + 11, pointerY + 7],
+              ["Z"],
+            ];
             const barFill: Highcharts.GradientColorObject = {
               linearGradient: {
                 x1: 0,
-                y1: 0,
-                x2: 1,
+                y1: 1,
+                x2: 0,
                 y2: 0,
               },
               stops: [
@@ -158,23 +174,49 @@ export class EarlyCareerDirectionResultsComponent
             };
 
             const barAttributes: Highcharts.SVGAttributes = {
-              x: left,
+              x: centerX - barWidth / 2,
               y: top,
-              width: right - left,
-              height: barHeight,
-              r: barHeight / 2,
+              width: barWidth,
+              height: bottom - top,
+              r: barWidth / 2,
               fill: barFill,
               zIndex: 0,
             };
 
             if (chart.scoreBar) {
               chart.scoreBar.attr(barAttributes);
+              chart.scorePointerLine.attr({ d: pointerPath });
+              chart.scorePointerArrow.attr({ d: pointerArrowPath });
               return;
             }
 
             chart.scoreBar = chart.renderer
-              .rect(left, top, right - left, barHeight, barHeight / 2)
+              .rect(
+                centerX - barWidth / 2,
+                top,
+                barWidth,
+                bottom - top,
+                barWidth / 2
+              )
               .attr(barAttributes)
+              .add();
+
+            chart.scorePointerLine = chart.renderer
+              .path(pointerPath)
+              .attr({
+                stroke: "#111111",
+                "stroke-width": 2,
+                "stroke-linecap": "round",
+                zIndex: 2,
+              })
+              .add();
+
+            chart.scorePointerArrow = chart.renderer
+              .path(pointerArrowPath)
+              .attr({
+                fill: "#111111",
+                zIndex: 3,
+              })
               .add();
           },
         },
@@ -192,8 +234,8 @@ export class EarlyCareerDirectionResultsComponent
         enabled: false,
       },
       xAxis: {
-        min: -15,
-        max: 15,
+        min: -1,
+        max: 1,
         lineWidth: 0,
         tickLength: 0,
         gridLineWidth: 0,
@@ -202,9 +244,27 @@ export class EarlyCareerDirectionResultsComponent
         },
       },
       yAxis: {
-        min: -1,
-        max: 1,
-        visible: false,
+        min: -15,
+        max: 15,
+        tickPositions: [-15, -10, -5, 0, 5, 10, 15],
+        lineWidth: 0,
+        gridLineWidth: 0,
+        tickLength: 9,
+        tickWidth: 1,
+        tickColor: "#7894a6",
+        labels: {
+          formatter: function () {
+            return scoreLabels[this.value as number] || "";
+          },
+          style: {
+            color: "#405f73",
+            fontSize: "12px",
+            fontWeight: "600",
+          },
+        },
+        title: {
+          text: null,
+        },
       },
       plotOptions: {
         series: {
@@ -220,8 +280,8 @@ export class EarlyCareerDirectionResultsComponent
         {
           type: "line",
           data: [
-            [-15, 0],
-            [15, 0],
+            [0, -15],
+            [0, 15],
           ],
           lineWidth: 0,
           marker: {
@@ -230,20 +290,255 @@ export class EarlyCareerDirectionResultsComponent
           color: "transparent",
         },
         {
-          type: "scatter",
-          data: [[score, 0.18]],
+          type: "line",
+          data: [],
+          lineWidth: 0,
           marker: {
-            enabled: true,
-            symbol: "triangle-down",
-            radius: 9,
-            fillColor: "#111111",
-            lineColor: "#111111",
-            lineWidth: 1,
+            enabled: false,
           },
-          color: "#111111",
+          color: "transparent",
         },
       ],
     });
+
+    this.renderSpeedometer(score);
+  }
+
+  private renderSpeedometer(score: number): void {
+    const scoreLabels = this.getScoreLabels();
+    const currentStatus = this.getStatusLabel(score);
+    const normalizedScore = (score + 15) / 30;
+    const needleAngle = -90 + normalizedScore * 180;
+
+    Highcharts.chart("career-results-speedometer", {
+      chart: {
+        height: 340,
+        backgroundColor: "transparent",
+        spacing: [22, 48, 58, 48],
+        events: {
+          render: function () {
+            const chart = this as Highcharts.Chart & {
+              speedometerArc?: Highcharts.SVGElement;
+              speedometerLabels?: Highcharts.SVGElement[];
+              speedometerNeedle?: Highcharts.SVGElement;
+              speedometerNeedleArrow?: Highcharts.SVGElement;
+              speedometerHub?: Highcharts.SVGElement;
+              speedometerScore?: Highcharts.SVGElement;
+            };
+            const centerX = chart.plotLeft + chart.plotWidth / 2;
+            const isCompact = chart.plotWidth < 420;
+            const centerY = chart.plotTop + chart.plotHeight - 18;
+            const radius = Math.max(
+              96,
+              Math.min(chart.plotWidth / 2 - 52, chart.plotHeight - 62)
+            );
+            const innerRadius = radius - 16;
+            const startAngle = -Math.PI;
+            const endAngle = 0;
+            const angle = (needleAngle - 90) * (Math.PI / 180);
+            const needleLength = radius - 24;
+            const needleTipX = centerX + Math.cos(angle) * needleLength;
+            const needleTipY = centerY + Math.sin(angle) * needleLength;
+            const arrowBaseX = centerX + Math.cos(angle) * (needleLength - 14);
+            const arrowBaseY = centerY + Math.sin(angle) * (needleLength - 14);
+            const arrowWing = 7;
+            const labelFontSize = isCompact ? "10px" : "12px";
+            const labelY = centerY + 24;
+            const labelOffset = Math.max(72, radius - (isCompact ? 18 : 4));
+            const labelPoints = [
+              {
+                text: scoreLabels[-15],
+                x: centerX - labelOffset,
+                y: labelY,
+              },
+              {
+                text: scoreLabels[0],
+                x: centerX,
+                y: centerY - radius - (isCompact ? 8 : 12),
+              },
+              {
+                text: scoreLabels[15],
+                x: centerX + labelOffset,
+                y: labelY,
+              },
+            ];
+            const needlePath: Highcharts.SVGPathArray = [
+              ["M", centerX, centerY],
+              ["L", needleTipX, needleTipY],
+            ];
+            const needleArrowPath: Highcharts.SVGPathArray = [
+              ["M", needleTipX, needleTipY],
+              [
+                "L",
+                arrowBaseX + Math.cos(angle + Math.PI / 2) * arrowWing,
+                arrowBaseY + Math.sin(angle + Math.PI / 2) * arrowWing,
+              ],
+              [
+                "L",
+                arrowBaseX + Math.cos(angle - Math.PI / 2) * arrowWing,
+                arrowBaseY + Math.sin(angle - Math.PI / 2) * arrowWing,
+              ],
+              ["Z"],
+            ];
+            const arcFill: Highcharts.GradientColorObject = {
+              linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 1,
+                y2: 0,
+              },
+              stops: [
+                [0, "#ef4444"],
+                [0.5, "#facc15"],
+                [1, "#22c55e"],
+              ],
+            };
+
+            if (chart.speedometerArc) {
+              chart.speedometerArc.attr({
+                x: centerX,
+                y: centerY,
+                r: radius,
+                innerR: innerRadius,
+                start: startAngle,
+                end: endAngle,
+              });
+              chart.speedometerLabels.forEach((label, index) => {
+                label.attr({
+                  text: labelPoints[index].text,
+                  x: labelPoints[index].x,
+                  y: labelPoints[index].y,
+                });
+                label.css({
+                  fontSize: labelFontSize,
+                });
+              });
+              chart.speedometerNeedle.attr({ d: needlePath });
+              chart.speedometerNeedleArrow.attr({ d: needleArrowPath });
+              chart.speedometerHub.attr({
+                cx: centerX,
+                cy: centerY,
+                r: 6,
+              });
+              chart.speedometerScore.attr({
+                text: currentStatus,
+                x: centerX,
+                y: centerY + 32,
+              });
+              chart.speedometerScore.css({
+                fontSize: labelFontSize,
+              });
+              return;
+            }
+
+            chart.speedometerArc = chart.renderer
+              .arc(centerX, centerY, radius, innerRadius, startAngle, endAngle)
+              .attr({
+                fill: arcFill,
+                zIndex: 0,
+              })
+              .add();
+
+            chart.speedometerLabels = labelPoints.map((label) =>
+              chart.renderer
+                .text(label.text, label.x, label.y)
+                .attr({ align: "center" })
+                .css({
+                  color: "#405f73",
+                  fontSize: labelFontSize,
+                  fontWeight: "600",
+                })
+                .add()
+            );
+
+            chart.speedometerNeedle = chart.renderer
+              .path(needlePath)
+              .attr({
+                stroke: "#111111",
+                "stroke-width": 4,
+                "stroke-linecap": "round",
+                zIndex: 2,
+              })
+              .add();
+
+            chart.speedometerNeedleArrow = chart.renderer
+              .path(needleArrowPath)
+              .attr({
+                fill: "#111111",
+                zIndex: 3,
+              })
+              .add();
+
+            chart.speedometerHub = chart.renderer
+              .circle(centerX, centerY, 6)
+              .attr({
+                fill: "#111111",
+                zIndex: 3,
+              })
+              .add();
+
+            chart.speedometerScore = chart.renderer
+              .text(currentStatus, centerX, centerY + 32)
+              .attr({ align: "center" })
+              .css({
+                color: "#17354d",
+                fontSize: labelFontSize,
+                fontWeight: "700",
+              })
+              .add();
+          },
+        },
+      },
+      title: {
+        text: null,
+      },
+      credits: {
+        enabled: false,
+      },
+      legend: {
+        enabled: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      xAxis: {
+        visible: false,
+      },
+      yAxis: {
+        visible: false,
+      },
+      series: [
+        {
+          type: "line",
+          data: [[0, 0]],
+          visible: false,
+          enableMouseTracking: false,
+        },
+      ],
+    });
+  }
+
+  private getScoreLabels(): { [score: number]: string } {
+    return {
+      [-15]: "At Risk",
+      [-10]: "Needs Focus",
+      [-5]: "Unsteady",
+      0: "Stagnant",
+      5: "Progressing",
+      10: "Strong",
+      15: "Excellent",
+    };
+  }
+
+  private getStatusLabel(score: number): string {
+    const scoreLabels = this.getScoreLabels();
+    const closestScore = Object.keys(scoreLabels)
+      .map((value) => Number(value))
+      .reduce((closest, value) =>
+        Math.abs(value - score) < Math.abs(closest - score) ? value : closest
+      );
+
+    return scoreLabels[closestScore];
   }
 
   private resolvePendingNavigation(result: boolean | UrlTree): void {

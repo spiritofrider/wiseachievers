@@ -24,11 +24,25 @@
 }
 
 #career-results-score-graph {
-  width: 100%;
-  min-height: 190px;
+  width: min(390px, 100%);
+  height: clamp(330px, 62vw, 380px);
 }
 
-#career-results-score-graph ::ng-deep .highcharts-background {
+.score-visuals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+  width: 100%;
+}
+
+#career-results-speedometer {
+  width: min(700px, 100%);
+  min-height: 340px;
+}
+
+#career-results-score-graph ::ng-deep .highcharts-background,
+#career-results-speedometer ::ng-deep .highcharts-background {
   fill: transparent;
 }
 
@@ -305,6 +319,20 @@ h2 {
 
   .results-card {
     padding: 2rem 1.25rem;
+  }
+
+  #career-results-score-graph {
+    width: 100%;
+    height: 330px;
+  }
+
+  #career-results-speedometer {
+    width: 100%;
+    min-height: 360px;
+  }
+
+  .score-visuals {
+    gap: 1.5rem;
   }
 
   .alert-actions {
