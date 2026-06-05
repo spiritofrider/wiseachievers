@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router, UrlTree } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import * as Highcharts from "highcharts";
+import html2canvas from "html2canvas";
 import {
   EarlyCareerDirectionAiReport,
   EarlyCareerDirectionSubmissionPayload,
@@ -103,6 +104,38 @@ export class EarlyCareerDirectionResultsComponent
     this.resolvePendingNavigation(
       this.router.parseUrl("/base/early-career-direction")
     );
+  }
+
+  async downloadReportAsImage(): Promise<void> {
+    if (!this.aiReport || !this.graphRendered) {
+      return;
+    }
+
+    const reportElement = document.getElementById("early-career-results-report");
+    if (!reportElement) {
+      return;
+    }
+
+    const canvas = await html2canvas(reportElement, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      scrollY: -window.scrollY,
+      useCORS: true,
+      onclone: (clonedDocument) => {
+        const clonedReport = clonedDocument.getElementById(
+          "early-career-results-report"
+        );
+
+        if (clonedReport) {
+          clonedReport.style.background = "#ffffff";
+        }
+      },
+    });
+    const downloadLink = document.createElement("a");
+
+    downloadLink.href = canvas.toDataURL("image/png");
+    downloadLink.download = "early-career-direction-report.png";
+    downloadLink.click();
   }
 
   private calculateTotalScore(

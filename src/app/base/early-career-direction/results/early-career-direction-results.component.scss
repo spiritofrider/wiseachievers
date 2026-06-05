@@ -7,6 +7,24 @@
   padding: 2rem clamp(1rem, 4vw, 4rem) 4rem;
 }
 
+.results-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 0.75rem;
+}
+
+.download-report-button {
+  min-width: 180px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+}
+
+.results-report-export {
+  width: 100%;
+}
+
 .results-graph-panel {
   width: 100%;
   max-width: 1200px;
@@ -302,6 +320,14 @@ h2 {
   .ai-report-panel,
   .report-error-panel {
     padding: 1rem 0 0;
+  }
+
+  .results-actions {
+    justify-content: stretch;
+  }
+
+  .download-report-button {
+    width: 100%;
   }
 
   .report-grid {

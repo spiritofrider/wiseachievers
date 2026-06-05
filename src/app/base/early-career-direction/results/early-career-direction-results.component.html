@@ -1,60 +1,81 @@
 <section class="results-page" *ngIf="submissionExists">
-  <div class="results-graph-panel" *ngIf="aiReport">
-    <h1>Career Status Indicator</h1>
-    <p>Below is the graphical representation of your current career progress.</p>
-    <div class="score-visuals">
-      <div id="career-results-score-graph"></div>
-      <!-- <div id="career-results-speedometer"></div> -->
-    </div>
+  <div class="results-actions" *ngIf="aiReport">
+    <button
+      class="btn btn-primary download-report-button"
+      (click)="downloadReportAsImage()"
+      [disabled]="!graphRendered"
+    >
+      Download Report Image
+    </button>
   </div>
 
-  <div class="ai-report-panel" *ngIf="aiReport">
-    <!-- <p class="eyebrow">AI Generated Report</p> -->
-
-    <p class="report-summary">{{ aiReport.overallSummary }}</p>
-
-    <div class="report-grid">
-      <div class="report-section strengths-section">
-        <h3>Strengths</h3>
-        <ul class="report-point-list">
-          <li *ngFor="let strength of aiReport.strengths">
-            <span class="point-icon" aria-hidden="true">✓</span>
-            <span>{{ strength }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="report-section improvement-section">
-        <h3>Improvement Areas</h3>
-        <ul class="report-point-list">
-          <li *ngFor="let area of aiReport.improvementAreas">
-            <span class="point-icon" aria-hidden="true">!</span>
-            <span>{{ area }}</span>
-          </li>
-        </ul>
+  <div
+    id="early-career-results-report"
+    class="results-report-export"
+    *ngIf="aiReport"
+  >
+    <div class="results-graph-panel">
+      <h1>Career Status Indicator</h1>
+      <p>
+        Below is the graphical representation of your current career progress.
+      </p>
+      <div class="score-visuals">
+        <div id="career-results-score-graph"></div>
+        <!-- <div id="career-results-speedometer"></div> -->
       </div>
     </div>
 
-    <div class="report-section full-width">
-      <h3>Next Steps</h3>
-      <ul>
-        <li *ngFor="let step of aiReport.nextSteps">{{ step }}</li>
-      </ul>
-    </div>
+    <div class="ai-report-panel">
+      <!-- <p class="eyebrow">AI Generated Report</p> -->
 
-    <div class="counsellor-contact-card">
-      <div>
-        <p class="contact-eyebrow">Need Personal Guidance?</p>
-        <h3>Speak with Thomas D'souza</h3>
-        <p>
-          Discuss your report with a counsellor and get clearer next steps for
-          your career direction.
-        </p>
+      <p class="report-summary">{{ aiReport.overallSummary }}</p>
+
+      <div class="report-grid">
+        <div class="report-section strengths-section">
+          <h3>Strengths</h3>
+          <ul class="report-point-list">
+            <li *ngFor="let strength of aiReport.strengths">
+              <span class="point-icon" aria-hidden="true">✓</span>
+              <span>{{ strength }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="report-section improvement-section">
+          <h3>Improvement Areas</h3>
+          <ul class="report-point-list">
+            <li *ngFor="let area of aiReport.improvementAreas">
+              <span class="point-icon" aria-hidden="true">!</span>
+              <span>{{ area }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <a class="btn btn-primary contact-phone-button" href="tel:+919819439307">
-        9819439307
-      </a>
+      <div class="report-section full-width">
+        <h3>Next Steps</h3>
+        <ul>
+          <li *ngFor="let step of aiReport.nextSteps">{{ step }}</li>
+        </ul>
+      </div>
+
+      <div class="counsellor-contact-card">
+        <div>
+          <p class="contact-eyebrow">Need Personal Guidance?</p>
+          <h3>Speak with Thomas D'souza</h3>
+          <p>
+            Discuss your report with a counsellor and get clearer next steps for
+            your career direction.
+          </p>
+        </div>
+
+        <a
+          class="btn btn-primary contact-phone-button"
+          href="tel:+919819439307"
+        >
+          9819439307
+        </a>
+      </div>
     </div>
   </div>
 
