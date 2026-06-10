@@ -2,8 +2,7 @@
   <div class="results-actions" *ngIf="aiReport">
     <button
       class="btn btn-primary download-report-button"
-      (click)="downloadReportAsImage()"
-      [disabled]="!graphRendered"
+      (click)="downloadReportAsPdf()"
     >
       Download Report
     </button>

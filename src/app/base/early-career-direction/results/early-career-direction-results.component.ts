@@ -3,11 +3,16 @@ import { Router, UrlTree } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import * as Highcharts from "highcharts";
 import html2canvas from "html2canvas";
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import type { Content, TDocumentDefinitions } from "pdfmake/interfaces";
 import {
   EarlyCareerDirectionAiReport,
   EarlyCareerDirectionSubmissionPayload,
   EarlyCareerDirectionService,
 } from "../early-career-direction.service";
+
+(pdfMake as any).addVirtualFileSystem(pdfFonts);
 
 @Component({
   selector: "app-early-career-direction-results",
@@ -136,6 +141,20 @@ export class EarlyCareerDirectionResultsComponent
     downloadLink.href = canvas.toDataURL("image/png");
     downloadLink.download = "early-career-direction-report.png";
     downloadLink.click();
+  }
+
+  downloadReportAsPdf(): void {
+    if (!this.aiReport) {
+      return;
+    }
+
+    const documentDefinition = this.buildReportDocumentDefinition(
+      this.aiReport
+    );
+
+    pdfMake
+      .createPdf(documentDefinition)
+      .download("early-career-direction-report.pdf");
   }
 
   private calculateTotalScore(
@@ -572,6 +591,308 @@ export class EarlyCareerDirectionResultsComponent
       );
 
     return scoreLabels[closestScore];
+  }
+
+  private buildReportDocumentDefinition(
+    report: EarlyCareerDirectionAiReport
+  ): TDocumentDefinitions {
+    const score = Math.max(-15, Math.min(15, this.totalScore));
+    const status = this.getStatusLabel(score);
+
+    return {
+      pageSize: "A4",
+      pageMargins: [42, 44, 42, 48],
+      defaultStyle: {
+        color: "#405f73",
+        font: "Roboto",
+        fontSize: 10.5,
+        lineHeight: 1.35,
+      },
+      footer: (currentPage, pageCount) => ({
+        margin: [42, 0, 42, 24],
+        columns: [
+          {
+            text: "Wise Achievers",
+            color: "#7894a6",
+            fontSize: 8,
+            bold: true,
+          },
+          {
+            text: `${currentPage} / ${pageCount}`,
+            alignment: "right",
+            color: "#7894a6",
+            fontSize: 8,
+          },
+        ],
+      }),
+      styles: {
+        title: {
+          color: "#17354d",
+          fontSize: 22,
+          bold: true,
+          margin: [0, 0, 0, 6],
+        },
+        subtitle: {
+          color: "#557084",
+          fontSize: 10.5,
+          margin: [0, 0, 0, 18],
+        },
+        sectionTitle: {
+          color: "#17354d",
+          fontSize: 13,
+          bold: true,
+          margin: [0, 0, 0, 8],
+        },
+        sectionBody: {
+          color: "#405f73",
+          margin: [0, 0, 0, 4],
+        },
+      },
+      content: [
+        {
+          stack: [
+            { text: "Early Career Direction Report", style: "title" },
+            {
+              text: "Career Status Indicator and personalized guidance",
+              style: "subtitle",
+            },
+          ],
+        },
+        this.buildStatusScale(score, status),
+        {
+          text: report.overallSummary,
+          style: "sectionBody",
+          margin: [0, 8, 0, 18],
+        },
+        {
+          columns: [
+            this.buildReportSection("Strengths", report.strengths, "#f0fbf4"),
+            this.buildReportSection(
+              "Improvement Areas",
+              report.improvementAreas,
+              "#fff4f4"
+            ),
+          ],
+          columnGap: 14,
+        },
+        this.buildReportSection("Next Steps", report.nextSteps, "#f7fbff", [
+          0,
+          14,
+          0,
+          0,
+        ]),
+        {
+          table: {
+            widths: ["*", 118],
+            body: [
+              [
+                {
+                  stack: [
+                    {
+                      text: "Need Personal Guidance?",
+                      color: "#0081d6",
+                      fontSize: 8,
+                      bold: true,
+                      margin: [0, 0, 0, 4],
+                    },
+                    {
+                      text: "Speak with Thomas D'souza",
+                      color: "#17354d",
+                      fontSize: 13,
+                      bold: true,
+                      margin: [0, 0, 0, 4],
+                    },
+                    {
+                      text: "Discuss your report with a counsellor and get clearer next steps for your career direction.",
+                      color: "#405f73",
+                    },
+                  ],
+                  fillColor: "#f7fbff",
+                  border: [false, false, false, false],
+                  margin: [14, 12, 8, 12],
+                },
+                {
+                  stack: [
+                    {
+                      text: "9819439307",
+                      alignment: "center",
+                      color: "#ffffff",
+                      bold: true,
+                    },
+                  ],
+                  fillColor: "#0081d6",
+                  border: [false, false, false, false],
+                  margin: [10, 21, 10, 21],
+                },
+              ],
+            ],
+          },
+          layout: "noBorders",
+          margin: [0, 14, 0, 0],
+        },
+      ],
+    };
+  }
+
+  private buildReportSection(
+    title: string,
+    items: string[],
+    fillColor: string,
+    margin: [number, number, number, number] = [0, 0, 0, 0]
+  ): Content {
+    return {
+      table: {
+        widths: ["*"],
+        body: [
+          [
+            {
+              stack: [
+                { text: title, style: "sectionTitle" },
+                {
+                  ul: items.map((item) => ({
+                    text: item,
+                    margin: [0, 0, 0, 5],
+                  })),
+                },
+              ],
+              fillColor,
+              border: [false, false, false, false],
+              margin: [14, 12, 14, 12],
+            },
+          ],
+        ],
+      },
+      layout: "noBorders",
+      margin,
+    };
+  }
+
+  private buildStatusScale(score: number, status: string): Content {
+    const barTop = 8;
+    const barHeight = 216;
+    const pointerY = barTop + ((15 - score) / 30) * barHeight;
+
+    return {
+      columns: [
+        {
+          width: "*",
+          stack: [
+            {
+              text: "Career Status Indicator",
+              style: "sectionTitle",
+              margin: [0, 0, 0, 6],
+            },
+            {
+              text: "Below is the graphical representation of your current career progress.",
+              color: "#557084",
+              margin: [0, 0, 0, 12],
+            },
+            {
+              text: status,
+              color: "#17354d",
+              fontSize: 16,
+              bold: true,
+              margin: [0, 0, 0, 4],
+            },
+          ],
+        },
+        {
+          width: 210,
+          canvas: [
+            {
+              type: "rect",
+              x: 82,
+              y: barTop,
+              w: 14,
+              h: 72,
+              r: 7,
+              color: "#22c55e",
+            },
+            {
+              type: "rect",
+              x: 82,
+              y: barTop + 72,
+              w: 14,
+              h: 72,
+              color: "#facc15",
+            },
+            {
+              type: "rect",
+              x: 82,
+              y: barTop + 144,
+              w: 14,
+              h: 72,
+              r: 7,
+              color: "#ef4444",
+            },
+            {
+              type: "line",
+              x1: 154,
+              y1: pointerY,
+              x2: 105,
+              y2: pointerY,
+              lineWidth: 2,
+              lineColor: "#111111",
+            },
+            {
+              type: "polyline",
+              points: [
+                { x: 101, y: pointerY },
+                { x: 112, y: pointerY - 7 },
+                { x: 112, y: pointerY + 7 },
+              ],
+              closePath: true,
+              color: "#111111",
+            },
+          ],
+          margin: [0, 0, 0, 0],
+        },
+        {
+          width: 96,
+          stack: [
+            { text: "Excellent", color: "#405f73", fontSize: 9 },
+            {
+              text: "Strong",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+            {
+              text: "Progressing",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+            {
+              text: "Stagnant",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+            {
+              text: "Unsteady",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+            {
+              text: "Needs Focus",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+            {
+              text: "At Risk",
+              color: "#405f73",
+              fontSize: 9,
+              margin: [0, 25, 0, 0],
+            },
+          ],
+        },
+      ],
+      columnGap: 8,
+      margin: [0, 0, 0, 18],
+    };
   }
 
   private resolvePendingNavigation(result: boolean | UrlTree): void {
