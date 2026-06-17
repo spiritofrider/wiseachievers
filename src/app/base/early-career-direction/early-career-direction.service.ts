@@ -43,6 +43,7 @@ export interface EarlyCareerDirectionSubmissionPayload {
 }
 
 export interface EarlyCareerDirectionAiReport {
+  reportId: string;
   overallSummary: string;
   strengths: string[];
   improvementAreas: string[];
@@ -51,6 +52,7 @@ export interface EarlyCareerDirectionAiReport {
 
 export interface EarlyCareerDirectionAiReportResponse {
   success: boolean;
+  reportId: string;
   report: EarlyCareerDirectionAiReport;
 }
 

@@ -73,7 +73,10 @@ export class EarlyCareerDirectionResultsComponent
       .generateAiReport(this.submissionPayload)
       .subscribe(
         (response) => {
-          this.aiReport = response.report;
+          this.aiReport = {
+            ...response.report,
+            reportId: response.report.reportId || response.reportId,
+          };
           setTimeout(() => this.renderScoreGraph());
         },
         () => {
@@ -729,6 +732,13 @@ export class EarlyCareerDirectionResultsComponent
           },
           layout: "noBorders",
           margin: [0, 14, 0, 0],
+        },
+        {
+          text: `Report ID: ${report.reportId}`,
+          color: "#7894a6",
+          fontSize: 8.5,
+          alignment: "right",
+          margin: [0, 12, 0, 0],
         },
       ],
     };
