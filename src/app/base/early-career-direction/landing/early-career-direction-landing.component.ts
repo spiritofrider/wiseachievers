@@ -8,9 +8,9 @@ import { EarlyCareerDirectionService } from "../early-career-direction.service";
   styleUrls: ["./early-career-direction-landing.component.scss"],
 })
 export class EarlyCareerDirectionLandingComponent {
-  assessmentTitle = "Career Guidance Assessment";
+  assessmentTitle = "Career Progress Assessment";
   assessmentDescription =
-    "This is a test for young professionals who want to change careers or improve their existing career path with clearer direction and stronger decision-making support.";
+    "This is a test for working professionals across all industries in order to gauge their current career status and take necessary corrective action.";
 
   constructor(
     private router: Router,

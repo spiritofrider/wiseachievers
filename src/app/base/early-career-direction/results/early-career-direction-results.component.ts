@@ -576,7 +576,7 @@ export class EarlyCareerDirectionResultsComponent
   private getScoreLabels(): { [score: number]: string } {
     return {
       [-15]: "At Risk",
-      [-10]: "Needs Focus",
+      [-10]: "Poor",
       [-5]: "Unsteady",
       0: "Stagnant",
       5: "Progressing",
@@ -654,7 +654,7 @@ export class EarlyCareerDirectionResultsComponent
       content: [
         {
           stack: [
-            { text: "Early Career Direction Report", style: "title" },
+            { text: "Career Progress Report", style: "title" },
             {
               text: "Career Status Indicator and personalized guidance",
               style: "subtitle",
@@ -886,7 +886,7 @@ export class EarlyCareerDirectionResultsComponent
               margin: [0, 25, 0, 0],
             },
             {
-              text: "Needs Focus",
+              text: "Poor",
               color: "#405f73",
               fontSize: 9,
               margin: [0, 25, 0, 0],
