@@ -1,0 +1,45 @@
+<div class="career-test-users-container">
+  <div class="header-row">
+    <div>
+      <h2>Career test users</h2>
+      <p>Total records: {{ totalCount }}</p>
+    </div>
+    <button class="btn btn-primary squareButtons" (click)="loadCareerTestUsers()">
+      Refresh
+    </button>
+  </div>
+
+  <div class="alert alert-warning" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="alert alert-info" *ngIf="!errorMessage && records.length === 0">
+    No career test user records found.
+  </div>
+
+  <div class="table-responsive mat-elevation-z8" *ngIf="records.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" id="ser">Sr. No</th>
+          <th scope="col" *ngFor="let column of columns">
+            {{ column.label }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of records; let i = index">
+          <td scope="row">{{ i + 1 }}</td>
+          <td *ngFor="let column of columns">
+            <span *ngIf="column.key !== 'createdAt'">
+              {{ getValue(record, column.key) }}
+            </span>
+            <span *ngIf="column.key === 'createdAt'">
+              {{ record.createdAt ? (record.createdAt | date: "dd MMM yyyy, h:mm a") : "-" }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

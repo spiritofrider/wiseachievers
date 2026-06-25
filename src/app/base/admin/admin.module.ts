@@ -7,6 +7,7 @@ import { ReportComponent } from "./report/report.component";
 import { GraphsComponent } from "./graphs/graphs.component";
 import { NgChartsModule } from "ng2-charts";
 import { AuthenticationGuard } from "src/app/authentication.guard";
+import { CareerTestUsersComponent } from "./career-test-users/career-test-users.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: "users",
         component: UsersComponent,
+      },
+      {
+        path: "career-test-users",
+        component: CareerTestUsersComponent,
       },
       {
         path: "**",
@@ -38,7 +43,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UsersComponent, ReportComponent, GraphsComponent],
+  declarations: [
+    UsersComponent,
+    ReportComponent,
+    GraphsComponent,
+    CareerTestUsersComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -53,6 +53,10 @@ export class CommonService {
     );
   }
 
+  getCareerTestUsers() {
+    return this.httpClient.get(environment.careerTestUsersFunctionUrl);
+  }
+
   snackBar(message: string, snackStyle: string) {
     this._snackBar.open(message, "", {
       duration: 3000,

@@ -126,13 +126,24 @@
         <a
           class="nav-item nav-link"
           href="javascript:;"
-          [ngClass]="{ activeRoute: getActiveRoutes('/admin') }"
+          [ngClass]="{ activeRoute: getActiveRoutes('/admin/users') }"
           [routerLink]="['admin']"
           routerLinkActive="active"
           *ngIf="admin"
                     (click)="closeMobileNavBar()"
 
           >View Users</a
+        >
+        <a
+          class="nav-item nav-link"
+          href="javascript:;"
+          [ngClass]="{ activeRoute: getActiveRoutes('/admin/career-test-users') }"
+          [routerLink]="['admin/career-test-users']"
+          routerLinkActive="active"
+          *ngIf="admin"
+                    (click)="closeMobileNavBar()"
+
+          >Career test users</a
         >
         <a
           class="nav-item nav-link"

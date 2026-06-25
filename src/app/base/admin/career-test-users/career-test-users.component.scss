@@ -1,0 +1,31 @@
+.career-test-users-container {
+  padding: 24px;
+}
+
+.header-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.header-row h2 {
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.header-row p {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .career-test-users-container {
+    padding: 16px;
+  }
+
+  .header-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
