@@ -76,7 +76,7 @@ export class EarlyCareerDirectionService {
         id: 1,
         questionTitle: "Goal Setting",
         question:
-          "Goal setting is a madatory and important aspect for success in your career.",
+          "Goal setting is a mandatory and important aspect for success in your career.",
         quote: "The future depends on what you do today.",
         quoteAuthor: "Mahatma Gandhi",
         options: [
@@ -103,7 +103,7 @@ export class EarlyCareerDirectionService {
         quoteAuthor: "Alexander Graham Bell",
         options: [
           {
-            question: "Focus comes eaisly to me and I am totally focused in my career",
+            question: "Focus comes easily to me and I am totally focused in my career",
             marks: 1,
           },
           {
@@ -296,7 +296,7 @@ export class EarlyCareerDirectionService {
         id: 11,
         questionTitle: "Practical Foresight",
         question:
-          "The importance of partical foresight can never be underestimated. Without that you may be moving in a blind alley. ",
+          "The importance of practical foresight can never be underestimated. Without that you may be moving in a blind alley. ",
         quote: "The best way to predict the future is to create it.",
         quoteAuthor: "Peter Drucker",
         options: [
@@ -367,7 +367,7 @@ export class EarlyCareerDirectionService {
         quoteAuthor: "Eckhart Tolle",
         options: [
           {
-            question: "I keep myself well aware of situations and circumstances surronding me. ",
+            question: "I keep myself well aware of situations and circumstances surrounding me. ",
             marks: 1,
           },
           {
@@ -394,7 +394,7 @@ export class EarlyCareerDirectionService {
             marks: 1,
           },
           {
-            question: "I do realise that everybody has external forces and circumstances to manage. I do manage an few but am also controlled by a few",
+            question: "I do realise that everybody has external forces and circumstances to manage. I do manage a few but am also controlled by a few",
             marks: 0,
           },
           {
